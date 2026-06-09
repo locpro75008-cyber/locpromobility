@@ -425,19 +425,17 @@ const cls =
       });
     };
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
       clearErrs();
+
       const hp = form.querySelector('input[name="bot-field-devis"]');
-      if (hp instanceof HTMLInputElement && hp.value.trim() !== "") {
-        e.preventDefault();
-        return;
-      }
+      if (hp instanceof HTMLInputElement && hp.value.trim() !== "") return;
 
       const siret = form.querySelector(`#${formId}-siret`);
       const digits = (v) => v.replace(/\D/g, "");
       if (siret instanceof HTMLInputElement && digits(siret.value).length !== 14) {
         showErr(`${formId}-siret`, "Le SIRET doit comporter 14 chiffres.");
-        e.preventDefault();
         return;
       }
 
@@ -446,27 +444,41 @@ const cls =
       const livraison = form.querySelector(`#${formId}-livraison`);
       const recup = form.querySelector(`#${formId}-recup`);
       if (debut instanceof HTMLInputElement && !debut.value) {
-        showErr(`${formId}-debut`, "Sélectionnez une date de départ.");
-        e.preventDefault(); return;
+        showErr(`${formId}-debut`, "Sélectionnez une date de départ."); return;
       }
       if (fin instanceof HTMLInputElement && !fin.value) {
-        showErr(`${formId}-fin`, "Sélectionnez une date de retour.");
-        e.preventDefault(); return;
+        showErr(`${formId}-fin`, "Sélectionnez une date de retour."); return;
       }
       if (livraison instanceof HTMLInputElement && livraison.value.trim().length < 5) {
-        showErr(`${formId}-livraison`, "Indiquez une adresse de livraison.");
-        e.preventDefault(); return;
+        showErr(`${formId}-livraison`, "Indiquez une adresse de livraison."); return;
       }
       if (recup instanceof HTMLInputElement && recup.value.trim().length < 5) {
-        showErr(`${formId}-recup`, "Indiquez une adresse de récupération.");
-        e.preventDefault(); return;
+        showErr(`${formId}-recup`, "Indiquez une adresse de récupération."); return;
       }
 
-      if (!formAction) {
-        e.preventDefault();
-        const success = document.getElementById(`${formId}-success`);
-        if (success) success.classList.remove("hidden");
-        form.reset();
+      const btn = form.querySelector('button[type="submit"]');
+      const successEl = document.getElementById(`${formId}-success`);
+
+      if (btn instanceof HTMLButtonElement) { btn.disabled = true; btn.textContent = "Envoi en cours…"; }
+
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+          form.reset();
+          if (successEl) successEl.classList.remove("hidden");
+        } else {
+          throw new Error(json.error || "Erreur inconnue");
+        }
+      } catch (err) {
+        alert((err instanceof Error ? err.message : "Une erreur est survenue.") + " Vous pouvez aussi nous appeler au 01 70 95 56 61.");
+      } finally {
+        if (btn instanceof HTMLButtonElement) { btn.disabled = false; btn.textContent = "Demander un devis"; }
       }
     });
   }
