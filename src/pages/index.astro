@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { getCollection } from "astro:content";
+
+const vehicules = (await getCollection("vehicules"))
+  .filter((v) => v.data.disponible)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="LocPro Mobilité — Location vélos électriques, cargo, trottinettes"
+  description="Louez votre mobilité électrique : B2C et B2B, court, moyen et long terme. Paris et périphérie."
+>
+  <section
+    class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white"
+  >
+    <div
+      class="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-brand-200/40 blur-3xl"
+    >
+    </div>
+    <div class="mx-auto max-w-6xl px-4 py-16 md:flex md:items-center md:gap-12 md:px-6 md:py-24">
+      <div class="max-w-xl">
+        <p class="text-sm font-semibold uppercase tracking-wide text-brand-800">
+          Mobilité électrique
+        </p>
+        <h1 class="mt-2 font-display text-4xl font-bold tracking-tight text-ink-900 md:text-5xl">
+          Louez le bon véhicule, pour la bonne durée.
+        </h1>
+        <p class="mt-4 text-lg text-slate-600">
+          Vélos électriques, cargos, trottinettes et gyropodes — particuliers,
+          entreprises et collectivités. Parcours simple : catalogue, tarifs,
+          réservation ou devis flotte.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/reserver"
+            class="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+          >
+            Je réserve (B2C)
+          </a>
+          <a
+            href="/entreprises"
+            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-ink-800 shadow-sm transition hover:border-brand-200 hover:bg-brand-50"
+          >
+            Espace entreprises
+          </a>
+        </div>
+      </div>
+      <div class="mt-12 hidden flex-1 md:block">
+        <div
+          class="rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60"
+        >
+          <p class="text-sm font-semibold text-ink-900">Grille indicative</p>
+          <ul class="mt-4 space-y-3 text-sm text-slate-600">
+            <li class="flex justify-between gap-4">
+              <span>Court terme</span><span class="font-medium text-ink-800">à partir de 19 € / jour</span>
+            </li>
+            <li class="flex justify-between gap-4">
+              <span>Moyen terme</span><span class="font-medium text-ink-800">dès 79 € / mois</span>
+            </li>
+            <li class="flex justify-between gap-4">
+              <span>Long terme B2B</span><span class="font-medium text-brand-700">sur devis</span>
+            </li>
+          </ul>
+          <a href="/tarifs" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline"
+            >Voir tous les tarifs →</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900 md:text-3xl">
+          Véhicules disponibles
+        </h2>
+        <p class="mt-2 max-w-2xl text-slate-600">
+          Un extrait du catalogue. Filtrez par type et durée sur la page catalogue.
+        </p>
+      </div>
+      <a
+        href="/catalogue"
+        class="text-sm font-semibold text-brand-700 hover:underline">Catalogue complet →</a
+      >
+    </div>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {vehicules.map((v) => <ProductCard vehicle={v} />)}
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-16">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Ils nous font confiance</h2>
+      <div
+        class="mt-8 grid grid-cols-2 gap-6 text-center text-sm font-semibold text-slate-400 sm:grid-cols-4"
+      >
+        <p class="rounded-xl border border-dashed border-slate-200 py-6">Cyclo Logistique</p>
+        <p class="rounded-xl border border-dashed border-slate-200 py-6">Ville Verte SA</p>
+        <p class="rounded-xl border border-dashed border-slate-200 py-6">Tourisme &amp; Co</p>
+        <p class="rounded-xl border border-dashed border-slate-200 py-6">Proxi Commerce</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <h2 class="font-display text-2xl font-bold text-ink-900">FAQ rapide</h2>
+    <dl class="mt-8 grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6">
+        <dt class="font-semibold text-ink-900">Caution ?</dt>
+        <dd class="mt-2 text-sm text-slate-600">
+          Une empreinte bancaire ou caution peut être demandée selon le véhicule
+          et la durée. Détail à la réservation.
+        </dd>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6">
+        <dt class="font-semibold text-ink-900">Assurance ?</dt>
+        <dd class="mt-2 text-sm text-slate-600">
+          Options RC et vol disponibles. Flottes B2B : contrat cadre et facturation
+          centralisée.
+        </dd>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 md:col-span-2">
+        <dt class="font-semibold text-ink-900">Livraison / retrait ?</dt>
+        <dd class="mt-2 text-sm text-slate-600">
+          Retrait en agence ou livraison sur zone (selon disponibilité). Indiquez
+          votre code postal dans le formulaire de contact.
+        </dd>
+      </div>
+    </dl>
+    <p class="mt-8 text-center">
+      <a href="/faq" class="text-sm font-semibold text-brand-700 hover:underline">Voir toute la FAQ →</a>
+    </p>
+  </section>
+</BaseLayout>

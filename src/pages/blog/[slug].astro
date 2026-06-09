@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, description, pubDate, heroImage } = post.data;
+---
+
+<BaseLayout title={`${title} — LocPro Mobilité`} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <nav class="text-sm text-slate-500">
+      <a href="/blog" class="hover:text-brand-700">Blog</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-800">{title}</span>
+    </nav>
+    <time
+      datetime={pubDate.toISOString()}
+      class="mt-4 block text-sm font-medium text-slate-500"
+    >
+      {pubDate.toLocaleDateString("fr-FR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })}
+    </time>
+    <h1 class="mt-2 font-display text-3xl font-bold text-ink-900 md:text-4xl">{title}</h1>
+    <p class="mt-4 text-lg text-slate-600">{description}</p>
+    {
+      heroImage && (
+        <div class="mt-8 overflow-hidden rounded-2xl border border-slate-200">
+          <img src={heroImage} alt="" width="1200" height="675" loading="eager" class="w-full" />
+        </div>
+      )
+    }
+    <div
+      class="mt-10 max-w-none space-y-4 text-base leading-relaxed text-slate-700 [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink-900 [&_a]:text-brand-700 [&_a]:underline"
+    >
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

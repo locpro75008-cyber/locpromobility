@@ -1,0 +1,213 @@
+---
+interface Props {
+  id?: string;
+  action?: string;
+  formName?: string;
+}
+
+const {
+  id = "devis",
+  action = import.meta.env.PUBLIC_DEVIS_FORM_ACTION || import.meta.env.PUBLIC_CONTACT_FORM_ACTION || "",
+  formName = "devis-b2b",
+} = Astro.props;
+---
+
+<form
+  id={id}
+  class="space-y-4"
+  method="POST"
+  action={action || undefined}
+  name={formName}
+  data-netlify={import.meta.env.PUBLIC_NETLIFY === "true" ? "true" : undefined}
+  data-netlify-honeypot="bot-field-devis"
+  novalidate
+>
+  {
+    import.meta.env.PUBLIC_NETLIFY === "true" && (
+      <input type="hidden" name="form-name" value={formName} />
+    )
+  }
+  <p class="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+    <label>
+      Ne pas remplir
+      <input type="text" name="bot-field-devis" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-societe`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Société <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-societe`}
+        name="societe"
+        type="text"
+        required
+        autocomplete="organization"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-societe`}></p>
+    </div>
+    <div>
+      <label for={`${id}-siret`} class="mb-1 block text-sm font-medium text-slate-700"
+        >SIRET <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-siret`}
+        name="siret"
+        type="text"
+        required
+        inputmode="numeric"
+        autocomplete="off"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-siret`}></p>
+    </div>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-nom`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Nom du contact <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-nom`}
+        name="nom_contact"
+        type="text"
+        required
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-nom`}></p>
+    </div>
+    <div>
+      <label for={`${id}-email`} class="mb-1 block text-sm font-medium text-slate-700"
+        >E-mail pro <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-email`}></p>
+    </div>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-3">
+    <div>
+      <label for={`${id}-nb`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Nb. véhicules <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-nb`}
+        name="nombre_vehicules"
+        type="number"
+        min="1"
+        required
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-nb`}></p>
+    </div>
+    <div>
+      <label for={`${id}-duree`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Durée <span class="text-red-600">*</span></label
+      >
+      <select
+        id={`${id}-duree`}
+        name="duree"
+        required
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      >
+        <option value="">Choisir…</option>
+        <option value="court">Court (&lt; 1 semaine)</option>
+        <option value="moyen">Moyen (1 sem. – 3 mois)</option>
+        <option value="long">Long (&gt; 3 mois)</option>
+      </select>
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-duree`}></p>
+    </div>
+    <div>
+      <label for={`${id}-tel`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Téléphone</label
+      >
+      <input
+        id={`${id}-tel`}
+        name="telephone"
+        type="tel"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+    </div>
+  </div>
+  <div>
+    <label for={`${id}-usage`} class="mb-1 block text-sm font-medium text-slate-700"
+      >Usage prévu <span class="text-red-600">*</span></label
+    >
+    <textarea
+      id={`${id}-usage`}
+      name="usage"
+      required
+      rows="3"
+      class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+    ></textarea>
+    <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-usage`}></p>
+  </div>
+
+  <button
+    type="submit"
+    class="rounded-lg bg-brand-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-800"
+  >
+    Demander un devis
+  </button>
+  <p
+    id={`${id}-success`}
+    class="hidden rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900"
+    role="status"
+  >
+    Demande enregistrée. Notre équipe commerciale vous contacte sous 48 h.
+  </p>
+</form>
+
+<script define:vars={{ formId: id, formAction: action }}>
+  const form = document.getElementById(formId);
+  if (form instanceof HTMLFormElement) {
+    const showErr = (fieldId, msg) => {
+      const el = form.querySelector(`[data-devis-error="${fieldId}"]`);
+      if (el instanceof HTMLElement) {
+        el.textContent = msg;
+        el.classList.remove("hidden");
+      }
+    };
+    const clearErrs = () => {
+      form.querySelectorAll("[data-devis-error]").forEach((n) => {
+        if (n instanceof HTMLElement) {
+          n.textContent = "";
+          n.classList.add("hidden");
+        }
+      });
+    };
+
+    form.addEventListener("submit", (e) => {
+      clearErrs();
+      const hp = form.querySelector('input[name="bot-field-devis"]');
+      if (hp instanceof HTMLInputElement && hp.value.trim() !== "") {
+        e.preventDefault();
+        return;
+      }
+
+      const siret = form.querySelector(`#${formId}-siret`);
+      const digits = (v) => v.replace(/\D/g, "");
+      if (siret instanceof HTMLInputElement && digits(siret.value).length !== 14) {
+        showErr(`${formId}-siret`, "Le SIRET doit comporter 14 chiffres.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!formAction) {
+        e.preventDefault();
+        const success = document.getElementById(`${formId}-success`);
+        if (success) success.classList.remove("hidden");
+        form.reset();
+      }
+    });
+  }
+</script>

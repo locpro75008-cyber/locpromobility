@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const vehicule = Astro.url.searchParams.get("vehicule") || "";
+---
+
+<BaseLayout
+  title="Réserver (B2C) — LocPro Mobilité"
+  description="Tunnel réservation simplifié : demande par formulaire (MVP vitrine). Paiement et calendrier en V2."
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <h1 class="font-display text-3xl font-bold text-ink-900">Réservation</h1>
+    <p class="mt-3 text-slate-600">
+      Sur cette vitrine, la réservation passe par le formulaire ci-dessous (équivalent étape
+      contact + intention). Le paiement en ligne et le planning en temps réel sont prévus en
+      version 2 selon votre roadmap.
+    </p>
+    {
+      vehicule && (
+        <p class="mt-4 rounded-lg bg-brand-50 px-4 py-3 text-sm text-brand-900">
+          Véhicule présélectionné : <strong>{vehicule}</strong> — précisez-le aussi dans le
+          message si besoin.
+        </p>
+      )
+    }
+    <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <ContactForm id="resa-form" />
+    </div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ preselect: vehicule }}>
+  if (preselect) {
+    const sel = document.querySelector("#resa-form-type");
+    if (sel instanceof HTMLSelectElement) {
+      const map = {
+        "explorer-urban-plus": "velo-electrique",
+        "cargo-flex-2-roues": "cargo",
+        "glide-pro-s9": "trottinette",
+        "ninebot-pro-fleet": "gyropode",
+      };
+      const v = map[preselect];
+      if (v) sel.value = v;
+    }
+  }
+</script>

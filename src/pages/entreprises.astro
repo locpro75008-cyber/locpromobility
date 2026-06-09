@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DevisForm from "../components/DevisForm.astro";
+---
+
+<BaseLayout
+  title="Entreprises & flottes — LocPro Mobilité"
+  description="Location longue durée, contrats cadre, livraisons urbaines et mobilité salariés. Simulateur vitrine + devis personnalisé."
+>
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <p class="text-sm font-semibold uppercase tracking-wide text-brand-300">B2B</p>
+      <h1 class="mt-2 max-w-3xl font-display text-3xl font-bold md:text-4xl">
+        Une flotte électrique sans immobiliser votre CAPEX.
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-slate-300">
+        Contrats court, moyen ou long terme. Reporting, maintenance et renouvellement
+        simplifiés — idéal pour logistique urbaine, équipes terrain et politique RSE.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="#simulateur"
+          class="inline-flex rounded-xl bg-brand-500 px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-brand-400"
+        >
+          Estimer ma flotte (indicatif)
+        </a>
+        <a
+          href="/devis"
+          class="inline-flex rounded-xl border border-white/30 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+        >
+          Formulaire devis
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <h2 class="font-display text-2xl font-bold text-ink-900">Pourquoi LocPro ?</h2>
+    <ul class="mt-8 grid gap-6 md:grid-cols-3">
+      <li class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h3 class="font-semibold text-ink-900">Long terme</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Engagements flexibles, tarifs dégressifs, renouvellement ou upgrade de parc.
+        </p>
+      </li>
+      <li class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h3 class="font-semibold text-ink-900">Conformité &amp; image</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Véhicules entretenus, traçabilité, accompagnement formation équipes.
+        </p>
+      </li>
+      <li class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h3 class="font-semibold text-ink-900">Un interlocuteur</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Facturation centralisée, devis rapide, options assurance et panne.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <section
+    id="simulateur"
+    class="border-y border-slate-200 bg-slate-50 py-16"
+    aria-labelledby="sim-title"
+  >
+    <div class="mx-auto max-w-3xl px-4 md:px-6">
+      <h2 id="sim-title" class="font-display text-2xl font-bold text-ink-900">
+        Simulateur flotte (indicatif)
+      </h2>
+      <p class="mt-2 text-sm text-slate-600">
+        Estimation non contractuelle. Ajustements selon durée, zone et services.
+      </p>
+      <form id="fleet-sim" class="mt-8 space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div>
+          <label for="sim-n" class="text-sm font-medium text-slate-700">Nombre de véhicules</label>
+          <input
+            id="sim-n"
+            type="number"
+            min="1"
+            max="500"
+            value="5"
+            class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2"
+          />
+        </div>
+        <div>
+          <label for="sim-m" class="text-sm font-medium text-slate-700">Mois d’engagement</label>
+          <input
+            id="sim-m"
+            type="number"
+            min="1"
+            max="36"
+            value="6"
+            class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2"
+          />
+        </div>
+        <p id="sim-out" class="rounded-lg bg-brand-50 px-4 py-3 text-sm font-medium text-brand-900">
+          Budget indicatif mensuel : —
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <h2 class="font-display text-2xl font-bold text-ink-900">Logos clients</h2>
+    <div
+      class="mt-8 grid grid-cols-2 gap-4 text-center text-xs font-semibold uppercase tracking-wide text-slate-400 sm:grid-cols-4"
+    >
+      <div class="rounded-xl border border-dashed border-slate-200 py-8">Urban Deliv</div>
+      <div class="rounded-xl border border-dashed border-slate-200 py-8">EcoFleet</div>
+      <div class="rounded-xl border border-dashed border-slate-200 py-8">Metro Events</div>
+      <div class="rounded-xl border border-dashed border-slate-200 py-8">Green HR</div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 pb-20 md:px-6">
+    <h2 class="font-display text-2xl font-bold text-ink-900">Devis express</h2>
+    <p class="mt-2 text-sm text-slate-600">
+      Même pipeline e-mail que le contact une fois les variables d’environnement configurées.
+    </p>
+    <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <DevisForm id="devis-inline" formName="devis-entreprises" />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("fleet-sim");
+  const out = document.getElementById("sim-out");
+  const nEl = document.getElementById("sim-n");
+  const mEl = document.getElementById("sim-m");
+
+  const calc = () => {
+    const n = Number(nEl instanceof HTMLInputElement ? nEl.value : 0) || 0;
+    const m = Number(mEl instanceof HTMLInputElement ? mEl.value : 0) || 0;
+    const base = 120;
+    const discount = m >= 12 ? 0.75 : m >= 6 ? 0.85 : 1;
+    const monthly = Math.round(n * base * discount);
+    if (out) {
+      out.textContent =
+        n > 0 && m > 0
+          ? `Budget indicatif mensuel : environ ${monthly} € HT (ordre de grandeur).`
+          : "Budget indicatif mensuel : —";
+    }
+  };
+
+  form?.addEventListener("input", calc);
+  calc();
+</script>

@@ -1,0 +1,82 @@
+---
+const nav = [
+  { href: "/catalogue", label: "Catalogue" },
+  { href: "/tarifs", label: "Tarifs" },
+  { href: "/entreprises", label: "Entreprises" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6"
+  >
+    <a
+      href="/"
+      class="font-display text-lg font-semibold tracking-tight text-ink-900 md:text-xl"
+    >
+      Loc<span class="text-brand-600">Pro</span>
+      <span class="hidden text-slate-500 sm:inline">Mobilité</span>
+    </a>
+    <nav
+      class="hidden items-center gap-1 text-sm font-medium text-slate-600 md:flex"
+      aria-label="Navigation principale"
+    >
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-lg px-3 py-2 transition hover:bg-brand-50 hover:text-brand-800"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex items-center gap-2">
+      <a
+        href="/reserver"
+        class="hidden rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 sm:inline-block"
+      >
+        Réserver
+      </a>
+      <a
+        href="/devis"
+        class="rounded-lg border border-brand-200 bg-white px-3 py-2 text-sm font-semibold text-brand-800 transition hover:bg-brand-50"
+      >
+        Devis B2B
+      </a>
+      <details class="relative md:hidden">
+        <summary
+          class="list-none cursor-pointer rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-ink-800"
+        >
+          Menu
+        </summary>
+        <div
+          class="absolute right-0 mt-2 w-52 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+        >
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a
+            href="/reserver"
+            class="mt-1 block rounded-lg bg-brand-600 px-3 py-2 text-center text-sm font-semibold text-white"
+          >
+            Réserver
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,258 @@
+---
+interface Props {
+  id?: string;
+  action?: string;
+  formName?: string;
+}
+
+const {
+  id = "contact",
+  action = import.meta.env.PUBLIC_CONTACT_FORM_ACTION || "",
+  formName = "contact",
+} = Astro.props;
+---
+
+<form
+  id={id}
+  class="space-y-4"
+  method="POST"
+  action={action || undefined}
+  name={formName}
+  data-netlify={import.meta.env.PUBLIC_NETLIFY === "true" ? "true" : undefined}
+  data-netlify-honeypot="bot-field"
+  novalidate
+>
+  {
+    import.meta.env.PUBLIC_NETLIFY === "true" && (
+      <input type="hidden" name="form-name" value={formName} />
+    )
+  }
+  <!-- Honeypot: leave empty (bots often fill hidden fields) -->
+  <p class="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+    <label>
+      Ne pas remplir si humain
+      <input type="text" name="bot-field" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-nom`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Nom <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-nom`}
+        name="nom"
+        type="text"
+        required
+        autocomplete="name"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-error-for={`${id}-nom`}></p>
+    </div>
+    <div>
+      <label for={`${id}-email`} class="mb-1 block text-sm font-medium text-slate-700"
+        >E-mail <span class="text-red-600">*</span></label
+      >
+      <input
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-error-for={`${id}-email`}></p>
+    </div>
+  </div>
+  <div>
+    <label for={`${id}-tel`} class="mb-1 block text-sm font-medium text-slate-700"
+      >Téléphone</label
+    >
+    <input
+      id={`${id}-tel`}
+      name="telephone"
+      type="tel"
+      autocomplete="tel"
+      class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+    />
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-type`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Type de véhicule <span class="text-red-600">*</span></label
+      >
+      <select
+        id={`${id}-type`}
+        name="type_vehicule"
+        required
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      >
+        <option value="">Choisir…</option>
+        <option value="velo-electrique">Vélo électrique</option>
+        <option value="cargo">Cargo</option>
+        <option value="trottinette">Trottinette</option>
+        <option value="gyropode">Gyropode</option>
+        <option value="autre">Autre / je ne sais pas</option>
+      </select>
+      <p class="mt-1 hidden text-xs text-red-600" data-error-for={`${id}-type`}></p>
+    </div>
+    <div>
+      <label for={`${id}-duree`} class="mb-1 block text-sm font-medium text-slate-700"
+        >Durée souhaitée <span class="text-red-600">*</span></label
+      >
+      <select
+        id={`${id}-duree`}
+        name="duree"
+        required
+        class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      >
+        <option value="">Choisir…</option>
+        <option value="court">Court terme (&lt; 1 semaine)</option>
+        <option value="moyen">Moyen terme (1 sem. – 3 mois)</option>
+        <option value="long">Long terme (&gt; 3 mois)</option>
+      </select>
+      <p class="mt-1 hidden text-xs text-red-600" data-error-for={`${id}-duree`}></p>
+    </div>
+  </div>
+  <div>
+    <label for={`${id}-msg`} class="mb-1 block text-sm font-medium text-slate-700"
+      >Message <span class="text-red-600">*</span></label
+    >
+    <textarea
+      id={`${id}-msg`}
+      name="message"
+      required
+      rows="4"
+      class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+    ></textarea>
+    <p class="mt-1 hidden text-xs text-red-600" data-error-for={`${id}-msg`}></p>
+  </div>
+
+  <button
+    type="submit"
+    id={`${id}-submit`}
+    class="w-full rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60 sm:w-auto"
+  >
+    Envoyer
+  </button>
+  <p
+    id={`${id}-success`}
+    class="hidden rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900"
+    role="status"
+  >
+    ✓ Message envoyé ! Vous recevrez une confirmation par e-mail. Nous vous répondons sous 24 h ouvrées.
+  </p>
+  <p
+    id={`${id}-error`}
+    class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+    role="alert"
+  >
+  </p>
+</form>
+
+<script define:vars={{ formId: id }}>
+  const form = document.getElementById(formId);
+  if (!form || !(form instanceof HTMLFormElement)) {
+    /* no-op */
+  } else {
+    const showErr = (fieldId, msg) => {
+      const el = form.querySelector(`[data-error-for="${fieldId}"]`);
+      if (el instanceof HTMLElement) {
+        el.textContent = msg;
+        el.classList.remove("hidden");
+      }
+    };
+    const clearErrs = () => {
+      form.querySelectorAll("[data-error-for]").forEach((n) => {
+        if (n instanceof HTMLElement) {
+          n.textContent = "";
+          n.classList.add("hidden");
+        }
+      });
+    };
+
+    const validate = () => {
+      let ok = true;
+      const nom = form.querySelector(`#${formId}-nom`);
+      const email = form.querySelector(`#${formId}-email`);
+      const typeV = form.querySelector(`#${formId}-type`);
+      const duree = form.querySelector(`#${formId}-duree`);
+      const msg = form.querySelector(`#${formId}-msg`);
+
+      if (nom instanceof HTMLInputElement && nom.value.trim().length < 2) {
+        showErr(`${formId}-nom`, "Indiquez au moins 2 caractères.");
+        ok = false;
+      }
+      if (email instanceof HTMLInputElement) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!re.test(email.value)) {
+          showErr(`${formId}-email`, "Adresse e-mail invalide.");
+          ok = false;
+        }
+      }
+      if (typeV instanceof HTMLSelectElement && !typeV.value) {
+        showErr(`${formId}-type`, "Choisissez un type de véhicule.");
+        ok = false;
+      }
+      if (duree instanceof HTMLSelectElement && !duree.value) {
+        showErr(`${formId}-duree`, "Choisissez une durée.");
+        ok = false;
+      }
+      if (msg instanceof HTMLTextAreaElement && msg.value.trim().length < 10) {
+        showErr(`${formId}-msg`, "Détaillez votre demande (10 caractères minimum).");
+        ok = false;
+      }
+      return ok;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearErrs();
+
+      const hp = form.querySelector('input[name="bot-field"]');
+      if (hp instanceof HTMLInputElement && hp.value.trim() !== "") return;
+
+      if (!validate()) return;
+
+      const btn = document.getElementById(`${formId}-submit`);
+      const successEl = document.getElementById(`${formId}-success`);
+      const errorEl = document.getElementById(`${formId}-error`);
+
+      if (btn instanceof HTMLButtonElement) {
+        btn.disabled = true;
+        btn.textContent = "Envoi en cours…";
+      }
+
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          form.reset();
+          if (successEl) successEl.classList.remove("hidden");
+          if (errorEl) errorEl.classList.add("hidden");
+        } else {
+          throw new Error(json.error || "Erreur inconnue");
+        }
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent =
+            (err instanceof Error ? err.message : "Une erreur est survenue.") +
+            " Vous pouvez aussi nous appeler au 01 70 95 56 61.";
+          errorEl.classList.remove("hidden");
+        }
+      } finally {
+        if (btn instanceof HTMLButtonElement) {
+          btn.disabled = false;
+          btn.textContent = "Envoyer";
+        }
+      }
+    });
+  }
+</script>

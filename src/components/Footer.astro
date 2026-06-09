@@ -1,0 +1,59 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: "/mentions-legales", label: "Mentions légales" },
+  { href: "/politique-confidentialite", label: "Confidentialité" },
+  { href: "/cgu", label: "Conditions de location" },
+];
+---
+
+<footer class="border-t border-slate-200 bg-white">
+  <div
+    class="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6"
+  >
+    <div>
+      <p class="font-display text-lg font-semibold text-ink-900">
+        LocPro Mobilité
+      </p>
+      <p class="mt-2 text-sm text-slate-600">
+        Location de vélos électriques, cargo, trottinettes et gyropodes — B2C
+        &amp; B2B, court, moyen et long terme.
+      </p>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-ink-900">Coordonnées</p>
+      <address class="mt-2 not-italic text-sm text-slate-600">
+        <p>60 rue François 1er</p>
+        <p>75008 Paris, France</p>
+        <p class="mt-2">
+          <a href="tel:+33170955661" class="text-brand-700 hover:underline"
+            >01 70 95 56 61</a
+          >
+        </p>
+        <p>
+          <a
+            href="mailto:contact@locpromobility.fr"
+            class="text-brand-700 hover:underline">contact@locpromobility.fr</a
+          >
+        </p>
+      </address>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-ink-900">Légal</p>
+      <ul class="mt-2 space-y-2 text-sm">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="text-brand-700 hover:underline">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 bg-slate-50 py-4 text-center text-xs text-slate-500">
+    © {year} LocPro Mobilité — Tous droits réservés.
+  </div>
+</footer>
