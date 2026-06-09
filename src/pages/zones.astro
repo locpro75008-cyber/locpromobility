@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { locationsByType } from "../data/locations";
+---
+
+<BaseLayout
+  title="Zones de livraison — Location vélo électrique Paris & Île-de-France | LocPro Mobilité"
+  description="LocPro Mobilité livre vos vélos électriques dans tout Paris (arrondissements) et les villes de banlieue : Boulogne, Neuilly, Vincennes, Saint-Denis et plus."
+>
+  <div class="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
+
+    <!-- Header -->
+    <div class="text-center">
+      <span class="rounded-full bg-brand-100 px-4 py-1.5 text-xs font-semibold text-brand-800">
+        Livraison à domicile
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold text-ink-900 md:text-4xl">
+        Zones desservies
+      </h1>
+      <p class="mt-3 mx-auto max-w-2xl text-slate-600">
+        LocPro Mobilité livre vos vélos électriques, cargos et trottinettes dans tout Paris et
+        les principales villes d'Île-de-France. Livraison sous 24–48h, prise en main sur place.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-10 grid grid-cols-3 gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      {[
+        { n: `${locationsByType.arrondissements.length}+`, label: "Arrondissements parisiens" },
+        { n: `${locationsByType.villes.length}+`, label: "Villes de banlieue" },
+        { n: "24–48h", label: "Délai de livraison" },
+      ].map((s) => (
+        <div class="text-center">
+          <p class="font-display text-2xl font-bold text-brand-700">{s.n}</p>
+          <p class="mt-1 text-xs text-slate-500">{s.label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Arrondissements -->
+    <section class="mt-12">
+      <h2 class="font-display text-xl font-bold text-ink-900">Paris — Arrondissements</h2>
+      <p class="mt-1 text-sm text-slate-500">
+        Livraison dans tous les arrondissements de Paris intra-muros.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        {locationsByType.arrondissements.map((loc) => (
+          <a
+            href={`/location/${loc.slug}`}
+            class="group flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm transition hover:border-brand-300 hover:bg-brand-50 hover:shadow-md"
+          >
+            <div>
+              <p class="font-semibold text-ink-900 group-hover:text-brand-700 text-sm">
+                {loc.nom.replace(" arrondissement", "")}
+              </p>
+              <p class="mt-0.5 text-xs text-slate-400">
+                {loc.landmarks.slice(0, 2).join(" · ")}
+              </p>
+            </div>
+            <svg class="h-4 w-4 shrink-0 text-slate-300 group-hover:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Villes de banlieue -->
+    <section class="mt-12">
+      <h2 class="font-display text-xl font-bold text-ink-900">Banlieue — Villes desservies</h2>
+      <p class="mt-1 text-sm text-slate-500">
+        Livraison dans les principales villes de la petite et grande couronne parisienne.
+      </p>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        {locationsByType.villes.map((loc) => (
+          <a
+            href={`/location/${loc.slug}`}
+            class="group flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm transition hover:border-brand-300 hover:bg-brand-50 hover:shadow-md"
+          >
+            <div>
+              <p class="font-semibold text-ink-900 group-hover:text-brand-700 text-sm">{loc.nom}</p>
+              <p class="mt-0.5 text-xs text-slate-400">{loc.departement}</p>
+            </div>
+            <svg class="h-4 w-4 shrink-0 text-slate-300 group-hover:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Votre ville n'est pas listée -->
+    <div class="mt-12 rounded-2xl border border-dashed border-brand-300 bg-brand-50 p-8 text-center">
+      <p class="font-semibold text-ink-900">Votre ville n'est pas listée ?</p>
+      <p class="mt-1 text-sm text-slate-600">
+        Nous livrons dans toute l'Île-de-France sur devis. Contactez-nous pour vérifier la
+        disponibilité et les délais dans votre secteur.
+      </p>
+      <div class="mt-4 flex flex-wrap justify-center gap-3">
+        <a
+          href="/contact"
+          class="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+        >
+          Nous contacter
+        </a>
+        <a
+          href="tel:+33170955661"
+          class="rounded-xl border border-brand-300 bg-white px-5 py-2.5 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50"
+        >
+          01 70 95 56 61
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
