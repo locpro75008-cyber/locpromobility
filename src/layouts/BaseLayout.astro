@@ -9,7 +9,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
-  structuredData?: Record<string, unknown>;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -78,9 +78,9 @@ const jsonLd = {
       />
     </noscript>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    {structuredData && (
-      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-    )}
+    {structuredData && (Array.isArray(structuredData) ? structuredData : [structuredData]).map((sd) => (
+      <script type="application/ld+json" set:html={JSON.stringify(sd)} />
+    ))}
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WNMWRMX3');</script>
     <!-- End Google Tag Manager -->

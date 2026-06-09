@@ -3,46 +3,108 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const faqs = [
   {
-    q: "Quels documents fournir ?",
-    a: "Pièce d’identité, justificatif de domicile récent, moyen de paiement. Les entreprises joignent Kbis et demande sur papier en-tête.",
+    q: "Quels documents fournir pour louer un vélo électrique ?",
+    a: "Pièce d'identité en cours de validité, justificatif de domicile de moins de 3 mois, moyen de paiement (CB ou virement). Les entreprises joignent en plus leur Kbis et une demande sur papier en-tête signé.",
+  },
+  {
+    q: "Quel est le montant de la caution ?",
+    a: "La caution varie selon le type de véhicule : 300 € pour une trottinette, 500 € pour un vélo électrique standard, 800 € pour un cargo électrique. Elle est restituée dans les 5 jours ouvrés après retour du véhicule en bon état.",
+  },
+  {
+    q: "Livrez-vous à domicile ou au bureau ?",
+    a: "Oui, nous livrons et récupérons votre véhicule à l'adresse de votre choix à Paris et en proche banlieue (petite couronne). La livraison est incluse dans les formules longue durée, et facturée à partir de 29 € pour les locations courte durée.",
   },
   {
     q: "Puis-je changer de véhicule en cours de location ?",
-    a: "Oui selon disponibilité et ajustement tarifaire. Contactez l’agence avant retour.",
+    a: "Oui, selon disponibilité. Un ajustement tarifaire sera appliqué si le nouveau modèle est dans une gamme différente. Contactez notre équipe au 01 70 95 56 61 au moins 48h avant le changement souhaité.",
   },
   {
-    q: "Que couvre l’assurance optionnelle ?",
-    a: "RC, vol et casco selon formules. Détail dans le contrat de location signé.",
+    q: "Que couvre l'assurance incluse ?",
+    a: "Tous nos véhicules sont couverts en responsabilité civile. Une assurance vol et dommages accidentels est disponible en option. Consultez les détails dans votre contrat de location.",
   },
   {
-    q: "Livrez-vous hors Paris ?",
-    a: "Zones périphériques sur devis (volume, durée, créneaux).",
+    q: "Que faire en cas de panne ou de crevaison ?",
+    a: "Appelez notre ligne d'assistance au 01 70 95 56 61 (disponible 7j/7 pendant vos heures de location). Nous intervenons sous 4h en Île-de-France, ou vous fournissons un véhicule de remplacement si la réparation dépasse 24h.",
   },
   {
-    q: "Annulation ?",
-    a: "Conditions selon délai avant départ — voir CGU et confirmation de réservation.",
+    q: "Puis-je louer pour une seule journée ?",
+    a: "Oui, nos formules démarrent à la journée. Pour les vélos électriques standard, la location à la journée est à partir de 29 €. Consultez notre grille tarifaire pour tous les détails.",
+  },
+  {
+    q: "Quelles sont les conditions d'annulation ?",
+    a: "Annulation gratuite jusqu'à 48h avant la prise en charge. Entre 48h et 24h : 30 % du montant retenu. Moins de 24h ou no-show : 100 % retenu. Pour les contrats longue durée, préavis de 30 jours.",
+  },
+  {
+    q: "Le vélo électrique est-il adapté à tous les profils ?",
+    a: "Oui. L'assistance électrique est modulable (modes Éco, Standard, Turbo), ce qui le rend accessible aux personnes peu sportives, aux seniors, ou à ceux qui ne veulent pas arriver en sueur au bureau. Nos modèles conviennent pour des gabarits de 1m55 à 1m95.",
+  },
+  {
+    q: "Proposez-vous des tarifs spéciaux pour les entreprises ?",
+    a: "Oui. Nos offres B2B incluent des tarifs dégressifs à partir de 3 véhicules, la facturation mensuelle, la livraison en entreprise et un contrat de maintenance dédié. Demandez votre devis sur la page Entreprises.",
+  },
+  {
+    q: "Livrez-vous en dehors de Paris ?",
+    a: "Nous couvrons Paris intra-muros et la petite couronne (92, 93, 94). Pour les communes de grande couronne ou hors Île-de-France, contactez-nous pour un devis spécifique selon le volume et la durée.",
+  },
+  {
+    q: "Quel est le délai pour recevoir un vélo après la commande ?",
+    a: "Pour les locations courte durée, nous livrons sous 24 à 48h selon les disponibilités. Pour les contrats longue durée, comptez 3 à 5 jours ouvrés pour la préparation et la livraison du véhicule.",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a,
+    },
+  })),
+};
 ---
 
 <BaseLayout
-  title="FAQ — LocPro Mobilité"
-  description="Questions fréquentes sur la location de vélos électriques, cargos, trottinettes et gyropodes."
+  title="FAQ — Questions fréquentes location vélo électrique Paris"
+  description="Toutes les réponses sur la location de vélos électriques à Paris : caution, livraison, assurance, annulation, B2B. LocPro Mobilité."
+  structuredData={faqSchema}
 >
   <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
-    <h1 class="font-display text-3xl font-bold text-ink-900">FAQ</h1>
+    <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
+      <ol class="flex items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">FAQ</li>
+      </ol>
+    </nav>
+
+    <h1 class="font-display text-3xl font-bold text-ink-900">Questions fréquentes</h1>
     <p class="mt-3 text-slate-600">
-      Pas trouvé votre réponse ? <a href="/contact" class="font-medium text-brand-700 underline">Contactez-nous</a>.
+      Pas trouvé votre réponse ?{" "}
+      <a href="/contact" class="font-medium text-brand-700 underline">Contactez-nous</a> ou appelez le{" "}
+      <a href="tel:+33170955661" class="font-medium text-brand-700 underline">01 70 95 56 61</a>.
     </p>
-    <dl class="mt-10 space-y-6">
+
+    <dl class="mt-10 space-y-4">
       {
         faqs.map((item) => (
           <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <dt class="font-semibold text-ink-900">{item.q}</dt>
-            <dd class="mt-2 text-sm text-slate-600">{item.a}</dd>
+            <dd class="mt-2 text-sm leading-relaxed text-slate-600">{item.a}</dd>
           </div>
         ))
       }
     </dl>
+
+    <div class="mt-10 rounded-2xl bg-brand-50 border border-brand-100 p-6 text-center">
+      <p class="font-semibold text-ink-900">Une autre question ?</p>
+      <p class="mt-1 text-sm text-slate-600">Notre équipe répond en moins de 2h en semaine.</p>
+      <div class="mt-4 flex flex-wrap justify-center gap-3">
+        <a href="/contact" class="rounded-full bg-brand-600 px-5 py-2 text-sm font-semibold text-white hover:bg-brand-700 transition">Nous contacter</a>
+        <a href="tel:+33170955661" class="rounded-full border border-brand-600 px-5 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50 transition">01 70 95 56 61</a>
+      </div>
+    </div>
   </div>
 </BaseLayout>

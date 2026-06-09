@@ -13,3 +13,58 @@
     @apply outline-2 outline-offset-2 outline-brand-600;
   }
 }
+
+@layer components {
+  .prose-locpro {
+    @apply max-w-none text-base leading-relaxed text-slate-700 space-y-4;
+  }
+  .prose-locpro h2 {
+    @apply mt-10 mb-3 font-display text-xl font-semibold text-ink-900;
+  }
+  .prose-locpro h3 {
+    @apply mt-6 mb-2 font-display text-lg font-semibold text-ink-900;
+  }
+  .prose-locpro p {
+    @apply text-slate-700 leading-relaxed;
+  }
+  .prose-locpro a {
+    @apply text-brand-700 underline hover:text-brand-800;
+  }
+  .prose-locpro ul {
+    @apply ml-5 list-disc space-y-1 text-slate-700;
+  }
+  .prose-locpro ol {
+    @apply ml-5 list-decimal space-y-1 text-slate-700;
+  }
+  .prose-locpro strong {
+    @apply font-semibold text-ink-900;
+  }
+  .prose-locpro blockquote {
+    @apply border-l-4 border-brand-300 pl-4 italic text-slate-500;
+  }
+  /* Tables */
+  .prose-locpro table {
+    @apply w-full my-6 text-sm border-collapse overflow-hidden rounded-xl border border-slate-200 shadow-sm;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .prose-locpro thead {
+    @apply bg-brand-50;
+  }
+  .prose-locpro th {
+    @apply px-4 py-3 text-left font-semibold text-ink-900 border-b border-slate-200 whitespace-nowrap;
+  }
+  .prose-locpro td {
+    @apply px-4 py-3 text-slate-700 border-b border-slate-100;
+  }
+  .prose-locpro tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .prose-locpro tbody tr:hover {
+    @apply bg-slate-50;
+  }
+  .prose-locpro tbody tr:nth-child(even) {
+    @apply bg-slate-50/50;
+  }
+}
