@@ -10,7 +10,46 @@ const {
   action = import.meta.env.PUBLIC_DEVIS_FORM_ACTION || import.meta.env.PUBLIC_CONTACT_FORM_ACTION || "",
   formName = "devis-b2b",
 } = Astro.props;
+const cls =
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none";
 ---
+
+<style>
+  .flatpickr-months .flatpickr-month,
+  .flatpickr-weekdays,
+  span.flatpickr-weekday {
+    background: #15803d !important;
+    color: #fff !important;
+    fill: #fff !important;
+  }
+  .flatpickr-current-month .flatpickr-monthDropdown-months,
+  .flatpickr-current-month input.cur-year {
+    color: #fff !important;
+  }
+  .flatpickr-day.selected,
+  .flatpickr-day.selected:hover {
+    background: #15803d !important;
+    border-color: #15803d !important;
+  }
+  .flatpickr-day:hover { background: #dcfce7 !important; }
+  .flatpickr-day.inRange {
+    background: #bbf7d0 !important;
+    border-color: #bbf7d0 !important;
+    box-shadow: -5px 0 0 #bbf7d0, 5px 0 0 #bbf7d0;
+  }
+  .devis-addr-list li {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .devis-addr-list li:last-child { border-bottom: none; }
+  .devis-addr-list li:hover, .devis-addr-list li.active {
+    background: #f0fdf4;
+    color: #15803d;
+  }
+</style>
 
 <form
   id={id}
@@ -138,6 +177,112 @@ const {
       />
     </div>
   </div>
+  <!-- Dates -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-debut`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Date de départ souhaitée <span class="text-red-600">*</span>
+      </label>
+      <div class="relative">
+        <input
+          id={`${id}-debut`}
+          name="date_debut"
+          type="text"
+          readonly
+          placeholder="Cliquez pour choisir…"
+          required
+          class={`${cls} cursor-pointer pr-10`}
+        />
+        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </span>
+      </div>
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-debut`}></p>
+    </div>
+    <div>
+      <label for={`${id}-fin`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Date de retour souhaitée <span class="text-red-600">*</span>
+      </label>
+      <div class="relative">
+        <input
+          id={`${id}-fin`}
+          name="date_fin"
+          type="text"
+          readonly
+          placeholder="Cliquez pour choisir…"
+          required
+          class={`${cls} cursor-pointer pr-10`}
+        />
+        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </span>
+      </div>
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-fin`}></p>
+    </div>
+  </div>
+
+  <!-- Adresses -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="relative">
+      <label for={`${id}-livraison`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Adresse de livraison <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-livraison`}
+        name="adresse_livraison"
+        type="text"
+        autocomplete="off"
+        placeholder="Ex : 10 rue de Rivoli, Paris"
+        required
+        class={cls}
+      />
+      <ul
+        id={`${id}-livraison-list`}
+        class="devis-addr-list absolute z-50 mt-1 hidden w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+        role="listbox"
+      ></ul>
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-livraison`}></p>
+    </div>
+    <div class="relative">
+      <label for={`${id}-recup`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Adresse de récupération <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-recup`}
+        name="adresse_recuperation"
+        type="text"
+        autocomplete="off"
+        placeholder="Ex : 60 rue François Ier, Paris"
+        required
+        class={cls}
+      />
+      <ul
+        id={`${id}-recup-list`}
+        class="devis-addr-list absolute z-50 mt-1 hidden w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+        role="listbox"
+      ></ul>
+      <p class="mt-1 hidden text-xs text-red-600" data-devis-error={`${id}-recup`}></p>
+    </div>
+  </div>
+
   <div>
     <label for={`${id}-usage`} class="mb-1 block text-sm font-medium text-slate-700"
       >Usage prévu <span class="text-red-600">*</span></label
@@ -168,6 +313,100 @@ const {
 </form>
 
 <script define:vars={{ formId: id, formAction: action }}>
+  async function initDevisExtras() {
+    if (!document.querySelector("link[data-flatpickr]")) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css";
+      link.dataset.flatpickr = "1";
+      document.head.appendChild(link);
+    }
+    if (typeof window.flatpickr === "undefined") {
+      await new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/flatpickr";
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    if (!window.flatpickr?.l10ns?.fr) {
+      await new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js";
+        s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let fpFin;
+    const fpDebut = window.flatpickr(`#${formId}-debut`, {
+      locale: "fr", dateFormat: "d/m/Y", minDate: today, disableMobile: true,
+      onChange(dates) {
+        if (dates.length && fpFin) {
+          fpFin.set("minDate", dates[0]);
+          if (fpFin.selectedDates[0] && fpFin.selectedDates[0] < dates[0]) fpFin.clear();
+        }
+      },
+    });
+    fpFin = window.flatpickr(`#${formId}-fin`, {
+      locale: "fr", dateFormat: "d/m/Y", minDate: today, disableMobile: true,
+    });
+
+    function setupAddr(inputId, listId) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !list) return;
+      let timer;
+      input.addEventListener("input", function () {
+        clearTimeout(timer);
+        const q = this.value.trim();
+        if (q.length < 3) { list.classList.add("hidden"); list.innerHTML = ""; return; }
+        timer = setTimeout(async () => {
+          try {
+            const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5&autocomplete=1`);
+            const data = await res.json();
+            const features = data.features || [];
+            if (!features.length) { list.classList.add("hidden"); return; }
+            list.innerHTML = features.map(f =>
+              `<li data-value="${f.properties.label}" role="option" tabindex="-1">
+                <span class="font-medium">${f.properties.name}</span>
+                <span class="ml-1 text-xs text-slate-400">${f.properties.postcode} ${f.properties.city}</span>
+              </li>`
+            ).join("");
+            list.classList.remove("hidden");
+            list.querySelectorAll("li").forEach(item => {
+              item.addEventListener("mousedown", e => {
+                e.preventDefault();
+                input.value = item.dataset.value;
+                list.classList.add("hidden"); list.innerHTML = "";
+              });
+            });
+          } catch { list.classList.add("hidden"); }
+        }, 280);
+      });
+      input.addEventListener("blur", () => setTimeout(() => list.classList.add("hidden"), 200));
+      input.addEventListener("keydown", e => {
+        const items = list.querySelectorAll("li");
+        const active = list.querySelector("li.active");
+        const idx = Array.from(items).indexOf(active);
+        if (e.key === "ArrowDown") { e.preventDefault(); if (active) active.classList.remove("active"); (items[idx + 1] || items[0])?.classList.add("active"); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); if (active) active.classList.remove("active"); (items[idx - 1] || items[items.length - 1])?.classList.add("active"); }
+        else if (e.key === "Enter" && active) { e.preventDefault(); input.value = active.dataset.value; list.classList.add("hidden"); }
+        else if (e.key === "Escape") list.classList.add("hidden");
+      });
+    }
+    setupAddr(`${formId}-livraison`, `${formId}-livraison-list`);
+    setupAddr(`${formId}-recup`, `${formId}-recup-list`);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDevisExtras);
+  } else {
+    initDevisExtras();
+  }
+
   const form = document.getElementById(formId);
   if (form instanceof HTMLFormElement) {
     const showErr = (fieldId, msg) => {
@@ -200,6 +439,27 @@ const {
         showErr(`${formId}-siret`, "Le SIRET doit comporter 14 chiffres.");
         e.preventDefault();
         return;
+      }
+
+      const debut = form.querySelector(`#${formId}-debut`);
+      const fin = form.querySelector(`#${formId}-fin`);
+      const livraison = form.querySelector(`#${formId}-livraison`);
+      const recup = form.querySelector(`#${formId}-recup`);
+      if (debut instanceof HTMLInputElement && !debut.value) {
+        showErr(`${formId}-debut`, "Sélectionnez une date de départ.");
+        e.preventDefault(); return;
+      }
+      if (fin instanceof HTMLInputElement && !fin.value) {
+        showErr(`${formId}-fin`, "Sélectionnez une date de retour.");
+        e.preventDefault(); return;
+      }
+      if (livraison instanceof HTMLInputElement && livraison.value.trim().length < 5) {
+        showErr(`${formId}-livraison`, "Indiquez une adresse de livraison.");
+        e.preventDefault(); return;
+      }
+      if (recup instanceof HTMLInputElement && recup.value.trim().length < 5) {
+        showErr(`${formId}-recup`, "Indiquez une adresse de récupération.");
+        e.preventDefault(); return;
       }
 
       if (!formAction) {

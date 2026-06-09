@@ -1,0 +1,516 @@
+---
+interface Props {
+  id?: string;
+}
+const { id = "resa" } = Astro.props;
+const cls =
+  "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200";
+---
+
+<style>
+  /* Flatpickr brand overrides */
+  .flatpickr-months .flatpickr-month,
+  .flatpickr-weekdays,
+  span.flatpickr-weekday {
+    background: #15803d !important;
+    color: #fff !important;
+    fill: #fff !important;
+  }
+  .flatpickr-current-month .flatpickr-monthDropdown-months,
+  .flatpickr-current-month input.cur-year {
+    color: #fff !important;
+  }
+  .flatpickr-day.selected,
+  .flatpickr-day.selected:hover,
+  .flatpickr-day.startRange,
+  .flatpickr-day.endRange {
+    background: #15803d !important;
+    border-color: #15803d !important;
+  }
+  .flatpickr-day:hover {
+    background: #dcfce7 !important;
+  }
+  .flatpickr-day.today {
+    border-color: #15803d !important;
+  }
+  .flatpickr-day.inRange {
+    background: #bbf7d0 !important;
+    border-color: #bbf7d0 !important;
+    box-shadow: -5px 0 0 #bbf7d0, 5px 0 0 #bbf7d0;
+  }
+  /* Address suggestion dropdown */
+  .addr-list li {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.1s;
+  }
+  .addr-list li:last-child {
+    border-bottom: none;
+  }
+  .addr-list li:hover,
+  .addr-list li.active {
+    background: #f0fdf4;
+    color: #15803d;
+  }
+</style>
+
+<form id={id} class="space-y-5" novalidate>
+  <!-- Honeypot -->
+  <p class="absolute -left-[9999px]" aria-hidden="true">
+    <input type="text" name="bot-field-resa" tabindex="-1" autocomplete="off" />
+  </p>
+
+  <!-- Nom + Email -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-nom`} class="mb-1 block text-sm font-medium text-slate-700">
+        Nom <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-nom`}
+        name="nom"
+        type="text"
+        required
+        autocomplete="name"
+        class={cls}
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-nom`}></p>
+    </div>
+    <div>
+      <label for={`${id}-email`} class="mb-1 block text-sm font-medium text-slate-700">
+        E-mail <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-email`}
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        class={cls}
+      />
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-email`}></p>
+    </div>
+  </div>
+
+  <!-- Téléphone + Type véhicule -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-tel`} class="mb-1 block text-sm font-medium text-slate-700">
+        Téléphone
+      </label>
+      <input
+        id={`${id}-tel`}
+        name="telephone"
+        type="tel"
+        autocomplete="tel"
+        class={cls}
+      />
+    </div>
+    <div>
+      <label for={`${id}-type`} class="mb-1 block text-sm font-medium text-slate-700">
+        Type de véhicule <span class="text-red-600">*</span>
+      </label>
+      <select id={`${id}-type`} name="type_vehicule" required class={cls}>
+        <option value="">Choisir…</option>
+        <option value="velo-electrique">Vélo électrique</option>
+        <option value="cargo">Cargo</option>
+        <option value="trottinette">Trottinette</option>
+        <option value="gyropode">Gyropode</option>
+        <option value="autre">Autre / je ne sais pas</option>
+      </select>
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-type`}></p>
+    </div>
+  </div>
+
+  <!-- Dates -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-debut`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Date de départ <span class="text-red-600">*</span>
+      </label>
+      <div class="relative">
+        <input
+          id={`${id}-debut`}
+          name="date_debut"
+          type="text"
+          readonly
+          placeholder="Cliquez pour choisir…"
+          required
+          class={`${cls} cursor-pointer pr-10`}
+        />
+        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </span>
+      </div>
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-debut`}></p>
+    </div>
+    <div>
+      <label for={`${id}-fin`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Date de retour <span class="text-red-600">*</span>
+      </label>
+      <div class="relative">
+        <input
+          id={`${id}-fin`}
+          name="date_fin"
+          type="text"
+          readonly
+          placeholder="Cliquez pour choisir…"
+          required
+          class={`${cls} cursor-pointer pr-10`}
+        />
+        <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </span>
+      </div>
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-fin`}></p>
+    </div>
+  </div>
+
+  <!-- Adresses -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="relative">
+      <label for={`${id}-livraison`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Adresse de livraison <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-livraison`}
+        name="adresse_livraison"
+        type="text"
+        autocomplete="off"
+        placeholder="Ex : 10 rue de Rivoli, Paris"
+        required
+        class={cls}
+      />
+      <ul
+        id={`${id}-livraison-list`}
+        class="addr-list absolute z-50 mt-1 hidden w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+        role="listbox"
+      ></ul>
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-livraison`}></p>
+    </div>
+    <div class="relative">
+      <label for={`${id}-recup`} class="mb-1 flex items-center gap-1 text-sm font-medium text-slate-700">
+        <svg class="h-4 w-4 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Adresse de récupération <span class="text-red-600">*</span>
+      </label>
+      <input
+        id={`${id}-recup`}
+        name="adresse_recuperation"
+        type="text"
+        autocomplete="off"
+        placeholder="Ex : 60 rue François Ier, Paris"
+        required
+        class={cls}
+      />
+      <ul
+        id={`${id}-recup-list`}
+        class="addr-list absolute z-50 mt-1 hidden w-full overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg"
+        role="listbox"
+      ></ul>
+      <p class="mt-1 hidden text-xs text-red-600" data-resa-error={`${id}-recup`}></p>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div>
+    <label for={`${id}-msg`} class="mb-1 block text-sm font-medium text-slate-700">
+      Message complémentaire
+    </label>
+    <textarea
+      id={`${id}-msg`}
+      name="message"
+      rows="3"
+      placeholder="Précisez vos besoins, questions particulières…"
+      class={cls}
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    id={`${id}-submit`}
+    class="w-full rounded-lg bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60 sm:w-auto"
+  >
+    Envoyer la demande de réservation
+  </button>
+  <p
+    id={`${id}-success`}
+    class="hidden rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900"
+    role="status"
+  >
+    ✓ Demande envoyée ! Nous vous répondons sous 24 h ouvrées.
+  </p>
+  <p
+    id={`${id}-error`}
+    class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+    role="alert"
+  ></p>
+</form>
+
+<script define:vars={{ formId: id }}>
+  async function initReservationForm() {
+    // Load flatpickr CSS
+    if (!document.querySelector("link[data-flatpickr]")) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css";
+      link.dataset.flatpickr = "1";
+      document.head.appendChild(link);
+    }
+
+    // Load flatpickr JS
+    if (typeof window.flatpickr === "undefined") {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/flatpickr";
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    // Load French locale
+    if (!window.flatpickr?.l10ns?.fr) {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js";
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let fpFin;
+
+    const fpDebut = window.flatpickr(`#${formId}-debut`, {
+      locale: "fr",
+      dateFormat: "d/m/Y",
+      minDate: today,
+      disableMobile: true,
+      onChange(dates) {
+        if (dates.length && fpFin) {
+          fpFin.set("minDate", dates[0]);
+          if (fpFin.selectedDates[0] && fpFin.selectedDates[0] < dates[0]) {
+            fpFin.clear();
+          }
+        }
+      },
+    });
+
+    fpFin = window.flatpickr(`#${formId}-fin`, {
+      locale: "fr",
+      dateFormat: "d/m/Y",
+      minDate: today,
+      disableMobile: true,
+    });
+
+    // Address autocomplete using api-adresse.data.gouv.fr (free, no key needed)
+    function setupAddressAutocomplete(inputId, listId) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !list) return;
+
+      let timer;
+
+      input.addEventListener("input", function () {
+        clearTimeout(timer);
+        const q = this.value.trim();
+        if (q.length < 3) {
+          list.classList.add("hidden");
+          list.innerHTML = "";
+          return;
+        }
+        timer = setTimeout(async () => {
+          try {
+            const res = await fetch(
+              `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5&autocomplete=1`
+            );
+            const data = await res.json();
+            const features = data.features || [];
+            if (!features.length) {
+              list.classList.add("hidden");
+              return;
+            }
+            list.innerHTML = features
+              .map(
+                (f) =>
+                  `<li data-value="${f.properties.label}" role="option" tabindex="-1">
+                    <span class="font-medium">${f.properties.name}</span>
+                    <span class="ml-1 text-xs text-slate-400">${f.properties.postcode} ${f.properties.city}</span>
+                  </li>`
+              )
+              .join("");
+            list.classList.remove("hidden");
+
+            list.querySelectorAll("li").forEach((item) => {
+              item.addEventListener("mousedown", (e) => {
+                e.preventDefault();
+                input.value = item.dataset.value;
+                list.classList.add("hidden");
+                list.innerHTML = "";
+              });
+            });
+          } catch {
+            list.classList.add("hidden");
+          }
+        }, 280);
+      });
+
+      input.addEventListener("blur", () => {
+        setTimeout(() => list.classList.add("hidden"), 200);
+      });
+
+      input.addEventListener("keydown", (e) => {
+        const items = list.querySelectorAll("li");
+        const active = list.querySelector("li.active");
+        const idx = Array.from(items).indexOf(active);
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (active) active.classList.remove("active");
+          const next = items[idx + 1] || items[0];
+          if (next) next.classList.add("active");
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (active) active.classList.remove("active");
+          const prev = items[idx - 1] || items[items.length - 1];
+          if (prev) prev.classList.add("active");
+        } else if (e.key === "Enter" && active) {
+          e.preventDefault();
+          input.value = active.dataset.value;
+          list.classList.add("hidden");
+        } else if (e.key === "Escape") {
+          list.classList.add("hidden");
+        }
+      });
+    }
+
+    setupAddressAutocomplete(`${formId}-livraison`, `${formId}-livraison-list`);
+    setupAddressAutocomplete(`${formId}-recup`, `${formId}-recup-list`);
+
+    // Form submission
+    const form = document.getElementById(formId);
+    if (!form) return;
+
+    const showErr = (fieldId, msg) => {
+      const el = form.querySelector(`[data-resa-error="${fieldId}"]`);
+      if (el) { el.textContent = msg; el.classList.remove("hidden"); }
+    };
+    const clearErrs = () => {
+      form.querySelectorAll("[data-resa-error]").forEach((n) => {
+        n.textContent = "";
+        n.classList.add("hidden");
+      });
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearErrs();
+
+      const hp = form.querySelector('input[name="bot-field-resa"]');
+      if (hp && hp.value.trim() !== "") return;
+
+      let ok = true;
+      const nom = form.querySelector(`#${formId}-nom`);
+      const email = form.querySelector(`#${formId}-email`);
+      const type = form.querySelector(`#${formId}-type`);
+      const debut = form.querySelector(`#${formId}-debut`);
+      const fin = form.querySelector(`#${formId}-fin`);
+      const livraison = form.querySelector(`#${formId}-livraison`);
+      const recup = form.querySelector(`#${formId}-recup`);
+
+      if (nom && nom.value.trim().length < 2) {
+        showErr(`${formId}-nom`, "Indiquez au moins 2 caractères.");
+        ok = false;
+      }
+      if (email) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          showErr(`${formId}-email`, "Adresse e-mail invalide.");
+          ok = false;
+        }
+      }
+      if (type && !type.value) {
+        showErr(`${formId}-type`, "Choisissez un type de véhicule.");
+        ok = false;
+      }
+      if (debut && !debut.value) {
+        showErr(`${formId}-debut`, "Sélectionnez une date de départ.");
+        ok = false;
+      }
+      if (fin && !fin.value) {
+        showErr(`${formId}-fin`, "Sélectionnez une date de retour.");
+        ok = false;
+      }
+      if (livraison && livraison.value.trim().length < 5) {
+        showErr(`${formId}-livraison`, "Indiquez une adresse de livraison.");
+        ok = false;
+      }
+      if (recup && recup.value.trim().length < 5) {
+        showErr(`${formId}-recup`, "Indiquez une adresse de récupération.");
+        ok = false;
+      }
+      if (!ok) return;
+
+      const btn = document.getElementById(`${formId}-submit`);
+      const successEl = document.getElementById(`${formId}-success`);
+      const errorEl = document.getElementById(`${formId}-error`);
+
+      if (btn) { btn.disabled = true; btn.textContent = "Envoi en cours…"; }
+
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (res.ok && json.success) {
+          form.reset();
+          fpDebut.clear();
+          fpFin.clear();
+          if (successEl) successEl.classList.remove("hidden");
+          if (errorEl) errorEl.classList.add("hidden");
+        } else {
+          throw new Error(json.error || "Erreur inconnue");
+        }
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent =
+            (err instanceof Error ? err.message : "Une erreur est survenue.") +
+            " Vous pouvez aussi nous appeler au 01 70 95 56 61.";
+          errorEl.classList.remove("hidden");
+        }
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = "Envoyer la demande de réservation"; }
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReservationForm);
+  } else {
+    initReservationForm();
+  }
+</script>
