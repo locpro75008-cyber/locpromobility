@@ -9,7 +9,7 @@ const schema = z
     nom: z.string().optional(),
     email: z.string().email("E-mail invalide"),
   telephone: z.string().optional(),
-  type_vehicule: z.string().min(1, "Type de véhicule requis"),
+  type_vehicule: z.string().optional(),
   duree: z.string().optional(),
   message: z.string().optional(),
   // Champs réservation / devis
@@ -111,7 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
       ${row("Société", societe, "", "#f8fafc")}
       ${row("SIRET", siret)}
       ${row("Contact B2B", nom_contact, "", "#f8fafc")}
-      <tr style="background:#f8fafc"><td style="padding:8px;color:#64748b">Véhicule</td><td style="padding:8px">${typeLabel[type_vehicule] ?? type_vehicule}</td></tr>
+      ${type_vehicule ? `<tr style="background:#f8fafc"><td style="padding:8px;color:#64748b">Véhicule</td><td style="padding:8px">${typeLabel[type_vehicule] ?? type_vehicule}</td></tr>` : ""}
       ${row("Nb. véhicules", nombre_vehicules)}
       ${row("Durée", duree ? (dureeLabel[duree] ?? duree) : undefined, "", "#f8fafc")}
       ${row("Date de départ", date_debut)}
@@ -124,7 +124,7 @@ export const POST: APIRoute = async ({ request }) => {
   `;
 
   const recapLines = [
-    `Véhicule : ${typeLabel[type_vehicule] ?? type_vehicule}`,
+    type_vehicule ? `Véhicule : ${typeLabel[type_vehicule] ?? type_vehicule}` : "",
     duree ? `Durée : ${dureeLabel[duree] ?? duree}` : "",
     date_debut ? `Départ : ${date_debut}` : "",
     date_fin ? `Retour : ${date_fin}` : "",
@@ -151,7 +151,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: "LocPro Mobilité <contact@locpromobility.fr>",
       to: "contact@locpromobility.fr",
       replyTo: email,
-      subject: `[Demande] ${nom_contact ?? nom} — ${typeLabel[type_vehicule] ?? type_vehicule}`,
+      subject: `[Demande] ${nom} — ${type_vehicule ? (typeLabel[type_vehicule] ?? type_vehicule) : societe ?? "Devis B2B"}`,
       html: htmlInterne,
     });
 
