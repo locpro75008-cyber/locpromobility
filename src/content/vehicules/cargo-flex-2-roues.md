@@ -10,7 +10,7 @@ tarifs:
   - label: "Long terme / mois"
     prix: "279 €"
 images:
-  - "/images/cargo-flex-2-roues.jpg"
+  - "../../assets/images/cargo-flex-2-roues.jpg"
 disponible: true
 specs:
   - label: "Charge utile"
@@ -22,3 +22,4 @@ specs:
 ---
 
 Plateau large, assistance progressive et freinage performant. Parfait pour les pros et les familles actives en ville.
+

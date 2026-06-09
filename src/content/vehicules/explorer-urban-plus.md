@@ -10,7 +10,7 @@ tarifs:
   - label: "Long terme / mois"
     prix: "149 €"
 images:
-  - "/images/explorer-urban-plus.jpg"
+  - "../../assets/images/explorer-urban-plus.jpg"
 disponible: true
 specs:
   - label: "Autonomie"
@@ -22,3 +22,4 @@ specs:
 ---
 
 Idéal pour les trajets domicile–travail. Batterie amovible, éclairage intégré, porte-bagages compatible sacoche ou enfant léger (selon homologation).
+

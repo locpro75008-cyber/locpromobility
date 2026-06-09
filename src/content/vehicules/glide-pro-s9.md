@@ -10,7 +10,7 @@ tarifs:
   - label: "Long terme / mois"
     prix: "79 €"
 images:
-  - "/images/glide-pro-s9.jpg"
+  - "../../assets/images/glide-pro-s9.jpg"
 disponible: true
 specs:
   - label: "Autonomie"
@@ -22,3 +22,4 @@ specs:
 ---
 
 À combiner avec les transports en commun. Casque et gants recommandés ; formation courte offerte à la remise.
+

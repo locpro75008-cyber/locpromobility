@@ -2,7 +2,7 @@
 title: "Cargo électrique en entreprise : le guide pour passer à l'action"
 description: "Livraison du dernier kilomètre, tournées terrain, logistique interne : le vélo cargo électrique s'impose dans les flottes professionnelles. Voici pourquoi — et comment bien démarrer."
 pubDate: 2026-05-14
-heroImage: "/images/blog-cargo-entreprise.jpg"
+heroImage: "../../assets/images/blog-cargo-entreprise.jpg"
 ---
 
 À Paris et dans les grandes villes françaises, le vélo cargo électrique est en train de s'imposer comme l'alternative sérieuse à la camionnette pour tout ce qui se passe dans un rayon de 15 km. Collectivités, artisans, services de livraison, traiteurs, enseignes de retail : de plus en plus d'entreprises franchissent le pas. Voici ce qu'il faut savoir avant de vous lancer.
@@ -59,3 +59,4 @@ Nos contrats B2B incluent une session de prise en main pour vos équipes (30 min
 Nos équipes peuvent organiser un **test gratuit d'une journée** sur votre zone de livraison avant tout engagement — n'hésitez pas à le demander lors de votre prise de contact.
 
 [Demander un devis flotte →](/devis)
+

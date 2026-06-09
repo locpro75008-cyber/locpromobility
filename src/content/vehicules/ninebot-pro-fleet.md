@@ -10,7 +10,7 @@ tarifs:
   - label: "Long terme / mois"
     prix: "299 €"
 images:
-  - "/images/ninebot-pro-fleet.jpg"
+  - "../../assets/images/ninebot-pro-fleet.jpg"
 disponible: false
 specs:
   - label: "Autonomie"
@@ -22,3 +22,4 @@ specs:
 ---
 
 Solution événementielle et team-building. Disponibilité limitée : contactez-nous pour calendrier et volume.
+

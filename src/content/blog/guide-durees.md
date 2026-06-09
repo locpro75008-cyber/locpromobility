@@ -2,7 +2,7 @@
 title: "Court, moyen ou long terme : comment choisir sa durée de location ?"
 description: "Vous hésitez entre une location à la journée, au mois ou sur contrat longue durée ? On vous explique quelle formule correspond à votre situation et comment en tirer le meilleur rapport qualité-prix."
 pubDate: 2026-04-02
-heroImage: "/images/blog-guide-durees.jpg"
+heroImage: "../../assets/images/blog-guide-durees.jpg"
 ---
 
 Vous avez décidé de vous déplacer en vélo électrique, mais vous ne savez pas quelle durée de location choisir ? C'est souvent la question qui bloque. Voici un guide concret pour vous aider à trancher — et à ne pas payer plus que nécessaire.
@@ -52,3 +52,4 @@ Pour les **entreprises**, le long terme ouvre droit à une facturation centralis
 | Long terme | Quotidien, flotte entreprise | Meilleur coût mensuel |
 
 Des questions sur votre situation ? [Contactez-nous](/contact) — on vous répond sous 24 h.
+
