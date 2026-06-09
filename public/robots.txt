@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://locpro-mobilite.example/sitemap-index.xml
+Sitemap: https://locpromobility.fr/sitemap.xml
