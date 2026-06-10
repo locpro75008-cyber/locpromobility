@@ -310,6 +310,192 @@ export const locations: Location[] = [
     usages: ["Tourisme Château de Versailles", "Balades grandes allées", "Familles et groupes"],
     distanceAgence: "Livraison sur rendez-vous (45 min depuis Paris 8e)",
   },
+  // ─── Arrondissements manquants ────────────────────────────────────────
+  {
+    slug: "paris-5e",
+    nom: "Paris 5e arrondissement",
+    type: "arrondissement",
+    codePostal: "75005",
+    description: "Location vélo électrique Paris 5e — Quartier Latin, Sorbonne, Panthéon",
+    metaDescription:
+      "Location de vélo électrique Paris 5e arrondissement. Quartier Latin, Sorbonne, jardins des plantes. Livraison sous 48h — LocPro Mobilité.",
+    intro:
+      "Le 5e arrondissement, cœur intellectuel de Paris, est idéal pour le vélo électrique : ruelles historiques, quais de Seine, Jardin des Plantes et campus universitaires. Rejoignez facilement les grandes bibliothèques et les musées.",
+    landmarks: ["Panthéon", "Sorbonne", "Jardin des Plantes", "Musée National d'Histoire Naturelle", "Arènes de Lutèce"],
+    metros: ["Cardinal Lemoine (L10)", "Jussieu (L7/10)", "Luxembourg (RER B)", "Maubert-Mutualité (L10)"],
+    usages: ["Étudiants et enseignants", "Tourisme culturel", "Navetteurs Rive Gauche"],
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-6e",
+    nom: "Paris 6e arrondissement",
+    type: "arrondissement",
+    codePostal: "75006",
+    description: "Location vélo électrique Paris 6e — Saint-Germain-des-Prés, Luxembourg",
+    metaDescription:
+      "Location vélo électrique Paris 6e arrondissement. Saint-Germain-des-Prés, jardin du Luxembourg. Livraison 24–48h — LocPro Mobilité.",
+    intro:
+      "Saint-Germain-des-Prés, les Cafés de Flore et de la Paix, le jardin du Luxembourg : le 6e est un arrondissement de promenade et de culture. Le vélo électrique vous permet de relier facilement les rives et les musées.",
+    landmarks: ["Jardin du Luxembourg", "Saint-Germain-des-Prés", "École des Beaux-Arts", "Odéon", "Musée d'Orsay (proche)"],
+    metros: ["Saint-Germain-des-Prés (L4)", "Odéon (L4/10)", "Mabillon (L10)", "Luxembourg (RER B)"],
+    usages: ["Promenades culturelles", "Mode et design", "Cadres et professions libérales"],
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-10e",
+    nom: "Paris 10e arrondissement",
+    type: "arrondissement",
+    codePostal: "75010",
+    description: "Location vélo électrique Paris 10e — Canal Saint-Martin, gares du Nord et de l'Est",
+    metaDescription:
+      "Location vélo électrique Paris 10e. Canal Saint-Martin, Gare du Nord, Gare de l'Est. Livraison rapide — LocPro Mobilité.",
+    intro:
+      "Le 10e arrondissement est un quartier en plein essor, animé par le Canal Saint-Martin et les deux grandes gares parisiennes. Idéal pour les navetteurs arrivant à Paris et les résidents du quartier.",
+    landmarks: ["Canal Saint-Martin", "Gare du Nord", "Gare de l'Est", "Hôpital Saint-Louis", "Place de la République (proche)"],
+    metros: ["Gare du Nord (L2/4/5/RER B/D/E)", "Gare de l'Est (L4/5/7/RER E)", "Jacques Bonsergent (L5)"],
+    usages: ["Navetteurs grandes lignes", "Résidents actifs", "Touristes en transit"],
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-12e",
+    nom: "Paris 12e arrondissement",
+    type: "arrondissement",
+    codePostal: "75012",
+    description: "Location vélo électrique Paris 12e — Bercy, Vincennes, Bastille",
+    metaDescription:
+      "Location vélo électrique Paris 12e arrondissement. Bercy Village, Bois de Vincennes, Bastille. Livraison sous 48h — LocPro Mobilité.",
+    intro:
+      "Le 12e arrondissement offre l'une des meilleures pistes cyclables de Paris : la Coulée Verte relie Bastille au Bois de Vincennes sur 4 km. Un terrain idéal pour découvrir Paris à vélo électrique.",
+    landmarks: ["Bercy Village", "Coulée Verte", "Opéra Bastille", "Bois de Vincennes (proche)", "Accor Arena"],
+    metros: ["Gare de Lyon (L1/14/RER A/D)", "Bastille (L1/5/8)", "Bercy (L6/14)", "Nation (L1/2/6/9/RER A)"],
+    usages: ["Loisirs et balades Vincennes", "Salariés Bercy", "Navetteurs Gare de Lyon"],
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-13e",
+    nom: "Paris 13e arrondissement",
+    type: "arrondissement",
+    codePostal: "75013",
+    description: "Location vélo électrique Paris 13e — Bibliothèque Nationale, Chinatown, Butte-aux-Cailles",
+    metaDescription:
+      "Location vélo électrique Paris 13e arrondissement. BNF, quartier asiatique, Butte-aux-Cailles. Livraison domicile — LocPro Mobilité.",
+    intro:
+      "Le 13e, entre la BNF François-Mitterrand et la Butte-aux-Cailles, est un arrondissement de contrastes idéal pour le vélo électrique. Les berges de Seine et la ZAC Paris Rive Gauche offrent des voies cyclables de qualité.",
+    landmarks: ["Bibliothèque François-Mitterrand (BNF)", "Butte-aux-Cailles", "Quartier asiatique", "Les Frigos"],
+    metros: ["Bibliothèque François-Mitterrand (L14/RER C)", "Place d'Italie (L5/6/7)", "Tolbiac (L7)"],
+    usages: ["Étudiants et chercheurs", "Résidents actifs", "Balade berges de Seine"],
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-14e",
+    nom: "Paris 14e arrondissement",
+    type: "arrondissement",
+    codePostal: "75014",
+    description: "Location vélo électrique Paris 14e — Montparnasse, Parc Montsouris, Catacombes",
+    metaDescription:
+      "Location vélo électrique Paris 14e arrondissement. Montparnasse, Catacombes, Parc Montsouris. Livraison 24–48h — LocPro Mobilité.",
+    intro:
+      "Montparnasse, les Catacombes et le Parc Montsouris caractérisent ce 14e arrondissement résidentiel et culturel. Le vélo électrique est le transport idéal pour relier les grandes rues et se connecter au périphérique cyclable.",
+    landmarks: ["Tour Montparnasse", "Catacombes de Paris", "Parc Montsouris", "Fondation Cartier", "Marché Edgar-Quinet"],
+    metros: ["Montparnasse-Bienvenüe (L4/6/12/13)", "Denfert-Rochereau (L4/6/RER B)", "Alésia (L4)"],
+    usages: ["Résidents et familles", "Tourisme culturel", "Navetteurs Montparnasse"],
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-19e",
+    nom: "Paris 19e arrondissement",
+    type: "arrondissement",
+    codePostal: "75019",
+    description: "Location vélo électrique Paris 19e — Buttes-Chaumont, Canal de l'Ourcq, La Villette",
+    metaDescription:
+      "Location vélo électrique Paris 19e. Buttes-Chaumont, Cité des Sciences, Canal de l'Ourcq. Livraison rapide — LocPro Mobilité.",
+    intro:
+      "Le 19e arrondissement est un paradis pour le cycliste avec le Parc des Buttes-Chaumont, le Canal de l'Ourcq et la Cité des Sciences et de l'Industrie. Le vélo électrique s'y intègre naturellement dans ce quartier jeune et dynamique.",
+    landmarks: ["Parc des Buttes-Chaumont", "Cité des Sciences", "La Villette", "Canal de l'Ourcq", "Parc de la Villette"],
+    metros: ["Jaurès (L2/5/7bis)", "Laumière (L5)", "Porte de Pantin (L5)"],
+    usages: ["Familles et loisirs", "Navetteurs La Villette", "Résidents Est parisien"],
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "paris-20e",
+    nom: "Paris 20e arrondissement",
+    type: "arrondissement",
+    codePostal: "75020",
+    description: "Location vélo électrique Paris 20e — Belleville, Père-Lachaise, Ménilmontant",
+    metaDescription:
+      "Location vélo électrique Paris 20e arrondissement. Belleville, Père-Lachaise, Ménilmontant. Livraison à domicile — LocPro Mobilité.",
+    intro:
+      "Belleville, Ménilmontant et le Père-Lachaise donnent au 20e arrondissement un caractère unique, mélange de cultures et d'art. Le vélo électrique permet de gravir facilement les côtes du quartier tout en profitant de l'ambiance locale.",
+    landmarks: ["Cimetière du Père-Lachaise", "Belleville", "Ménilmontant", "Parc de Belleville"],
+    metros: ["Gambetta (L3/3bis)", "Père Lachaise (L2/3)", "Ménilmontant (L2)", "Belleville (L2/11)"],
+    usages: ["Résidents et artistes", "Tourisme culturel alternatif", "Navetteurs Est parisien"],
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+  },
+  // ─── Nouvelles villes banlieue proche ────────────────────────────────
+  {
+    slug: "courbevoie",
+    nom: "Courbevoie",
+    type: "ville",
+    departement: "Hauts-de-Seine (92)",
+    codePostal: "92400",
+    description: "Location vélo électrique Courbevoie — La Défense, Seine, livraison 92",
+    metaDescription:
+      "Location vélo électrique Courbevoie (92). La Défense, berges de Seine. Livraison à domicile ou en entreprise — LocPro Mobilité.",
+    intro:
+      "Courbevoie, aux portes de La Défense, est un pôle d'affaires majeur de l'Île-de-France. Le vélo électrique permet de relier facilement les tours de La Défense, les berges de Seine et Paris Ouest en quelques minutes.",
+    landmarks: ["La Défense (CNIT, Grande Arche)", "Berges de Seine", "Parc de Bécon", "Île de la Jatte"],
+    metros: ["La Défense (L1/RER A)", "Courbevoie (Transilien L)", "Charlebourg (T2)"],
+    usages: ["Cadres La Défense", "Navetteurs Paris Ouest", "Salariés secteur tertiaire"],
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "clichy",
+    nom: "Clichy",
+    type: "ville",
+    departement: "Hauts-de-Seine (92)",
+    codePostal: "92110",
+    description: "Location vélo électrique Clichy — livraison Nord Ouest Paris, industries créatives",
+    metaDescription:
+      "Location vélo électrique à Clichy (92). Livraison rapide, proche Paris 17e. Industries créatives et résidentiel — LocPro Mobilité.",
+    intro:
+      "Clichy, directement connectée au 17e arrondissement de Paris, est une ville en transformation rapide. Le vélo électrique y est idéal pour rejoindre Paris sans embouteillages et explorer les nouveaux quartiers rénovés.",
+    landmarks: ["Maison du Peuple", "Berges de Seine", "Clichy Batignolles (proche)", "Parc Roger Salengro"],
+    metros: ["Mairie de Clichy (L13)", "Porte de Clichy (L13/RER C)"],
+    usages: ["Navetteurs Paris 17e/8e", "Résidents actifs", "PME et artisans"],
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "ivry-sur-seine",
+    nom: "Ivry-sur-Seine",
+    type: "ville",
+    departement: "Val-de-Marne (94)",
+    codePostal: "94200",
+    description: "Location vélo électrique Ivry-sur-Seine — livraison Sud Est Paris, RER C",
+    metaDescription:
+      "Location vélo électrique à Ivry-sur-Seine (94). Proche Paris 13e, RER C. Livraison domicile ou bureau — LocPro Mobilité.",
+    intro:
+      "Ivry-sur-Seine, limitrophe du 13e arrondissement, est en plein développement avec le quartier ZAC du Plateau et les berges de Seine. Le vélo électrique est le meilleur moyen de se déplacer vers Paris sans les embouteillages de la RN7.",
+    landmarks: ["Berges de Seine d'Ivry", "Manufacture des Œillets", "Parc Maurice Thorez", "ZAC du Plateau"],
+    metros: ["Pierre et Marie Curie (T3a)", "Ivry-sur-Seine (RER C)"],
+    usages: ["Navetteurs Paris 13e", "Résidents en reconversion urbaine", "Salariés secteur créatif"],
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+  },
+  {
+    slug: "pantin",
+    nom: "Pantin",
+    type: "ville",
+    departement: "Seine-Saint-Denis (93)",
+    codePostal: "93500",
+    description: "Location vélo électrique Pantin — Canal de l'Ourcq, mode, livraison 93",
+    metaDescription:
+      "Location vélo électrique à Pantin (93). Canal de l'Ourcq, quartier mode et design. Livraison rapide — LocPro Mobilité.",
+    intro:
+      "Pantin est devenue la capitale française de la mode et du design, avec les sièges de Chanel, Hermès et de nombreuses agences créatives. Le long du Canal de l'Ourcq, le vélo électrique est le transport de prédilection des professionnels de l'industrie créative.",
+    landmarks: ["Canal de l'Ourcq", "Siège Chanel et Hermès", "Parc de la Bergère", "Docks en Seine (proche)"],
+    metros: ["Hoche (L5)", "Église de Pantin (L5)", "Aubervilliers-Pantin (L7)"],
+    usages: ["Professionnels de la mode", "Navetteurs Paris 19e", "Résidents actifs"],
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+  },
 ];
 
 export const locationsByType = {

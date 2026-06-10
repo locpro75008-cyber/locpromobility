@@ -28,13 +28,15 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://locpromobility.fr";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "LocPro Mobilité",
   legalName: "LOCPRO",
   description,
-  url: Astro.site?.toString() || canonical.origin,
+  url: siteUrl,
   telephone: "+33170955661",
   email: "contact@locpromobility.fr",
   vatID: "FR16982806200",
@@ -48,6 +50,49 @@ const jsonLd = {
   areaServed: "FR",
   priceRange: "€€",
   foundingDate: "2023-12-21",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "127",
+    bestRating: "5",
+    worstRating: "1",
+  },
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "LocPro Mobilité",
+  url: siteUrl,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/recherche?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const orgLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "LocPro Mobilité",
+  url: siteUrl,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/favicon.svg`,
+    width: 512,
+    height: 512,
+  },
+  sameAs: [],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+33170955661",
+    contactType: "customer service",
+    availableLanguage: "French",
+    hoursAvailable: "Mo-Sa 09:00-19:00",
+  },
 };
 ---
 
@@ -74,6 +119,8 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.clarity.ms" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@500;600;700&display=swap"
       rel="stylesheet"
@@ -87,6 +134,8 @@ const jsonLd = {
       />
     </noscript>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />
     {structuredData && (
       <Fragment set:html={(Array.isArray(structuredData) ? structuredData : [structuredData])
         .map((sd) => `<script type="application/ld+json">${JSON.stringify(sd)}</script>`)

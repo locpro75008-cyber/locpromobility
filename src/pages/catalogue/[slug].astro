@@ -122,10 +122,11 @@ const faqLd = {
               width={1200}
               height={800}
               loading="eager"
+              fetchpriority="high"
               class="w-full object-cover"
             />
           ) : (
-            <img src="/images/placeholder-bike.svg" alt={nom} width="1200" height="800" loading="eager" class="w-full object-cover" />
+            <img src="/images/placeholder-bike.svg" alt={nom} width="1200" height="800" loading="eager" fetchpriority="high" class="w-full object-cover" />
           )}
         </div>
 

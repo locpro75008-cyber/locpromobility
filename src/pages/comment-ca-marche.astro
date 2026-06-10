@@ -52,11 +52,42 @@ const faqs = [
   { q: "Que se passe-t-il en cas de vol ?", a: "Déposez plainte et contactez-nous immédiatement. Selon la formule choisie, votre assurance vol couvre tout ou partie du préjudice." },
   { q: "Y a-t-il un kilométrage limité ?", a: "Non, aucune limite de kilométrage. Roulez autant que vous le souhaitez pendant la durée de votre location." },
 ];
+
+const howToLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Comment louer un vélo électrique à Paris avec LocPro Mobilité",
+  description: "Location de vélo électrique à Paris en 6 étapes : sélection, réservation, livraison 24–48h, assistance 7j/7 et récupération sans contrainte.",
+  totalTime: "PT5M",
+  supply: [
+    { "@type": "HowToSupply", name: "Pièce d'identité" },
+    { "@type": "HowToSupply", name: "Justificatif de domicile" },
+    { "@type": "HowToSupply", name: "Moyen de paiement" },
+  ],
+  step: etapes.map((e, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: e.titre,
+    text: e.desc,
+    url: `https://locpromobility.fr/comment-ca-marche#etape-${e.num}`,
+  })),
+};
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
 <BaseLayout
   title="Comment ça marche — Location vélo électrique Paris | LocPro Mobilité"
   description="Location vélo électrique à Paris en 6 étapes simples : catalogue, réservation en ligne, livraison 48h, assistance 7j/7, récupération sans contrainte."
+  structuredData={[howToLd, faqLd]}
 >
   <!-- Hero -->
   <section class="bg-gradient-to-b from-brand-50 to-white py-16 md:py-20">
