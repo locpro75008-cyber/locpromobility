@@ -6,9 +6,10 @@ import { CATEGORIES } from "../../data/blogCategories";
 
 const POSTS_PER_PAGE = 9;
 
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const now = new Date();
+const allPosts = (await getCollection("blog"))
+  .filter((p) => p.data.pubDate <= now)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // Article en vedette = le plus récent
 const featured = allPosts[0];

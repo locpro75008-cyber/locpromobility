@@ -1,0 +1,23 @@
+name: Weekly Rebuild — Publication articles programmés
+
+on:
+  schedule:
+    # Chaque lundi à 6h00 UTC (8h00 Paris en été, 7h00 en hiver)
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    # Permet aussi de déclencher manuellement depuis GitHub Actions
+
+jobs:
+  trigger-vercel-rebuild:
+    name: Déclencher un rebuild Vercel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Déclencher le Deploy Hook Vercel
+        run: |
+          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}"
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+
+      - name: Confirmer le déclenchement
+        run: echo "✅ Rebuild Vercel déclenché le $(date '+%A %d %B %Y à %H:%M UTC')"

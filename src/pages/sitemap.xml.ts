@@ -48,14 +48,17 @@ export const GET: APIRoute = async () => {
     url(`/catalogue/${v.slug}`, "0.8", "weekly", today)
   );
 
-  const blogPages = blogs.map((b) =>
-    url(
-      `/blog/${b.slug}`,
-      "0.7",
-      "monthly",
-      b.data.pubDate.toISOString().split("T")[0]
-    )
-  );
+  const now = new Date();
+  const blogPages = blogs
+    .filter((b) => b.data.pubDate <= now)
+    .map((b) =>
+      url(
+        `/blog/${b.slug}`,
+        "0.7",
+        "monthly",
+        b.data.pubDate.toISOString().split("T")[0]
+      )
+    );
 
   const locationPages = locations.map((l) =>
     url(`/location/${l.slug}`, "0.7", "monthly", today)

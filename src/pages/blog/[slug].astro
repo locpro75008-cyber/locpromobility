@@ -4,7 +4,8 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const now = new Date();
+  const posts = (await getCollection("blog")).filter((p) => p.data.pubDate <= now);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

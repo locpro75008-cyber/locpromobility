@@ -5,7 +5,8 @@ import { Image } from "astro:assets";
 import { CATEGORIES } from "../../../data/blogCategories";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const now = new Date();
+  const posts = (await getCollection("blog")).filter((p) => p.data.pubDate <= now);
 
   return Object.entries(CATEGORIES).map(([catSlug, cat]) => {
     const filtered = posts.filter((p) =>
