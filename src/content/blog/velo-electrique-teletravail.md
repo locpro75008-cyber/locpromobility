@@ -2,7 +2,7 @@
 title: "Vélo électrique et télétravail : la mobilité idéale pour les travailleurs hybrides"
 description: "2 à 3 jours au bureau, le reste à la maison : le mode hybride change tout à la mobilité. Le vélo électrique mensuel s'impose comme la solution la plus flexible et économique."
 pubDate: "2026-10-20"
-heroImage: "../../assets/images/blog-domicile-travail.jpg"
+heroImage: "../../assets/images/blog-velo-domicile-travail.jpg"
 ---
 
 Le télétravail partiel est désormais ancré dans les habitudes : 60% des cadres parisiens travaillent en mode hybride en 2026. Ce changement transforme radicalement le rapport aux transports. Le Navigo mensuel à plein tarif pour 2-3 jours de présence hebdomadaire ? Le calcul ne tient plus.

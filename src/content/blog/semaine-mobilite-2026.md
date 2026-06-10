@@ -2,7 +2,7 @@
 title: "Semaine européenne de la mobilité 2026 : le vélo électrique à l'honneur à Paris"
 description: "La Semaine européenne de la mobilité (16-22 septembre) célèbre les transports durables. À Paris, des centaines d'événements mettent le vélo électrique sous les projecteurs."
 pubDate: "2026-09-15"
-heroImage: "../../assets/images/blog-mobilite-douce.jpg"
+heroImage: "../../assets/images/blog-mobilite-idf.jpg"
 ---
 
 Chaque année en septembre, la Semaine européenne de la mobilité (SEM) invite les villes à repenser leurs transports. En 2026, le thème officiel est **"La mobilité partagée"** et Paris propose un programme riche en événements vélo. Tout ce qu'il faut savoir.

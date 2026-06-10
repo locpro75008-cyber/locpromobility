@@ -2,7 +2,7 @@
 title: "Bonnes résolutions 2027 : adopter le vélo électrique pour votre trajet domicile-travail"
 description: "Janvier, les bonnes résolutions. Celle-ci est réaliste, rentable et durable : remplacer les transports en commun par le vélo électrique pour aller au travail."
 pubDate: "2026-12-22"
-heroImage: "../../assets/images/blog-securite-antivol.jpg"
+heroImage: "../../assets/images/blog-antivol-velo.jpg"
 ---
 
 La fin d'année approche et avec elle les traditionnelles bonnes résolutions. Cette année, une se distingue par sa faisabilité immédiate, ses bénéfices mesurables et son impact positif sur votre qualité de vie : **adopter le vélo électrique pour vos trajets domicile-travail**. Voici un plan concret pour vous lancer en janvier 2027.

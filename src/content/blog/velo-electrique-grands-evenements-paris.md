@@ -2,7 +2,7 @@
 title: "Grands événements parisiens : le vélo électrique, le pass VIP pour éviter les bouchons"
 description: "Roland-Garros, Fashion Week, salons, concerts à Bercy : comment le vélo électrique transforme votre expérience des grands événements parisiens. Tous les accès, toutes les astuces."
 pubDate: "2026-06-30"
-heroImage: "../../assets/images/blog-velo-tourisme.jpg"
+heroImage: "../../assets/images/blog-tourisme-paris-velo.jpg"
 ---
 
 Paris accueille chaque année des centaines de grands événements qui transforment la ville en chaos circulatoire. Pendant que les automobilistes cherchent des places pendant 40 minutes, les cyclistes arrivent frais, à l'heure, directement à l'entrée. Le vélo électrique est le ticket VIP des événements parisiens.

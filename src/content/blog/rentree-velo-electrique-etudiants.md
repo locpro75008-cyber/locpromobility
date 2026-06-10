@@ -2,7 +2,7 @@
 title: "Rentrée 2026 : le vélo électrique, l'allié indispensable des étudiants parisiens"
 description: "Entre loyers en hausse et abonnements de transport chers, le vélo électrique s'impose comme la solution mobilité des étudiants à Paris. Guide complet et calcul d'économies."
 pubDate: "2026-09-01"
-heroImage: "../../assets/images/blog-domicile-travail.jpg"
+heroImage: "../../assets/images/blog-velo-domicile-travail.jpg"
 ---
 
 La rentrée universitaire 2026 à Paris, c'est 700 000 étudiants qui reprennent le chemin des amphis, des bibliothèques et des stages. Entre les loyers en banlieue, les abonnements de transport et la pression financière, le vélo électrique s'impose de plus en plus comme LA solution mobilité des étudiants. Voici pourquoi.

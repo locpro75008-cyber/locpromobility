@@ -2,7 +2,7 @@
 title: "Vélo électrique et bagages : toutes les solutions pour voyager léger (et chargé)"
 description: "Sacoche de guidon, bikepacking, remorque, porte-bagages intégré : guide complet des solutions de transport de bagages sur un vélo électrique."
 pubDate: "2026-08-18"
-heroImage: "../../assets/images/blog-securite-antivol.jpg"
+heroImage: "../../assets/images/blog-antivol-velo.jpg"
 ---
 
 L'un des freins à l'adoption du vélo électrique pour le quotidien est la question des bagages. Comment transporter son ordinateur, ses courses, ses affaires de sport ? La bonne nouvelle : les solutions sont nombreuses et s'adaptent à tous les usages. Tour d'horizon.

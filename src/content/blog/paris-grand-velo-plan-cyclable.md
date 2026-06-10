@@ -2,7 +2,7 @@
 title: "Paris Grand Vélo : le plan cyclable 2026-2040 décrypté"
 description: "La mairie de Paris dévoile son plan cyclable 2026-2040. 1 400 km de pistes, 300 000 arceaux, quartiers vélo : tout ce que ce plan change pour les cyclistes parisiens."
 pubDate: "2026-11-10"
-heroImage: "../../assets/images/blog-pistes-cyclables.jpg"
+heroImage: "../../assets/images/blog-pistes-paris.jpg"
 ---
 
 Après le succès du Plan Vélo 2015-2026 qui a transformé Paris en ville cyclable, la mairie annonce un nouveau plan ambitieux pour les 15 prochaines années. "Paris Grand Vélo" vise à faire du vélo le premier mode de déplacement motorisé dans Paris d'ici 2040.

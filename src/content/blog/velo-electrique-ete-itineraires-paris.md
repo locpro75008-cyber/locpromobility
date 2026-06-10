@@ -2,7 +2,7 @@
 title: "Vélo électrique à Paris en été : 10 itinéraires pour profiter de la ville sans transpirer"
 description: "Paris en été se vit à vélo électrique. Découvrez 10 itinéraires ombragés, le long des quais et dans les parcs, pour explorer la capitale sans effort sous la chaleur."
 pubDate: "2026-06-16"
-heroImage: "../../assets/images/blog-pistes-cyclables.jpg"
+heroImage: "../../assets/images/blog-pistes-paris.jpg"
 ---
 
 L'été parisien sous 35°C en métro bondé — ou sur votre vélo électrique le long de la Seine avec la brise ? Le choix est vite fait. Le VAE transforme les chaudes journées en véritables aventures urbaines. Voici 10 itinéraires pensés pour l'été.

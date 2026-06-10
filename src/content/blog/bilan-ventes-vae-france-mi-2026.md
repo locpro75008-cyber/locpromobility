@@ -2,7 +2,7 @@
 title: "Bilan mi-2026 : les ventes de vélos électriques en France au premier semestre"
 description: "Premier semestre 2026 : le marché français du VAE continue sa progression. Chiffres de ventes, modèles les plus populaires, tendances par segment et analyse des prix."
 pubDate: "2026-08-11"
-heroImage: "../../assets/images/blog-marche-france.jpg"
+heroImage: "../../assets/images/blog-marche-vae-france.jpg"
 ---
 
 Le Comité Professionnel du Cycle (CPC) a publié ses chiffres de ventes pour le premier semestre 2026. Le marché français du vélo électrique confirme sa maturité et sa résilience, avec des tendances marquées par segment. Analyse détaillée.

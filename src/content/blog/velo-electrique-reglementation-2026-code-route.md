@@ -2,7 +2,7 @@
 title: "Réglementation vélo électrique 2026 : les nouvelles règles du code de la route à connaître"
 description: "Nouvelles règles aux feux, stationnement, vitesse, vêtements réfléchissants : tour complet de la réglementation du vélo électrique en France en 2026."
 pubDate: "2026-09-22"
-heroImage: "../../assets/images/blog-reglementation.jpg"
+heroImage: "../../assets/images/blog-reglementation-vae.jpg"
 ---
 
 La réglementation du vélo électrique en France évolue régulièrement. En 2026, plusieurs changements importants sont entrés en vigueur ou précisés. Voici le guide complet et à jour pour circuler en toute légalité.

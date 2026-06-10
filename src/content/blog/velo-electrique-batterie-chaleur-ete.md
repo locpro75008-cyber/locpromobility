@@ -2,7 +2,7 @@
 title: "Batterie de vélo électrique en été : 7 erreurs à éviter absolument"
 description: "Chaleur, soleil, stockage : les batteries Li-ion souffrent en été. Voici les 7 erreurs qui réduisent leur durée de vie et comment les éviter facilement."
 pubDate: "2026-06-23"
-heroImage: "../../assets/images/blog-autonomie.jpg"
+heroImage: "../../assets/images/blog-autonomie-batterie.jpg"
 ---
 
 L'été est la saison la plus risquée pour les batteries de vélos électriques. Entre les fortes chaleurs, le stationnement en plein soleil et les mauvaises habitudes de recharge, de nombreux cyclistes réduisent involontairement la durée de vie de leur batterie de 30 à 50%. Voici le guide complet pour éviter ces erreurs.

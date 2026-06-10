@@ -2,7 +2,7 @@
 title: "ZFE 2027 à Paris : comment se préparer dès maintenant avec le vélo électrique"
 description: "Les ZFE vont s'étendre en 2027 : Crit'Air 2 bientôt exclus de Paris. Tout comprendre sur l'impact et les solutions alternatives, dont le vélo électrique."
 pubDate: "2026-10-13"
-heroImage: "../../assets/images/blog-zfe.jpg"
+heroImage: "../../assets/images/blog-zfe-paris.jpg"
 ---
 
 La Zone à Faibles Émissions (ZFE) métropolitaine du Grand Paris continue d'évoluer. D'ici 2027, les véhicules Crit'Air 2 pourraient être restreints dans Paris et de nombreuses communes de la métropole. Anticiper cette transition dès maintenant permet d'éviter les mauvaises surprises.

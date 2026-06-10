@@ -2,7 +2,7 @@
 title: "Offrir une location de vélo électrique : l'idée cadeau la plus originale de 2026"
 description: "Vous cherchez un cadeau original, utile et durable pour Noël ? Un mois ou une semaine de location de vélo électrique à Paris est l'idée qui sort du lot."
 pubDate: "2026-12-01"
-heroImage: "../../assets/images/blog-domicile-travail.jpg"
+heroImage: "../../assets/images/blog-velo-domicile-travail.jpg"
 ---
 
 Les cadeaux de Noël qui finissent dans un placard, ça suffit. Cette année, offrez quelque chose qui change vraiment le quotidien de vos proches : une location de vélo électrique. Voici pourquoi c'est l'idée cadeau de la saison 2026.

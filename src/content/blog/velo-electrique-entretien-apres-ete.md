@@ -2,7 +2,7 @@
 title: "Entretien vélo électrique après l'été : le guide complet pour préparer l'automne"
 description: "Après des mois de chaleur et de poussière, votre VAE a besoin d'une révision. Checklist complète d'entretien pour préparer votre vélo électrique à l'automne."
 pubDate: "2026-08-25"
-heroImage: "../../assets/images/blog-entretien.jpg"
+heroImage: "../../assets/images/blog-entretien-vae.jpg"
 ---
 
 Septembre approche. Votre vélo électrique a encaissé plusieurs mois de chaleur, de poussière, et peut-être quelques averses orageuses. Avant d'attaquer l'automne avec ses pluies et ses feuilles mouillées, une révision complète s'impose. Voici la checklist définitive.

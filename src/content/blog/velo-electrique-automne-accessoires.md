@@ -2,7 +2,7 @@
 title: "Vélo électrique en automne : les 12 accessoires indispensables pour rouler sous la pluie"
 description: "Pluie, feuilles mouillées, nuits plus courtes : l'automne à vélo demande une préparation spécifique. Les 12 accessoires essentiels pour rouler en sécurité et au sec."
 pubDate: "2026-10-06"
-heroImage: "../../assets/images/blog-pluie-hiver.jpg"
+heroImage: "../../assets/images/blog-velo-pluie-hiver.jpg"
 ---
 
 Septembre passe, octobre arrive et avec lui les premières pluies parisiennes. Les cyclistes électriques expérimentés savent que l'automne est en réalité une saison très agréable à vélo — à condition d'être bien équipé. Voici les 12 accessoires qui transforment une galère pluvieuse en trajet confortable.

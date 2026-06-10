@@ -2,7 +2,7 @@
 title: "Rétrospective 2026 : l'année du vélo électrique en France — chiffres et faits marquants"
 description: "2026 restera une année charnière pour le vélo électrique en France. Ventes records, nouvelles réglementations, innovations technologiques : bilan complet en données."
 pubDate: "2026-12-29"
-heroImage: "../../assets/images/blog-marche-france.jpg"
+heroImage: "../../assets/images/blog-marche-vae-france.jpg"
 ---
 
 2026 s'achève et les bilans tombent. Pour le vélo électrique en France, l'année confirme et amplifie les tendances amorcées depuis 2020. Voici les chiffres et faits marquants qui ont marqué l'industrie et les usagers.

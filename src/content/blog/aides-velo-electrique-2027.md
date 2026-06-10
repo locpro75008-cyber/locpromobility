@@ -2,7 +2,7 @@
 title: "Aides vélo électrique 2026-2027 : le guide complet des subventions disponibles"
 description: "Bonus écologique, aide régionale Île-de-France, aides des collectivités, FMD employeur : toutes les subventions pour acquérir ou louer un VAE en 2026-2027."
 pubDate: "2026-10-27"
-heroImage: "../../assets/images/blog-aides-subventions.jpg"
+heroImage: "../../assets/images/blog-aides-velo-2025.jpg"
 ---
 
 Les aides à l'acquisition et à l'usage du vélo électrique n'ont jamais été aussi nombreuses. En 2026-2027, plusieurs dispositifs cumulables permettent de réduire significativement le coût d'un VAE — qu'il soit acheté ou loué. Tour d'horizon complet.

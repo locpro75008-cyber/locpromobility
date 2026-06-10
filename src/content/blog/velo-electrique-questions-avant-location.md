@@ -2,7 +2,7 @@
 title: "10 questions essentielles avant de louer un vélo électrique à Paris"
 description: "Autonomie réelle, caution, livraison, assurance, panne... Les 10 questions que tout le monde se pose avant de louer un vélo électrique, avec des réponses claires."
 pubDate: "2026-07-14"
-heroImage: "../../assets/images/blog-choisir.jpg"
+heroImage: "../../assets/images/blog-choisir-vae.jpg"
 ---
 
 Vous envisagez de louer un vélo électrique à Paris mais vous avez des doutes ? Normal. C'est un engagement financier, et les offres varient considérablement d'un loueur à l'autre. Voici les 10 questions que vous devez poser — et les réponses que LocPro Mobilité apporte.

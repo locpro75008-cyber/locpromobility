@@ -2,7 +2,7 @@
 title: "Préparer sa rentrée à Paris : la logistique vélo électrique pour les 3 premières semaines"
 description: "Nouveau job, nouveau logement, nouvelle école : comment planifier votre mobilité vélo électrique pour une rentrée réussie à Paris. Guide pratique et liste de contrôle."
 pubDate: "2026-08-04"
-heroImage: "../../assets/images/blog-domicile-travail.jpg"
+heroImage: "../../assets/images/blog-velo-domicile-travail.jpg"
 ---
 
 La rentrée, c'est le moment des grandes décisions de mobilité. Nouveau poste, nouveau quartier, nouvelles habitudes. Les 3 premières semaines sont cruciales pour établir de bonnes routines. Voici comment planifier votre transition vers le vélo électrique pour une rentrée sans stress.

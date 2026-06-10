@@ -2,7 +2,7 @@
 title: "Vélo électrique en hiver : 5 idées reçues et 10 vrais conseils pour rouler par le froid"
 description: "Non, le vélo électrique ne s'arrête pas en hiver. Idées reçues déconstruites et conseils pratiques pour rouler en sécurité et maintenir ses performances par le froid."
 pubDate: "2026-11-03"
-heroImage: "../../assets/images/blog-pluie-hiver.jpg"
+heroImage: "../../assets/images/blog-velo-pluie-hiver.jpg"
 ---
 
 "Tu roules encore à vélo en novembre ?" Cette question revient chaque année. Et chaque année, les cyclistes chevronnés sourient. L'hiver à Paris est largement surestimé comme obstacle — et le vélo électrique, avec ses particularités, mérite quelques ajustements. Voici la réalité, sans romantisme excessif ni catastrophisme.
