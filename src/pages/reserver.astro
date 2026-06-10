@@ -9,13 +9,37 @@ const vehicule = Astro.url.searchParams.get("vehicule") || "";
   title="Réserver un vélo électrique à Paris — LocPro Mobilité"
   description="Réservez votre vélo électrique en ligne à Paris. Choisissez vos dates, adresse de livraison et modèle. Réponse sous 2h, livraison 24-48h."
 >
-  <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
-    <h1 class="font-display text-3xl font-bold text-ink-900">Réservation</h1>
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-3xl px-4 pt-6 md:px-6">
+    <nav aria-label="Fil d'Ariane" class="text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Réservation</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 py-8 md:px-6 md:py-10">
+    <h1 class="font-display text-3xl font-bold text-ink-900">Réserver un vélo électrique</h1>
     <p class="mt-3 text-slate-600">
-      Sur cette vitrine, la réservation passe par le formulaire ci-dessous (équivalent étape
-      contact + intention). Le paiement en ligne et le planning en temps réel sont prévus en
-      version 2 selon votre roadmap.
+      Remplissez le formulaire ci-dessous. Notre équipe vous confirme la disponibilité et les détails de livraison <strong>sous 2h</strong> (jours ouvrés).
     </p>
+
+    <!-- Signaux de confiance -->
+    <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {[
+        { icon: "⚡", label: "Réponse sous 2h" },
+        { icon: "🚚", label: "Livraison 24–48h" },
+        { icon: "🔒", label: "Paiement sécurisé" },
+        { icon: "↩️", label: "Résiliation flexible" },
+      ].map((s) => (
+        <div class="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-white p-3 text-center shadow-sm">
+          <span class="text-xl">{s.icon}</span>
+          <span class="text-xs font-semibold text-slate-700">{s.label}</span>
+        </div>
+      ))}
+    </div>
     {
       vehicule && (
         <p class="mt-4 rounded-lg bg-brand-50 px-4 py-3 text-sm text-brand-900">

@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// On récupère le type de formulaire depuis l'URL (?type=reservation|devis|contact)
+const type = Astro.url.searchParams.get("type") || "contact";
+
+const messages = {
+  reservation: {
+    titre: "Réservation bien reçue !",
+    texte: "Notre équipe traite votre demande et vous contactera sous 2h (jours ouvrés) pour confirmer les détails de votre location.",
+    icon: "🚲",
+  },
+  devis: {
+    titre: "Votre devis est en cours !",
+    texte: "Nous avons bien reçu votre demande de devis entreprise. Un conseiller vous adressera une proposition personnalisée sous 24h.",
+    icon: "📋",
+  },
+  contact: {
+    titre: "Message bien envoyé !",
+    texte: "Merci pour votre message. Notre équipe vous répondra dans les meilleurs délais, généralement sous 24h.",
+    icon: "✉️",
+  },
+};
+
+const msg = messages[type as keyof typeof messages] ?? messages.contact;
+---
+
+<BaseLayout
+  title="Merci — LocPro Mobilité"
+  description="Votre demande a bien été reçue. Notre équipe vous recontacte très prochainement."
+  noindex={true}
+>
+  <div class="mx-auto max-w-lg px-4 py-20 text-center md:py-28">
+    <div class="flex justify-center">
+      <div class="flex h-20 w-20 items-center justify-center rounded-full bg-green-50 text-4xl">
+        {msg.icon}
+      </div>
+    </div>
+    <h1 class="mt-6 font-display text-2xl font-bold text-ink-900 md:text-3xl">
+      {msg.titre}
+    </h1>
+    <p class="mt-4 text-slate-600 leading-relaxed">{msg.texte}</p>
+
+    <div class="mt-4 rounded-xl bg-brand-50 border border-brand-100 p-4 text-sm text-brand-800">
+      <strong>Une question urgente ?</strong><br />
+      Appelez-nous directement au
+      <a href="tel:+33758481021" class="font-bold text-brand-700 hover:underline">07 58 48 10 21</a>
+      ou sur WhatsApp.
+    </div>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href="/catalogue"
+        class="rounded-full bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
+      >
+        Voir le catalogue
+      </a>
+      <a
+        href="/"
+        class="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+      >
+        Retour à l'accueil
+      </a>
+    </div>
+
+    <!-- Étapes suivantes -->
+    <div class="mt-12 text-left rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-700">Prochaines étapes :</p>
+      <ol class="mt-4 space-y-3">
+        {[
+          "Vous recevrez un email de confirmation dans quelques minutes.",
+          "Un conseiller LocPro vous contacte pour finaliser votre location.",
+          "Livraison de votre véhicule à l'adresse de votre choix sous 24–48h.",
+        ].map((step, i) => (
+          <li class="flex items-start gap-3">
+            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
+              {i + 1}
+            </span>
+            <span class="text-sm text-slate-600">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+// GTM event : confirmation de conversion
+window.dataLayer = window.dataLayer || [];
+const type = new URLSearchParams(window.location.search).get("type") || "contact";
+window.dataLayer.push({ event: "form_confirmation", form_type: type });
+</script>

@@ -1,0 +1,251 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const vehicules = await getCollection("vehicules");
+const disponibles = vehicules.filter((v) => v.data.disponible);
+
+const SITE = "https://locpromobility.fr";
+
+const faqItems = [
+  {
+    q: "Quelle est la durée minimale pour une location longue durée ?",
+    a: "La location longue durée (LLD) commence à partir d'1 mois. Des formules de 3, 6 et 12 mois sont disponibles avec des tarifs dégressifs allant jusqu'à -30%.",
+  },
+  {
+    q: "Puis-je résilier mon contrat avant le terme ?",
+    a: "Oui, avec un préavis de 15 jours. Des frais de résiliation anticipée peuvent s'appliquer selon la formule choisie. Consultez nos CGU pour les détails.",
+  },
+  {
+    q: "La maintenance est-elle incluse dans la LLD ?",
+    a: "Oui, l'ensemble des révisions périodiques, le remplacement des consommables (plaquettes, pneus) et le dépannage sont inclus dans toutes nos formules longue durée.",
+  },
+  {
+    q: "Puis-je bénéficier du Forfait Mobilités Durables (FMD) ?",
+    a: "Absolument. Nous fournissons toutes les pièces justificatives nécessaires pour que votre employeur puisse prendre en charge jusqu'à 800 €/an de votre abonnement location.",
+  },
+  {
+    q: "Proposez-vous des contrats pour les entreprises ?",
+    a: "Oui, nous proposons des contrats flotte multi-véhicules avec facturation mensuelle, gestion centralisée et rapport d'utilisation. Demandez votre devis sur la page Entreprises.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Location vélo électrique longue durée Paris",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "LocPro Mobilité",
+    url: SITE,
+    telephone: "+33758481021",
+  },
+  description: "Location de vélos électriques, cargos et trottinettes à la semaine, au mois ou à l'année. Maintenance incluse, livraison à domicile à Paris et Île-de-France.",
+  areaServed: "Île-de-France",
+  serviceType: "Location longue durée vélo électrique",
+  url: `${SITE}/location-longue-duree`,
+};
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: SITE },
+    { "@type": "ListItem", position: 2, name: "Location longue durée", item: `${SITE}/location-longue-duree` },
+  ],
+};
+---
+
+<BaseLayout
+  title="Location vélo électrique longue durée Paris — À partir de 149€/mois"
+  description="Louez un vélo électrique à Paris pour 1 mois, 3 mois ou 1 an. Maintenance incluse, livraison à domicile, résiliation flexible. Idéal navetteurs et salariés."
+  structuredData={[structuredData, breadcrumbLd]}
+>
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-5xl px-4 pt-6 md:px-6">
+    <nav aria-label="Fil d'Ariane" class="text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Location longue durée</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-brand-700 to-brand-900 py-16 text-white mt-4">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">Location longue durée</span>
+          <h1 class="mt-4 font-display text-3xl font-bold md:text-4xl lg:text-5xl">
+            Votre vélo électrique<br />dédié, tous les mois
+          </h1>
+          <p class="mt-4 text-brand-100 text-lg leading-relaxed">
+            Un véhicule réservé rien que pour vous, livré à domicile, entretenu par nos soins. Plus de Vélib' vide, plus de RER bondé.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/reserver" class="rounded-xl bg-white px-6 py-3 text-sm font-bold text-brand-800 shadow transition hover:bg-brand-50">
+              Réserver ma formule
+            </a>
+            <a href="/devis" class="rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Devis entreprise
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { valeur: "149 €", label: "dès /mois", detail: "vélo électrique standard" },
+            { valeur: "0 €", label: "maintenance", detail: "révisions incluses" },
+            { valeur: "24–48h", label: "livraison", detail: "à votre domicile" },
+            { valeur: "−30%", label: "sur 12 mois", detail: "vs tarif mensuel" },
+          ].map((s) => (
+            <div class="rounded-2xl bg-white/10 p-4 backdrop-blur-sm border border-white/10">
+              <p class="font-display text-2xl font-bold">{s.valeur}</p>
+              <p class="text-sm font-semibold text-brand-200">{s.label}</p>
+              <p class="mt-1 text-xs text-brand-300">{s.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 py-14 md:px-6">
+
+    <!-- Pourquoi LLD -->
+    <section>
+      <h2 class="font-display text-2xl font-bold text-ink-900">Pourquoi choisir la location longue durée ?</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          {
+            icon: "💶",
+            titre: "Économies réelles",
+            texte: "Vs l'achat : 0 € d'apport initial, pas de dépréciation, pas de frais de réparation imprévus. La LLD coûte en moyenne 40% moins cher sur 3 ans.",
+          },
+          {
+            icon: "🔧",
+            titre: "Maintenance incluse",
+            texte: "Révisions, remplacement des pneus et plaquettes, dépannage 7j/7. Vous roulez, on s'occupe du reste.",
+          },
+          {
+            icon: "🚲",
+            titre: "Véhicule toujours récent",
+            texte: "Possibilité de changer de modèle à chaque renouvellement. Profitez toujours des dernières technologies.",
+          },
+          {
+            icon: "🏢",
+            titre: "Forfait Mobilités Durables",
+            texte: "Votre employeur peut prendre en charge jusqu'à 800 €/an. Nous fournissons toutes les attestations nécessaires.",
+          },
+          {
+            icon: "📍",
+            titre: "Livraison à domicile",
+            texte: "Réception de votre véhicule directement chez vous ou à votre bureau, avec prise en main sur place.",
+          },
+          {
+            icon: "🔄",
+            titre: "Résiliation flexible",
+            texte: "Préavis de 15 jours seulement. Aucun engagement 24 mois. Adaptez votre formule selon vos besoins.",
+          },
+        ].map((item) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="text-2xl">{item.icon}</div>
+            <h3 class="mt-3 font-semibold text-ink-900">{item.titre}</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{item.texte}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Tableau de tarifs -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Nos formules longue durée</h2>
+      <p class="mt-2 text-slate-600">Tarifs mensuels TTC, livraison incluse à Paris et proche banlieue.</p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+        <table class="min-w-full bg-white">
+          <thead>
+            <tr class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <th class="px-5 py-4">Formule</th>
+              <th class="px-5 py-4">1 mois</th>
+              <th class="px-5 py-4">3 mois</th>
+              <th class="px-5 py-4">6 mois</th>
+              <th class="px-5 py-4">12 mois</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-sm text-slate-700">
+            {[
+              { cat: "Vélo électrique", m1: "149 €", m3: "139 €", m6: "129 €", m12: "109 €" },
+              { cat: "Vélo cargo électrique", m1: "249 €", m3: "229 €", m6: "209 €", m12: "179 €" },
+              { cat: "Trottinette électrique", m1: "79 €", m3: "69 €", m6: "59 €", m12: "49 €" },
+            ].map((row) => (
+              <tr class="hover:bg-slate-50 transition">
+                <td class="px-5 py-4 font-medium text-ink-900">{row.cat}</td>
+                <td class="px-5 py-4">{row.m1}/mois</td>
+                <td class="px-5 py-4 text-brand-700 font-semibold">{row.m3}/mois</td>
+                <td class="px-5 py-4 text-brand-700 font-semibold">{row.m6}/mois</td>
+                <td class="px-5 py-4">
+                  <span class="rounded-full bg-brand-100 px-2 py-0.5 font-bold text-brand-800">{row.m12}/mois</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-slate-400">* Tarifs indicatifs, hors options. Caution remboursable à la fin du contrat.</p>
+    </section>
+
+    <!-- Véhicules disponibles -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Véhicules disponibles en LLD</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {disponibles.map((v) => (
+          <a
+            href={`/catalogue/${v.slug}`}
+            class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+          >
+            <p class="font-semibold text-ink-900 group-hover:text-brand-700">{v.data.nom}</p>
+            <p class="mt-1 text-xs text-slate-500 capitalize">{v.data.categorie.replace("-", " ")}</p>
+            <p class="mt-3 text-sm font-semibold text-brand-700">
+              Dès {v.data.tarifs[0]?.prix} <span class="font-normal text-slate-400">/ jour</span>
+            </p>
+            <span class="mt-3 block text-xs font-semibold text-brand-600 group-hover:underline">Voir les détails →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Questions fréquentes — LLD</h2>
+      <div class="mt-6 space-y-3">
+        {faqItems.map((item) => (
+          <details class="group rounded-xl border border-slate-200 bg-white">
+            <summary class="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-ink-900 text-sm marker:content-none">
+              {item.q}
+              <svg class="h-4 w-4 shrink-0 text-slate-400 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="border-t border-slate-100 px-5 py-4 text-sm text-slate-600 leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <div class="mt-14 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 p-8 text-center text-white">
+      <h2 class="font-display text-2xl font-bold">Commencez dès aujourd'hui</h2>
+      <p class="mt-2 text-brand-100">Remplissez notre formulaire en 2 minutes. Réponse sous 2h, livraison sous 48h.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="/reserver" class="rounded-xl bg-white px-6 py-3 text-sm font-bold text-brand-800 shadow transition hover:bg-brand-50">
+          Réserver ma formule
+        </a>
+        <a href="/devis" class="rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+          Devis entreprise / flotte
+        </a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

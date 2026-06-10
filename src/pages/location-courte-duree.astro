@@ -1,0 +1,195 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const vehicules = await getCollection("vehicules");
+const disponibles = vehicules.filter((v) => v.data.disponible);
+
+const SITE = "https://locpromobility.fr";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Location vélo électrique courte durée Paris",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "LocPro Mobilité",
+    url: SITE,
+    telephone: "+33758481021",
+  },
+  description: "Location de vélos électriques à Paris à la journée, à la semaine. Livraison à domicile, casque et antivol inclus. Idéal touristes, week-ends et déplacements ponctuels.",
+  areaServed: "Île-de-France",
+  serviceType: "Location courte durée vélo électrique",
+  url: `${SITE}/location-courte-duree`,
+};
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Accueil", item: SITE },
+    { "@type": "ListItem", position: 2, name: "Location courte durée", item: `${SITE}/location-courte-duree` },
+  ],
+};
+
+const useCases = [
+  { icon: "✈️", titre: "Touristes et visiteurs", texte: "Explorez Paris à votre rythme, sans dépendre du métro. 1 à 7 jours, livraison à l'hôtel possible." },
+  { icon: "🏖️", titre: "Week-end et escapade", texte: "Profitez du week-end sans tracas : on livre vendredi, on récupère lundi." },
+  { icon: "🔧", titre: "Remplacement de votre véhicule", texte: "Votre vélo est en réparation ? Location de substitution à la journée." },
+  { icon: "📦", titre: "Livraison ponctuelle", texte: "Besoin d'un cargo pour un déménagement ou des livraisons ? Location à la journée." },
+  { icon: "🎉", titre: "Événement d'entreprise", texte: "Team-building, visites de site, journées mobilité durable. Flotte courte durée sur devis." },
+  { icon: "🚲", titre: "Essai avant abonnement", texte: "Testez un modèle une semaine avant de vous engager sur une formule mensuelle." },
+];
+---
+
+<BaseLayout
+  title="Location vélo électrique courte durée Paris — Dès 29€/jour"
+  description="Location de vélo électrique à Paris à la journée ou à la semaine. Livraison à domicile ou à l'hôtel, casque inclus. Dès 29€/jour — LocPro Mobilité."
+  structuredData={[structuredData, breadcrumbLd]}
+>
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-5xl px-4 pt-6 md:px-6">
+    <nav aria-label="Fil d'Ariane" class="text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Location courte durée</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-slate-800 to-brand-900 py-16 text-white mt-4">
+    <div class="mx-auto max-w-5xl px-4 md:px-6">
+      <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">Location courte durée · 1 jour à 4 semaines</span>
+          <h1 class="mt-4 font-display text-3xl font-bold md:text-4xl lg:text-5xl">
+            Un vélo électrique<br />pour aujourd'hui
+          </h1>
+          <p class="mt-4 text-slate-300 text-lg leading-relaxed">
+            Livré en 24h à votre porte à Paris et Île-de-France. Casque, antivol et chargeur inclus. Aucun abonnement requis.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/reserver" class="rounded-xl bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-brand-400">
+              Réserver maintenant
+            </a>
+            <a href="/catalogue" class="rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Voir les modèles
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          {[
+            { val: "29 €", label: "/jour", sub: "trottinette" },
+            { val: "49 €", label: "/jour", sub: "vélo électrique" },
+            { val: "89 €", label: "/jour", sub: "cargo électrique" },
+          ].map((t) => (
+            <div class="rounded-2xl bg-white/10 p-4 text-center backdrop-blur-sm border border-white/10">
+              <p class="font-display text-xl font-bold">{t.val}</p>
+              <p class="text-xs text-slate-300">{t.label}</p>
+              <p class="mt-1 text-xs text-slate-400">{t.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 py-14 md:px-6">
+
+    <!-- Comment ça marche -->
+    <section>
+      <h2 class="font-display text-2xl font-bold text-ink-900">Réservez en 3 étapes</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-3">
+        {[
+          { n: "1", titre: "Choisissez votre modèle", texte: "Vélo, cargo ou trottinette. Sélectionnez vos dates et adresse de livraison sur le formulaire en ligne." },
+          { n: "2", titre: "Confirmation sous 2h", texte: "Notre équipe confirme votre réservation et planifie la livraison à Paris et Île-de-France." },
+          { n: "3", titre: "On livre, vous roulez", texte: "Livraison 24–48h. Prise en main sur place incluse. Reprise au même endroit à la fin." },
+        ].map((step) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 font-display text-lg font-bold text-white">
+              {step.n}
+            </div>
+            <h3 class="mt-3 font-semibold text-ink-900">{step.titre}</h3>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{step.texte}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Cas d'usage -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Pour quels besoins ?</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {useCases.map((u) => (
+          <div class="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-5">
+            <span class="text-2xl shrink-0">{u.icon}</span>
+            <div>
+              <p class="font-semibold text-ink-900 text-sm">{u.titre}</p>
+              <p class="mt-1 text-xs text-slate-600 leading-relaxed">{u.texte}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Inclus dans la courte durée -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Tout est inclus</h2>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { icon: "🪖", label: "Casque homologué" },
+          { icon: "🔒", label: "Antivol haute sécurité" },
+          { icon: "🔌", label: "Chargeur + batterie" },
+          { icon: "📍", label: "Livraison à domicile" },
+          { icon: "🛠️", label: "Assistance dépannage" },
+          { icon: "🔄", label: "Remplacement sous 24h" },
+          { icon: "📋", label: "Contrat simple et clair" },
+          { icon: "💳", label: "Paiement sécurisé" },
+        ].map((item) => (
+          <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <span class="text-xl">{item.icon}</span>
+            <span class="text-sm font-medium text-slate-700">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Véhicules disponibles -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Nos modèles disponibles maintenant</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {disponibles.map((v) => (
+          <a
+            href={`/catalogue/${v.slug}`}
+            class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+          >
+            <p class="font-semibold text-ink-900 group-hover:text-brand-700">{v.data.nom}</p>
+            <p class="mt-1 text-xs text-slate-500 capitalize">{v.data.categorie.replace("-", " ")}</p>
+            <p class="mt-3 text-sm font-semibold text-brand-700">
+              Dès {v.data.tarifs[0]?.prix} <span class="font-normal text-slate-400">/ jour</span>
+            </p>
+            <span class="mt-3 block text-xs font-semibold text-brand-600 group-hover:underline">Voir les détails →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <div class="mt-14 rounded-2xl bg-brand-50 border border-brand-200 p-8 text-center">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Prêt à pédaler ?</h2>
+      <p class="mt-2 text-slate-600">Réservez en 2 minutes, livraison 24–48h dans toute l'Île-de-France.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="/reserver" class="rounded-full bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow transition hover:bg-brand-700">
+          Réserver maintenant
+        </a>
+        <a href="/catalogue" class="rounded-full border border-brand-300 px-6 py-3 text-sm font-semibold text-brand-700 transition hover:bg-brand-50">
+          Voir tous les modèles
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-slate-400">Ou appelez-nous : <a href="tel:+33758481021" class="font-medium text-slate-600 hover:underline">07 58 48 10 21</a></p>
+    </div>
+
+  </div>
+</BaseLayout>

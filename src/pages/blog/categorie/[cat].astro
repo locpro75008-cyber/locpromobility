@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+export const CATEGORIES: Record<string, { label: string; description: string; keywords: string[] }> = {
+  pratique: {
+    label: "Guides pratiques",
+    description: "Entretien, autonomie, recharge, sécurité : tous nos guides pour profiter au mieux de votre vélo électrique.",
+    keywords: ["guide", "entretien", "autonomie", "batterie", "recharger", "réparer", "pneu", "freins", "équipement", "casque", "assurance"],
+  },
+  actualite: {
+    label: "Actualité & chiffres",
+    description: "Marché du vélo électrique, statistiques, réglementation et aides financières : l'essentiel de l'actu.",
+    keywords: ["marché", "vente", "statistiques", "réglementation", "loi", "bonus", "aide", "subvention", "chiffre", "2025", "2024"],
+  },
+  comparatifs: {
+    label: "Comparatifs",
+    description: "Comparatifs objectifs pour choisir le bon vélo électrique ou la bonne formule de location.",
+    keywords: ["vs", "versus", "comparatif", "choisir", "louer", "acheter", "meilleur", "différence"],
+  },
+  paris: {
+    label: "Paris & Île-de-France",
+    description: "Itinéraires, infrastructure cyclable et conseils pour se déplacer à vélo électrique à Paris.",
+    keywords: ["paris", "vélib", "arrondissement", "île-de-france", "itinéraire", "piste cyclable", "circulation"],
+  },
+  entreprise: {
+    label: "Mobilité entreprise",
+    description: "Flotte d'entreprise, Forfait Mobilités Durables, vélo cargo professionnel : solutions B2B.",
+    keywords: ["entreprise", "b2b", "flotte", "salarié", "mobilité durable", "fmd", "forfait", "livraison", "cargo"],
+  },
+};
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return Object.entries(CATEGORIES).map(([catSlug, cat]) => {
+    const filtered = posts.filter((p) =>
+      cat.keywords.some((kw) =>
+        p.data.title.toLowerCase().includes(kw) ||
+        p.data.description.toLowerCase().includes(kw) ||
+        p.body.toLowerCase().includes(kw)
+      )
+    ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return {
+      params: { cat: catSlug },
+      props: { catSlug, catInfo: cat, posts: filtered },
+    };
+  });
+}
+
+const { catSlug, catInfo, posts } = Astro.props;
+const SITE = "https://locpromobility.fr";
+---
+
+<BaseLayout
+  title={`${catInfo.label} — Blog vélo électrique LocPro Mobilité`}
+  description={catInfo.description}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <!-- Breadcrumb -->
+    <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li><a href="/blog" class="hover:text-brand-700">Blog</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">{catInfo.label}</li>
+      </ol>
+    </nav>
+
+    <h1 class="font-display text-3xl font-bold text-ink-900 md:text-4xl">{catInfo.label}</h1>
+    <p class="mt-3 max-w-2xl text-slate-600">{catInfo.description}</p>
+
+    <!-- Filtres catégories -->
+    <div class="mt-6 flex flex-wrap gap-2">
+      <a
+        href="/blog"
+        class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-brand-300 hover:text-brand-700"
+      >
+        Tous les articles
+      </a>
+      {Object.entries(CATEGORIES).map(([slug, info]) => (
+        <a
+          href={`/blog/categorie/${slug}`}
+          class={`rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition ${
+            slug === catSlug
+              ? "border-brand-500 bg-brand-50 text-brand-900"
+              : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-700"
+          }`}
+        >
+          {info.label}
+        </a>
+      ))}
+    </div>
+
+    {posts.length === 0 ? (
+      <p class="mt-10 text-slate-500">Aucun article dans cette catégorie pour l'instant.</p>
+    ) : (
+      <ul class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <li>
+            <a
+              href={`/blog/${post.slug}`}
+              class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-brand-200 hover:shadow-md"
+            >
+              <div class="aspect-[16/9] bg-slate-100">
+                {post.data.heroImage && (
+                  <Image
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    width={600}
+                    height={337}
+                    loading="lazy"
+                    class="h-full w-full object-cover transition group-hover:scale-105"
+                  />
+                )}
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <time datetime={post.data.pubDate.toISOString()} class="text-xs text-slate-400">
+                  {post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" })}
+                </time>
+                <h2 class="mt-1 font-semibold text-ink-900 group-hover:text-brand-700 leading-snug line-clamp-2">
+                  {post.data.title}
+                </h2>
+                <p class="mt-2 text-sm text-slate-500 line-clamp-2 flex-1">{post.data.description}</p>
+                <span class="mt-3 text-xs font-semibold text-brand-700">Lire l'article →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</BaseLayout>

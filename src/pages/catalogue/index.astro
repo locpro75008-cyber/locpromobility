@@ -12,6 +12,13 @@ const ordered = all.sort((a, b) => a.data.nom.localeCompare(b.data.nom, "fr"));
   description="Louez un vélo électrique, cargo, trottinette ou gyropode à Paris. Modèles disponibles avec fiches détaillées, autonomie, specs et tarifs. Livraison possible."
 >
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Catalogue</li>
+      </ol>
+    </nav>
     <h1 class="font-display text-3xl font-bold text-ink-900 md:text-4xl">Catalogue</h1>
     <p class="mt-3 max-w-2xl text-slate-600">
       Filtrez par catégorie. Les tarifs détaillés sont sur chaque fiche et sur la page

@@ -5,6 +5,8 @@ import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import ExitIntentPopup from "../components/ExitIntentPopup.astro";
+import MobileCTA from "../components/MobileCTA.astro";
+import BackToTop from "../components/BackToTop.astro";
 
 interface Props {
   title: string;
@@ -54,6 +56,8 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="4m3zzQAqZSFA_YQIGAlLPcx06NxIawv4tOAOu51rhaM" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@500;600;700&display=swap" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -106,5 +110,7 @@ const jsonLd = {
     <CookieBanner />
     <WhatsAppButton />
     <ExitIntentPopup />
+    <MobileCTA />
+    <BackToTop />
   </body>
 </html>

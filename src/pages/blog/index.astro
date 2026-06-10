@@ -3,9 +3,23 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
-const posts = (await getCollection("blog")).sort(
+const POSTS_PER_PAGE = 9;
+
+const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const CATEGORIES = [
+  { slug: "pratique", label: "Guides pratiques" },
+  { slug: "actualite", label: "Actualité & chiffres" },
+  { slug: "comparatifs", label: "Comparatifs" },
+  { slug: "paris", label: "Paris & Île-de-France" },
+  { slug: "entreprise", label: "Mobilité entreprise" },
+];
+
+// Article en vedette = le plus récent
+const featured = allPosts[0];
+const restPosts = allPosts.slice(1);
 ---
 
 <BaseLayout
@@ -13,51 +27,138 @@ const posts = (await getCollection("blog")).sort(
   description="Guides pratiques vélo électrique : entretien, autonomie, réglementation, aides 2025, comparatifs et itinéraires à Paris. Le blog LocPro Mobilité."
 >
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Blog</li>
+      </ol>
+    </nav>
+
     <h1 class="font-display text-3xl font-bold text-ink-900">Blog vélo électrique</h1>
     <p class="mt-3 max-w-2xl text-slate-600">
       Guides pratiques, comparatifs, actualités réglementaires et conseils pour tirer le meilleur de votre vélo électrique à Paris.
     </p>
-    <ul class="mt-10 grid gap-6 md:grid-cols-2">
-      {
-        posts.map((post) => (
-          <li>
-            <a
-              href={`/blog/${post.slug}`}
-              class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-brand-200 hover:shadow-md"
-            >
-              <div class="aspect-[16/9] bg-slate-100">
-                {post.data.heroImage && (
-                  <Image
-                    src={post.data.heroImage}
-                    alt={post.data.title}
-                    width={800}
-                    height={450}
-                    loading="lazy"
-                    class="h-full w-full object-cover"
-                  />
-                )}
+
+    <!-- Filtres catégories -->
+    <div class="mt-6 flex flex-wrap gap-2">
+      <span class="rounded-full border border-brand-500 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-900 shadow-sm">
+        Tous les articles
+      </span>
+      {CATEGORIES.map((cat) => (
+        <a
+          href={`/blog/categorie/${cat.slug}`}
+          class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-brand-300 hover:text-brand-700"
+        >
+          {cat.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Article en vedette -->
+    {featured && (
+      <div class="mt-10">
+        <a
+          href={`/blog/${featured.slug}`}
+          class="group grid overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-brand-200 hover:shadow-md lg:grid-cols-2"
+        >
+          <div class="aspect-[16/9] overflow-hidden bg-slate-100 lg:aspect-auto lg:min-h-[280px]">
+            {featured.data.heroImage ? (
+              <Image
+                src={featured.data.heroImage}
+                alt={featured.data.title}
+                width={800}
+                height={450}
+                loading="eager"
+                fetchpriority="high"
+                class="h-full w-full object-cover transition group-hover:scale-105"
+              />
+            ) : (
+              <div class="flex h-full items-center justify-center bg-brand-50">
+                <svg class="h-16 w-16 text-brand-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+                </svg>
               </div>
-              <div class="flex flex-1 flex-col p-6">
-                <time
-                  datetime={post.data.pubDate.toISOString()}
-                  class="text-xs font-medium text-slate-500"
-                >
-                  {post.data.pubDate.toLocaleDateString("fr-FR", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-                <h2 class="mt-2 font-display text-lg font-semibold text-ink-900 group-hover:text-brand-700">
-                  {post.data.title}
-                </h2>
-                <p class="mt-2 flex-1 text-sm text-slate-600">{post.data.description}</p>
-                <span class="mt-4 text-sm font-semibold text-brand-700">Lire →</span>
-              </div>
-            </a>
-          </li>
-        ))
-      }
+            )}
+          </div>
+          <div class="flex flex-col justify-center p-8">
+            <span class="w-fit rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">À la une</span>
+            <time datetime={featured.data.pubDate.toISOString()} class="mt-3 text-sm text-slate-500">
+              {featured.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" })}
+            </time>
+            <h2 class="mt-2 font-display text-xl font-bold text-ink-900 group-hover:text-brand-700 lg:text-2xl">
+              {featured.data.title}
+            </h2>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed line-clamp-3">{featured.data.description}</p>
+            <span class="mt-5 text-sm font-semibold text-brand-700">Lire l'article →</span>
+          </div>
+        </a>
+      </div>
+    )}
+
+    <!-- Grille des autres articles -->
+    <ul id="blog-grid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {restPosts.map((post, i) => (
+        <li class={i >= POSTS_PER_PAGE - 1 ? "post-card hidden" : "post-card"}>
+          <a
+            href={`/blog/${post.slug}`}
+            class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-brand-200 hover:shadow-md"
+          >
+            <div class="aspect-[16/9] bg-slate-100">
+              {post.data.heroImage && (
+                <Image
+                  src={post.data.heroImage}
+                  alt={post.data.title}
+                  width={600}
+                  height={337}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition group-hover:scale-105"
+                />
+              )}
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <time datetime={post.data.pubDate.toISOString()} class="text-xs text-slate-400">
+                {post.data.pubDate.toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" })}
+              </time>
+              <h2 class="mt-1 font-semibold text-ink-900 group-hover:text-brand-700 leading-snug line-clamp-2">
+                {post.data.title}
+              </h2>
+              <p class="mt-2 text-sm text-slate-500 line-clamp-2 flex-1">{post.data.description}</p>
+              <span class="mt-3 text-xs font-semibold text-brand-700">Lire →</span>
+            </div>
+          </a>
+        </li>
+      ))}
     </ul>
+
+    <!-- Bouton "Voir plus" -->
+    {restPosts.length >= POSTS_PER_PAGE && (
+      <div class="mt-10 text-center">
+        <button
+          id="load-more-btn"
+          class="rounded-full border border-brand-300 bg-white px-8 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 hover:border-brand-400"
+        >
+          Voir plus d'articles
+        </button>
+      </div>
+    )}
+
   </div>
 </BaseLayout>
+
+<script is:inline>
+(function () {
+  const btn = document.getElementById("load-more-btn");
+  if (!btn) return;
+
+  btn.addEventListener("click", function () {
+    const hidden = document.querySelectorAll(".post-card.hidden");
+    hidden.forEach(function (card) {
+      card.classList.remove("hidden");
+    });
+    btn.style.display = "none";
+  });
+})();
+</script>

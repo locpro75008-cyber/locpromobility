@@ -8,6 +8,13 @@ import ContactForm from "../components/ContactForm.astro";
   description="Écrivez-nous : type de véhicule, durée, message. Réponse sous 24 h ouvrées."
 >
   <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
+      <ol class="flex flex-wrap items-center gap-1">
+        <li><a href="/" class="hover:text-brand-700">Accueil</a></li>
+        <li aria-hidden="true" class="mx-1">›</li>
+        <li class="text-slate-800">Contact</li>
+      </ol>
+    </nav>
     <h1 class="font-display text-3xl font-bold text-ink-900">Contact</h1>
     <p class="mt-3 text-slate-600">
       Agence : 60 rue François 1er, 75008 Paris — <a
