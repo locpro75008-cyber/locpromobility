@@ -42,7 +42,7 @@ const productLd = {
   "@type": "Product",
   name: nom,
   description,
-  image: images.map((i) => new URL(i.src, Astro.site).toString()),
+  image: images.map((i) => `${SITE}${i.src}`),
   offers: {
     "@type": "AggregateOffer",
     priceCurrency: "EUR",

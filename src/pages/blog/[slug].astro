@@ -71,7 +71,7 @@ const breadcrumbSchema = {
 <BaseLayout
   title={`${title} — LocPro Mobilité`}
   description={description}
-  ogImage={heroImage ? new URL(heroImage.src, Astro.site).toString() : undefined}
+  ogImage={heroImage?.src}
   structuredData={[articleSchema, breadcrumbSchema]}
 >
   <article class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
