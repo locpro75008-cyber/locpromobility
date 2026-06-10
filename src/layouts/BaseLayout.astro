@@ -3,6 +3,8 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+import ExitIntentPopup from "../components/ExitIntentPopup.astro";
 
 interface Props {
   title: string;
@@ -100,5 +102,7 @@ const jsonLd = {
     </main>
     <Footer />
     <CookieBanner />
+    <WhatsAppButton />
+    <ExitIntentPopup />
   </body>
 </html>

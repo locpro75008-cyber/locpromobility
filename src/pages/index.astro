@@ -91,16 +91,91 @@ const vehicules = (await getCollection("vehicules"))
     </div>
   </section>
 
-  <section class="border-y border-slate-200 bg-white py-16">
+  <!-- Compteurs animés -->
+  <section class="border-y border-slate-200 bg-white py-14">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <h2 class="font-display text-2xl font-bold text-ink-900">Ils nous font confiance</h2>
-      <div
-        class="mt-8 grid grid-cols-2 gap-6 text-center text-sm font-semibold text-slate-400 sm:grid-cols-4"
-      >
-        <p class="rounded-xl border border-dashed border-slate-200 py-6">Cyclo Logistique</p>
-        <p class="rounded-xl border border-dashed border-slate-200 py-6">Ville Verte SA</p>
-        <p class="rounded-xl border border-dashed border-slate-200 py-6">Tourisme &amp; Co</p>
-        <p class="rounded-xl border border-dashed border-slate-200 py-6">Proxi Commerce</p>
+      <div class="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
+        <div data-counter="500" data-suffix="+" class="counter-block">
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="mt-1 text-sm font-medium text-slate-500">Clients actifs</p>
+        </div>
+        <div data-counter="4.9" data-suffix="/5" class="counter-block">
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="mt-1 text-sm font-medium text-slate-500">Note Google</p>
+        </div>
+        <div data-counter="48" data-suffix="h" class="counter-block">
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="mt-1 text-sm font-medium text-slate-500">Délai de livraison max</p>
+        </div>
+        <div data-counter="330" data-suffix=" km" class="counter-block">
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="mt-1 text-sm font-medium text-slate-500">Pistes cyclables Paris</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos partenaires / marques -->
+  <section class="bg-slate-50 py-12">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">Véhicules équipés des meilleures marques</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-8 md:gap-12">
+        {[
+          { name: "Bosch", desc: "Motorisation" },
+          { name: "Shimano", desc: "Transmission" },
+          { name: "Yamaha", desc: "Assistance" },
+          { name: "Schwalbe", desc: "Pneumatiques" },
+          { name: "Magura", desc: "Freinage" },
+          { name: "Brose", desc: "Moteur mid-drive" },
+        ].map((brand) => (
+          <div class="flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition">
+            <div class="flex h-12 w-28 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 shadow-sm">
+              <span class="font-display text-sm font-bold text-ink-800 tracking-tight">{brand.name}</span>
+            </div>
+            <span class="text-xs text-slate-400">{brand.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comment ça marche (teaser) -->
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-ink-900 md:text-3xl">Louer un vélo, c'est simple</h2>
+        <ol class="mt-6 space-y-4">
+          {[
+            { n: "1", t: "Choisissez votre véhicule", d: "Catalogue complet avec specs, autonomie et tarifs détaillés." },
+            { n: "2", t: "Réservez en ligne", d: "Formulaire avec choix de dates et adresse de livraison. Réponse sous 2h." },
+            { n: "3", t: "Livraison à votre porte", d: "Votre vélo arrive chargé et prêt à rouler sous 48h." },
+            { n: "4", t: "On gère l'entretien", d: "Maintenance, assistance et remplacement inclus pendant toute la durée." },
+          ].map((s) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">{s.n}</span>
+              <div>
+                <p class="font-semibold text-ink-900">{s.t}</p>
+                <p class="mt-0.5 text-sm text-slate-600">{s.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <a href="/comment-ca-marche" class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:underline">
+          Voir le guide complet →
+        </a>
+      </div>
+      <div class="rounded-2xl bg-brand-600 p-8 text-white">
+        <p class="text-sm font-semibold uppercase tracking-wide text-brand-200">Nouveau client ?</p>
+        <h3 class="mt-2 font-display text-2xl font-bold">Essayez sans risque</h3>
+        <ul class="mt-4 space-y-2 text-sm text-brand-100">
+          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Location à la journée dès 29 €</li>
+          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Résiliation mensuelle flexible</li>
+          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Aucun frais de mise en service</li>
+          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Assistance 7j/7 incluse</li>
+        </ul>
+        <a href="/reserver" class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-brand-700 transition hover:bg-brand-50">
+          Réserver maintenant →
+        </a>
       </div>
     </div>
   </section>
@@ -134,4 +209,39 @@ const vehicules = (await getCollection("vehicules"))
       <a href="/faq" class="text-sm font-semibold text-brand-700 hover:underline">Voir toute la FAQ →</a>
     </p>
   </section>
+  <script is:inline>
+    (function () {
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.counter);
+        const suffix = el.dataset.suffix || "";
+        const isFloat = target % 1 !== 0;
+        const duration = 1800;
+        const step = 16;
+        const steps = duration / step;
+        const increment = target / steps;
+        let current = 0;
+        const display = el.querySelector(".counter-value");
+        if (!display) return;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          display.textContent = (isFloat ? current.toFixed(1) : Math.floor(current)) + suffix;
+        }, step);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll(".counter-block").forEach((el) => observer.observe(el));
+    })();
+  </script>
 </BaseLayout>

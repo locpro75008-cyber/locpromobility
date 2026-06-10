@@ -492,6 +492,8 @@ const cls =
           fpFin.clear();
           if (successEl) successEl.classList.remove("hidden");
           if (errorEl) errorEl.classList.add("hidden");
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "reservation_submitted", form_type: "b2c" });
         } else {
           throw new Error(json.error || "Erreur inconnue");
         }

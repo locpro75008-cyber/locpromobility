@@ -1,0 +1,147 @@
+---
+// Popup exit-intent : s'affiche quand le curseur quitte la fenêtre vers le haut
+// ou après 45s d'inactivité sur mobile. Stocké en localStorage pour ne pas répéter.
+---
+
+<div
+  id="exit-popup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-popup-title"
+  class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+>
+  <div class="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+    <!-- Fermer -->
+    <button
+      id="exit-popup-close"
+      aria-label="Fermer"
+      class="absolute right-4 top-4 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+    >
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Illustration -->
+    <div class="flex justify-center">
+      <div class="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50">
+        <svg class="h-8 w-8 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <h2 id="exit-popup-title" class="mt-4 text-center font-display text-xl font-bold text-ink-900">
+      Avant de partir…
+    </h2>
+    <p class="mt-2 text-center text-sm text-slate-600">
+      Recevez <strong class="text-brand-700">−10 % sur votre première location</strong> et nos dernières offres directement dans votre boîte mail.
+    </p>
+
+    <form id="exit-popup-form" class="mt-6 space-y-3" novalidate>
+      <input
+        type="email"
+        id="exit-popup-email"
+        name="email"
+        placeholder="votre@email.fr"
+        required
+        autocomplete="email"
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
+      />
+      <p id="exit-popup-err" class="hidden text-xs text-red-600">Adresse e-mail invalide.</p>
+      <button
+        type="submit"
+        class="w-full rounded-xl bg-brand-600 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
+      >
+        Recevoir mon code −10 %
+      </button>
+    </form>
+
+    <div id="exit-popup-success" class="mt-4 hidden rounded-xl bg-green-50 p-3 text-center text-sm text-green-700">
+      ✅ Super ! Votre code promo vous sera envoyé sous 24h.
+    </div>
+
+    <p class="mt-4 text-center text-xs text-slate-400">
+      Pas de spam. Désinscription en 1 clic.
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  const STORAGE_KEY = "lpm_exit_seen";
+  const DELAY_MS = 45000; // 45s avant affichage sur mobile
+
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  const popup = document.getElementById("exit-popup");
+  const closeBtn = document.getElementById("exit-popup-close");
+  const form = document.getElementById("exit-popup-form");
+  const emailInput = document.getElementById("exit-popup-email");
+  const errEl = document.getElementById("exit-popup-err");
+  const successEl = document.getElementById("exit-popup-success");
+
+  function show() {
+    if (!popup || localStorage.getItem(STORAGE_KEY)) return;
+    popup.classList.remove("hidden");
+    popup.classList.add("flex");
+    localStorage.setItem(STORAGE_KEY, "1");
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "exit_intent_shown" });
+  }
+
+  function hide() {
+    if (!popup) return;
+    popup.classList.add("hidden");
+    popup.classList.remove("flex");
+  }
+
+  // Desktop : exit intent (souris vers le haut de la fenêtre)
+  document.addEventListener("mouseleave", function (e) {
+    if (e.clientY <= 10) show();
+  });
+
+  // Mobile : timer 45s
+  const mobileTimer = setTimeout(show, DELAY_MS);
+
+  // Fermer
+  if (closeBtn) closeBtn.addEventListener("click", hide);
+  if (popup) popup.addEventListener("click", function (e) {
+    if (e.target === popup) hide();
+  });
+
+  // Escape
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") hide();
+  });
+
+  // Soumission
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const email = emailInput ? emailInput.value.trim() : "";
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!valid) {
+        if (errEl) errEl.classList.remove("hidden");
+        return;
+      }
+      if (errEl) errEl.classList.add("hidden");
+
+      try {
+        await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, nom: "Newsletter", message: "Inscription popup exit-intent (-10%)", type_vehicule: "newsletter" }),
+        });
+      } catch (_) {}
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "exit_intent_subscribed", email_provided: true });
+
+      form.classList.add("hidden");
+      if (successEl) successEl.classList.remove("hidden");
+      clearTimeout(mobileTimer);
+    });
+  }
+})();
+</script>

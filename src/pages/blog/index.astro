@@ -29,7 +29,7 @@ const posts = (await getCollection("blog")).sort(
                 {post.data.heroImage && (
                   <Image
                     src={post.data.heroImage}
-                    alt=""
+                    alt={post.data.title}
                     width={800}
                     height={450}
                     loading="lazy"

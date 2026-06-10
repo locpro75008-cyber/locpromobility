@@ -472,6 +472,8 @@ const cls =
         if (res.ok && json.success) {
           form.reset();
           if (successEl) successEl.classList.remove("hidden");
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "devis_submitted", form_type: "b2b" });
         } else {
           throw new Error(json.error || "Erreur inconnue");
         }
