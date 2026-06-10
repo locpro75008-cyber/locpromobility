@@ -62,12 +62,39 @@ const breadcrumbLd = {
     { "@type": "ListItem", position: 3, name: nom, item: canonicalCat },
   ],
 };
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: `Quelle est l'autonomie réelle du ${nom} ?`,
+      acceptedAnswer: { "@type": "Answer", text: "En usage urbain parisien, comptez 60 à 80% de l'autonomie maximale annoncée. Nos techniciens vous précisent l'autonomie lors de la prise en main." },
+    },
+    {
+      "@type": "Question",
+      name: "La caution est-elle débitée immédiatement ?",
+      acceptedAnswer: { "@type": "Answer", text: "Non. La caution est une empreinte bancaire non débitée, libérée dans les 5 jours ouvrés suivant le retour du véhicule en bon état." },
+    },
+    {
+      "@type": "Question",
+      name: "Que se passe-t-il en cas de panne ?",
+      acceptedAnswer: { "@type": "Answer", text: "Notre assistance intervient sous 4h dans Paris et petite couronne. Un véhicule de remplacement est livré sous 24h si la réparation est impossible en urgence." },
+    },
+    {
+      "@type": "Question",
+      name: "Le Forfait Mobilités Durables s'applique-t-il ?",
+      acceptedAnswer: { "@type": "Answer", text: "Oui. Toute location mensuelle LocPro est éligible au FMD (jusqu'à 800 €/an exonérés). Nous fournissons l'attestation nécessaire pour votre employeur." },
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title={`${nom} — Location vélo électrique Paris | LocPro Mobilité`}
   description={description}
-  structuredData={[productLd, breadcrumbLd]}
+  structuredData={[productLd, breadcrumbLd, faqLd]}
 >
   <article class="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
 
@@ -301,5 +328,66 @@ const breadcrumbLd = {
       </section>
     )}
 
+    <!-- FAQ enrichie avec structured data FAQPage -->
+    <section class="mt-16 border-t border-slate-200 pt-12" id="faq">
+      <h2 class="font-display text-xl font-bold text-ink-900">Questions fréquentes</h2>
+      <dl class="mt-6 space-y-4" id="faq-list">
+        {[
+          {
+            q: `Quelle est l'autonomie réelle du ${nom} ?`,
+            a: `L'autonomie annoncée est mesurée en conditions optimales. En usage urbain parisien (niveau d'assistance modéré, relief faible), comptez 60 à 80% de l'autonomie maximale. Nos techniciens vous précisent l'autonomie réelle lors de la prise en main.`,
+          },
+          {
+            q: "La caution est-elle débitée immédiatement ?",
+            a: "Non. La caution est une empreinte bancaire (pré-autorisation) : elle est réservée sur votre carte mais non débitée. Elle est libérée dans les 5 jours ouvrés suivant le retour du véhicule en bon état.",
+          },
+          {
+            q: "Que se passe-t-il en cas de panne ?",
+            a: "Appelez notre assistance au 01 70 95 56 61 (7j/7, 8h-20h). Pour les pannes techniques, nous intervenons sous 4h dans Paris et petite couronne. Si la réparation est impossible en urgence, un véhicule de remplacement est livré sous 24h.",
+          },
+          {
+            q: "Puis-je modifier ou annuler ma réservation ?",
+            a: "Pour les formules courte durée, modification possible jusqu'à 24h avant. Pour les abonnements mensuels, résiliation avec 15 jours de préavis. Aucun frais d'annulation si vous prévenez dans les délais.",
+          },
+          {
+            q: "Le Forfait Mobilités Durables s'applique-t-il à cette location ?",
+            a: "Oui. Toute location mensuelle LocPro est éligible au FMD (jusqu'à 800 €/an exonérés d'impôt et de charges). Nous vous fournissons l'attestation nécessaire pour votre employeur sur simple demande.",
+          },
+        ].map((item, i) => (
+          <div class="rounded-2xl border border-slate-200 bg-white">
+            <button
+              type="button"
+              class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-ink-900 hover:text-brand-700"
+              aria-expanded="false"
+              data-faq-toggle
+            >
+              <dt>{item.q}</dt>
+              <svg class="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <dd class="hidden px-5 pb-4 text-sm text-slate-600 leading-relaxed faq-answer">
+              {item.a}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
   </article>
 </BaseLayout>
+
+<script is:inline>
+(function () {
+  document.querySelectorAll("[data-faq-toggle]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      const answer = btn.parentElement.querySelector(".faq-answer");
+      const icon = btn.querySelector(".faq-icon");
+      if (answer) answer.classList.toggle("hidden", expanded);
+      if (icon) icon.style.transform = expanded ? "" : "rotate(180deg)";
+    });
+  });
+})();
+</script>

@@ -82,6 +82,14 @@ const breadcrumbSchema = {
   ogImage={heroImage?.src}
   structuredData={[articleSchema, breadcrumbSchema]}
 >
+  <!-- Barre de progression de lecture -->
+  <div
+    id="read-progress"
+    class="fixed top-0 left-0 z-[100] h-1 w-0 bg-gradient-to-r from-brand-500 to-brand-700 transition-none"
+    role="progressbar"
+    aria-label="Progression de lecture"
+  ></div>
+
   <article class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
     <!-- Fil d'Ariane -->
     <nav aria-label="Fil d'Ariane" class="text-sm text-slate-500">
@@ -219,6 +227,22 @@ const breadcrumbSchema = {
 
 <script is:inline>
 (function () {
+  // Barre de progression de lecture
+  const bar = document.getElementById("read-progress");
+  const article = document.querySelector("article");
+  if (bar && article) {
+    function updateProgress() {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const scrolled = window.scrollY - articleTop;
+      const pct = Math.min(100, Math.max(0, (scrolled / articleHeight) * 100));
+      bar.style.width = pct + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // Copier le lien
   const btn = document.getElementById("copy-link-btn");
   const label = document.getElementById("copy-link-text");
   if (!btn || !label) return;

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
+import Testimonials from "../components/Testimonials.astro";
 import { getCollection } from "astro:content";
 
 const vehicules = (await getCollection("vehicules"))
@@ -275,6 +276,8 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
       <a href="/faq" class="text-sm font-semibold text-brand-700 hover:underline">Voir toute la FAQ →</a>
     </p>
   </section>
+  <Testimonials />
+
   <!-- Section saisonnière : articles du moment -->
   {featuredPosts.length > 0 && (
     <section class="bg-slate-50 py-16">

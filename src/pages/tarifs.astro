@@ -72,5 +72,124 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </a>
       </section>
     </div>
+    <!-- Calculateur de prix interactif -->
+    <section class="mt-16" id="calculateur">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Calculateur de prix</h2>
+      <p class="mt-2 text-sm text-slate-500">Estimez votre budget en quelques secondes.</p>
+
+      <div class="mt-6 rounded-2xl border border-brand-100 bg-brand-50/50 p-6 md:p-8">
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Véhicule -->
+          <div>
+            <label for="calc-vehicule" class="block text-sm font-semibold text-ink-800 mb-2">Type de véhicule</label>
+            <select id="calc-vehicule" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200">
+              <option value="trottinette">Trottinette électrique</option>
+              <option value="velo" selected>Vélo électrique</option>
+              <option value="cargo">Cargo électrique</option>
+              <option value="gyropode">Gyropode</option>
+            </select>
+          </div>
+          <!-- Durée -->
+          <div>
+            <label for="calc-duree" class="block text-sm font-semibold text-ink-800 mb-2">
+              Durée : <span id="calc-duree-label" class="text-brand-700">30 jours</span>
+            </label>
+            <input
+              type="range"
+              id="calc-duree"
+              min="1"
+              max="365"
+              value="30"
+              class="w-full accent-brand-600"
+            />
+            <div class="mt-1 flex justify-between text-xs text-slate-400">
+              <span>1 jour</span><span>1 an</span>
+            </div>
+          </div>
+          <!-- Résultat -->
+          <div class="flex flex-col items-center justify-center rounded-xl bg-white border border-brand-200 p-5 text-center shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-600">Estimation</p>
+            <p id="calc-result" class="mt-1 font-display text-4xl font-bold text-brand-700">149 €</p>
+            <p id="calc-unit" class="text-xs text-slate-500">par mois · maintenance incluse</p>
+            <a href="/reserver" class="mt-4 w-full rounded-xl bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 transition text-center">
+              Réserver ce véhicule
+            </a>
+          </div>
+        </div>
+
+        <!-- Économie FMD -->
+        <div id="calc-fmd" class="mt-4 hidden rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800">
+          💡 Salarié ? Avec le <strong>Forfait Mobilités Durables</strong>, votre employeur peut prendre en charge jusqu'à <strong>800 €/an</strong> — soit <strong id="calc-fmd-net"></strong>/mois nets. <a href="/blog/forfait-mobilites-durables-2026" class="underline font-semibold">En savoir plus →</a>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <script is:inline>
+  (function () {
+    const tarifs = {
+      trottinette: { jour: 19, semaine: 89, mois: 99, an: 49 },
+      velo:        { jour: 29, semaine: 139, mois: 149, an: 129 },
+      cargo:       { jour: 59, semaine: 290, mois: 249, an: 219 },
+      gyropode:    { jour: 79, semaine: 350, mois: 399, an: 349 },
+    };
+
+    const sel = document.getElementById("calc-vehicule");
+    const range = document.getElementById("calc-duree");
+    const label = document.getElementById("calc-duree-label");
+    const result = document.getElementById("calc-result");
+    const unit = document.getElementById("calc-unit");
+    const fmdBox = document.getElementById("calc-fmd");
+    const fmdNet = document.getElementById("calc-fmd-net");
+
+    function update() {
+      const v = sel.value;
+      const days = parseInt(range.value, 10);
+      const t = tarifs[v];
+      let prix, unitText, showFmd = false;
+
+      if (days === 1) {
+        prix = t.jour;
+        unitText = "pour 1 jour · tout inclus";
+        label.textContent = "1 jour";
+      } else if (days <= 6) {
+        prix = t.jour * days;
+        unitText = `pour ${days} jours · tout inclus`;
+        label.textContent = `${days} jours`;
+      } else if (days <= 27) {
+        const weeks = Math.round(days / 7);
+        prix = t.semaine * weeks;
+        unitText = `pour ${weeks} semaine${weeks > 1 ? "s" : ""} · maintenance incluse`;
+        label.textContent = `${weeks} semaine${weeks > 1 ? "s" : ""}`;
+      } else if (days <= 89) {
+        const months = Math.round(days / 30);
+        prix = t.mois * months;
+        unitText = `pour ${months} mois · maintenance incluse`;
+        label.textContent = `${months} mois`;
+        showFmd = true;
+      } else {
+        const months = Math.round(days / 30);
+        prix = t.an * months;
+        unitText = `pour ${months} mois (tarif annuel) · tout inclus`;
+        label.textContent = `${months} mois`;
+        showFmd = true;
+      }
+
+      result.textContent = prix.toLocaleString("fr-FR") + " €";
+      unit.textContent = unitText;
+
+      if (showFmd && fmdBox && fmdNet) {
+        const netParMois = Math.max(0, Math.round(prix / Math.round(days / 30)) - Math.round(800 / 12));
+        fmdNet.textContent = netParMois + " €";
+        fmdBox.classList.remove("hidden");
+      } else if (fmdBox) {
+        fmdBox.classList.add("hidden");
+      }
+    }
+
+    if (sel) sel.addEventListener("change", update);
+    if (range) range.addEventListener("input", update);
+    update();
+  })();
+  </script>
 </BaseLayout>
