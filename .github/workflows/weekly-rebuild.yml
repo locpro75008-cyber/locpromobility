@@ -21,3 +21,19 @@ jobs:
 
       - name: Confirmer le déclenchement
         run: echo "✅ Rebuild Vercel déclenché le $(date '+%A %d %B %Y à %H:%M UTC')"
+
+      # On attend 3 min que Vercel finisse le déploiement, puis on pinge les moteurs
+      - name: Attendre la fin du déploiement Vercel
+        run: sleep 180
+
+      - name: Ping Google — soumettre le sitemap
+        run: |
+          curl -s "https://www.google.com/ping?sitemap=https://locpromobility.fr/sitemap.xml" \
+            -w "HTTP %{http_code}" -o /dev/null
+          echo " ✅ Google pingé"
+
+      - name: Ping Bing — soumettre le sitemap
+        run: |
+          curl -s "https://www.bing.com/ping?sitemap=https://locpromobility.fr/sitemap.xml" \
+            -w "HTTP %{http_code}" -o /dev/null
+          echo " ✅ Bing pingé"

@@ -1,6 +1,45 @@
 ---
-// Popup exit-intent : s'affiche quand le curseur quitte la fenêtre vers le haut
-// ou après 45s d'inactivité sur mobile. Stocké en localStorage pour ne pas répéter.
+// Popup exit-intent saisonnier — message et offre adaptés selon le mois
+const month = new Date().getMonth() + 1; // 1-12 (généré au build)
+
+const seasonal: Record<string, { emoji: string; title: string; offer: string; cta: string; badge: string }> = {
+  printemps: {
+    emoji: "🌸",
+    badge: "Offre printemps",
+    title: "Profitez du printemps à vélo !",
+    offer: "Réservez ce mois-ci et obtenez <strong class=\"text-brand-700\">−10 % sur votre première location</strong> — avant la ruée estivale.",
+    cta: "Je réserve avec −10 %",
+  },
+  ete: {
+    emoji: "☀️",
+    badge: "Spécial été",
+    title: "Paris à vélo cet été, c'est maintenant",
+    offer: "Livraison express sous 24h. <strong class=\"text-brand-700\">−10 % sur votre première location</strong> avec notre offre été.",
+    cta: "Réserver pour l'été",
+  },
+  automne: {
+    emoji: "🍂",
+    badge: "Offre rentrée",
+    title: "La rentrée à vélo électrique",
+    offer: "Commutez malin dès la rentrée. <strong class=\"text-brand-700\">−10 % sur le premier mois</strong> de votre abonnement.",
+    cta: "Profiter de l'offre rentrée",
+  },
+  hiver: {
+    emoji: "❄️",
+    badge: "Cadeau de fin d'année",
+    title: "Roulez même en hiver",
+    offer: "Nos VAE sont équipés pour l'hiver. <strong class=\"text-brand-700\">−10 % sur votre première location</strong> et livraison gratuite.",
+    cta: "Réserver pour l'hiver",
+  },
+};
+
+const currentSeason =
+  month >= 3 && month <= 5 ? "printemps"
+  : month >= 6 && month <= 8 ? "ete"
+  : month >= 9 && month <= 11 ? "automne"
+  : "hiver";
+
+const s = seasonal[currentSeason];
 ---
 
 <div
@@ -22,21 +61,18 @@
       </svg>
     </button>
 
-    <!-- Illustration -->
+    <!-- Illustration saisonnière -->
     <div class="flex justify-center">
-      <div class="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50">
-        <svg class="h-8 w-8 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+      <div class="flex h-16 w-16 items-center justify-center rounded-full bg-brand-50 text-3xl">
+        {s.emoji}
       </div>
     </div>
+    <p class="mt-3 text-center text-xs font-bold uppercase tracking-widest text-brand-600">{s.badge}</p>
 
-    <h2 id="exit-popup-title" class="mt-4 text-center font-display text-xl font-bold text-ink-900">
-      Avant de partir…
+    <h2 id="exit-popup-title" class="mt-2 text-center font-display text-xl font-bold text-ink-900">
+      {s.title}
     </h2>
-    <p class="mt-2 text-center text-sm text-slate-600">
-      Recevez <strong class="text-brand-700">−10 % sur votre première location</strong> et nos dernières offres directement dans votre boîte mail.
-    </p>
+    <p class="mt-2 text-center text-sm text-slate-600" set:html={s.offer} />
 
     <form id="exit-popup-form" class="mt-6 space-y-3" novalidate>
       <input
@@ -53,7 +89,7 @@
         type="submit"
         class="w-full rounded-xl bg-brand-600 py-3 text-sm font-semibold text-white transition hover:bg-brand-700"
       >
-        Recevoir mon code −10 %
+        {s.cta}
       </button>
     </form>
 

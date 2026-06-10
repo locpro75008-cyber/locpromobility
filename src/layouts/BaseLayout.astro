@@ -7,6 +7,7 @@ import WhatsAppButton from "../components/WhatsAppButton.astro";
 import ExitIntentPopup from "../components/ExitIntentPopup.astro";
 import MobileCTA from "../components/MobileCTA.astro";
 import BackToTop from "../components/BackToTop.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
 
 interface Props {
   title: string;
@@ -14,6 +15,7 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  hideNewsletter?: boolean;
 }
 
 const {
@@ -22,6 +24,7 @@ const {
   ogImage = "/og-default.svg",
   noindex = false,
   structuredData,
+  hideNewsletter = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -106,6 +109,7 @@ const jsonLd = {
     <main id="main" class="flex-1">
       <slot />
     </main>
+    {!hideNewsletter && <NewsletterForm />}
     <Footer />
     <CookieBanner />
     <WhatsAppButton />

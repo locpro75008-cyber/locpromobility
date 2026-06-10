@@ -38,6 +38,7 @@ export const GET: APIRoute = async () => {
     url("/location-longue-duree", "0.9", "monthly", today),
     url("/location-courte-duree", "0.9", "monthly", today),
     url("/comment-ca-marche", "0.7", "monthly", today),
+    url("/recherche", "0.5", "monthly", today),
     url("/a-propos", "0.6", "monthly", today),
     url("/mentions-legales", "0.3", "yearly"),
     url("/politique-confidentialite", "0.3", "yearly"),

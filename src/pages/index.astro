@@ -6,6 +6,72 @@ import { getCollection } from "astro:content";
 const vehicules = (await getCollection("vehicules"))
   .filter((v) => v.data.disponible)
   .slice(0, 3);
+
+// === Section saisonnière ===
+const now = new Date();
+const month = now.getMonth() + 1; // 1-12
+
+const seasons: Record<string, { label: string; emoji: string; tags: string[]; cta: string; ctaHref: string }> = {
+  printemps: {
+    label: "À lire ce printemps",
+    emoji: "🌸",
+    tags: ["reglementation", "tendances", "tourisme", "pistes", "securite"],
+    cta: "Tous les articles printemps",
+    ctaHref: "/blog",
+  },
+  ete: {
+    label: "À lire cet été",
+    emoji: "☀️",
+    tags: ["ete", "itineraires", "chaleur", "evenements", "tourisme", "bagages"],
+    cta: "Tous les articles été",
+    ctaHref: "/blog",
+  },
+  automne: {
+    label: "À lire cet automne",
+    emoji: "🍂",
+    tags: ["rentree", "automne", "intermodalite", "etudiants", "entretien", "pliable"],
+    cta: "Tous les articles automne",
+    ctaHref: "/blog",
+  },
+  hiver: {
+    label: "À lire cet hiver",
+    emoji: "❄️",
+    tags: ["hiver", "noel", "resolutions", "retrospective", "previsions", "cadeau"],
+    cta: "Tous les articles hiver",
+    ctaHref: "/blog",
+  },
+};
+
+const currentSeason =
+  month >= 3 && month <= 5 ? "printemps"
+  : month >= 6 && month <= 8 ? "ete"
+  : month >= 9 && month <= 11 ? "automne"
+  : "hiver";
+
+const seasonData = seasons[currentSeason];
+
+// Récupérer les articles de la saison (publiés uniquement)
+const allBlogPosts = (await getCollection("blog"))
+  .filter((p) => p.data.pubDate <= now)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const seasonalPosts = allBlogPosts
+  .filter((p) =>
+    seasonData.tags.some(
+      (tag) =>
+        p.slug.includes(tag) || p.data.title.toLowerCase().includes(tag) || p.data.description.toLowerCase().includes(tag)
+    )
+  )
+  .slice(0, 3);
+
+// Si pas assez d'articles saisonniers, compléter avec les plus récents
+const featuredPosts =
+  seasonalPosts.length >= 2
+    ? seasonalPosts
+    : allBlogPosts.slice(0, 3);
+
+// Badge "Nouveau" : articles publiés dans les 10 derniers jours
+const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
 ---
 
 <BaseLayout
@@ -209,6 +275,57 @@ const vehicules = (await getCollection("vehicules"))
       <a href="/faq" class="text-sm font-semibold text-brand-700 hover:underline">Voir toute la FAQ →</a>
     </p>
   </section>
+  <!-- Section saisonnière : articles du moment -->
+  {featuredPosts.length > 0 && (
+    <section class="bg-slate-50 py-16">
+      <div class="mx-auto max-w-6xl px-4 md:px-6">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-brand-700">
+              {seasonData.emoji} Blog
+            </p>
+            <h2 class="mt-1 font-display text-2xl font-bold text-ink-900 md:text-3xl">
+              {seasonData.label}
+            </h2>
+          </div>
+          <a href={seasonData.ctaHref} class="text-sm font-semibold text-brand-700 hover:underline">
+            {seasonData.cta} →
+          </a>
+        </div>
+
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredPosts.map((post) => {
+            const isNew = post.data.pubDate >= tenDaysAgo;
+            return (
+              <a
+                href={`/blog/${post.slug}`}
+                class="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-200 hover:shadow-md"
+              >
+                {isNew && (
+                  <span class="absolute right-4 top-4 rounded-full bg-brand-600 px-2.5 py-0.5 text-xs font-bold text-white">
+                    Nouveau
+                  </span>
+                )}
+                <p class="text-xs font-semibold uppercase tracking-wide text-brand-700">
+                  {post.data.pubDate.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                </p>
+                <h3 class="mt-2 font-display text-base font-bold leading-snug text-ink-900 group-hover:text-brand-700 transition line-clamp-3">
+                  {post.data.title}
+                </h3>
+                <p class="mt-2 line-clamp-2 flex-1 text-sm text-slate-500">
+                  {post.data.description}
+                </p>
+                <span class="mt-4 text-xs font-semibold text-brand-600 group-hover:underline">
+                  Lire l'article →
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
   <script is:inline>
     (function () {
       function animateCounter(el) {

@@ -1,0 +1,114 @@
+---
+// Formulaire d'inscription newsletter — Brevo (ex-Sendinblue) API v3
+// Variable requise dans Vercel : BREVO_API_KEY
+// Optionnel : BREVO_LIST_ID (ID de la liste Brevo, défaut 2)
+---
+
+<section class="bg-gradient-to-r from-brand-600 to-brand-800 py-14">
+  <div class="mx-auto max-w-2xl px-4 text-center md:px-6">
+    <p class="text-sm font-bold uppercase tracking-widest text-brand-200">Newsletter gratuite</p>
+    <h2 class="mt-2 font-display text-2xl font-bold text-white md:text-3xl">
+      Restez informé des bons plans mobilité
+    </h2>
+    <p class="mt-3 text-brand-100 text-sm md:text-base">
+      Un email par semaine : nouveaux articles, offres de saison, actualités ZFE et vélo électrique à Paris. Pas de spam, désinscription en 1 clic.
+    </p>
+
+    <form
+      id="newsletter-form"
+      class="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
+      novalidate
+    >
+      <input
+        type="email"
+        id="newsletter-email"
+        name="email"
+        placeholder="votre@email.fr"
+        required
+        autocomplete="email"
+        class="flex-1 rounded-xl border-0 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none focus:ring-2 focus:ring-white/50"
+      />
+      <button
+        type="submit"
+        id="newsletter-btn"
+        class="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-brand-700 shadow-sm transition hover:bg-brand-50 disabled:opacity-60"
+      >
+        S'inscrire
+      </button>
+    </form>
+
+    <p id="newsletter-error" class="mt-3 hidden text-sm text-red-300"></p>
+    <div id="newsletter-success" class="mt-4 hidden rounded-xl bg-white/10 px-4 py-3 text-sm font-medium text-white">
+      ✅ Inscription confirmée ! Vous recevrez nos articles chaque semaine.
+    </div>
+    <p class="mt-4 text-xs text-brand-300">
+      En vous inscrivant, vous acceptez notre <a href="/politique-confidentialite" class="underline hover:text-white">politique de confidentialité</a>.
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+(function () {
+  const form = document.getElementById("newsletter-form");
+  const emailInput = document.getElementById("newsletter-email");
+  const btn = document.getElementById("newsletter-btn");
+  const errorEl = document.getElementById("newsletter-error");
+  const successEl = document.getElementById("newsletter-success");
+
+  if (!form) return;
+
+  // Ne pas ré-afficher si déjà inscrit
+  if (localStorage.getItem("lpm_newsletter_ok")) {
+    form.style.display = "none";
+    if (successEl) {
+      successEl.classList.remove("hidden");
+      successEl.textContent = "✅ Vous êtes déjà inscrit à notre newsletter.";
+    }
+    return;
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const email = emailInput ? emailInput.value.trim() : "";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (errorEl) {
+        errorEl.textContent = "Adresse e-mail invalide.";
+        errorEl.classList.remove("hidden");
+      }
+      return;
+    }
+
+    if (btn) btn.disabled = true;
+    if (errorEl) errorEl.classList.add("hidden");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        localStorage.setItem("lpm_newsletter_ok", "1");
+        form.style.display = "none";
+        if (successEl) successEl.classList.remove("hidden");
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "newsletter_signup", method: "footer_form" });
+      } else {
+        const data = await res.json().catch(() => ({}));
+        if (errorEl) {
+          errorEl.textContent = data.error || "Une erreur est survenue. Réessayez.";
+          errorEl.classList.remove("hidden");
+        }
+        if (btn) btn.disabled = false;
+      }
+    } catch (_) {
+      if (errorEl) {
+        errorEl.textContent = "Erreur réseau. Vérifiez votre connexion.";
+        errorEl.classList.remove("hidden");
+      }
+      if (btn) btn.disabled = false;
+    }
+  });
+})();
+</script>
