@@ -91,6 +91,21 @@ export const locations: Location[] = [
     distanceAgence: "12 min à vélo depuis notre agence (Paris 8e)",
   },
   {
+    slug: "paris-8e",
+    nom: "Paris 8e arrondissement",
+    type: "arrondissement",
+    codePostal: "75008",
+    description: "Location vélo électrique Paris 8e — Champs-Élysées, Madeleine, agence LocPro",
+    metaDescription:
+      "Location vélo électrique Paris 8e arrondissement. Champs-Élysées, Madeleine, siège LocPro au 60 rue François 1er. Livraison le jour même — LocPro Mobilité.",
+    intro:
+      "Le 8e arrondissement, entre les Champs-Élysées et la Madeleine, est le cœur du Paris des affaires et du luxe. LocPro Mobilité y a son siège au 60 rue François 1er : livraison express et retrait sur place possibles.",
+    landmarks: ["Champs-Élysées", "Arc de Triomphe", "Place de la Madeleine", "Parc Monceau", "Grand Palais"],
+    metros: ["Charles de Gaulle-Étoile (L1/2/6/RER A)", "Madeleine (L8/12/14)", "Franklin D. Roosevelt (L1/9)", "George V (L1)"],
+    usages: ["Cadres et professions libérales", "Tourisme Champs-Élysées", "Livraison express depuis notre agence"],
+    distanceAgence: "Notre agence est dans le 8e — livraison le jour même possible",
+  },
+  {
     slug: "paris-9e",
     nom: "Paris 9e arrondissement",
     type: "arrondissement",
@@ -498,7 +513,16 @@ export const locations: Location[] = [
   },
 ];
 
+function arrondissementNum(slug: string): number {
+  const m = slug.match(/paris-(\d+)/);
+  return m ? parseInt(m[1], 10) : 999;
+}
+
 export const locationsByType = {
-  arrondissements: locations.filter((l) => l.type === "arrondissement"),
-  villes: locations.filter((l) => l.type === "ville"),
+  arrondissements: locations
+    .filter((l) => l.type === "arrondissement")
+    .sort((a, b) => arrondissementNum(a.slug) - arrondissementNum(b.slug)),
+  villes: locations
+    .filter((l) => l.type === "ville")
+    .sort((a, b) => a.nom.localeCompare(b.nom, "fr")),
 };
