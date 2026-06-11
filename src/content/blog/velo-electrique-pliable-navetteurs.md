@@ -85,4 +85,4 @@ LocPro propose la trottinette électrique pliable **Glide Pro S9** — une alter
 
 Elle se transporte debout dans le RER, se plie en 3 secondes, et offre 30 km d'autonomie réelle — suffisant pour la quasi-totalité des besoins navetteurs.
 
-[Voir la trottinette Glide Pro S9 →](/catalogue/glide-pro-s9)
+[Voir la trottinette Ninebot Max G30 →](/catalogue/locpro-scoot-s9)

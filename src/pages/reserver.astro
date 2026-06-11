@@ -59,10 +59,18 @@ const vehicule = Astro.url.searchParams.get("vehicule") || "";
     const sel = document.querySelector("#resa-form-type");
     if (sel instanceof HTMLSelectElement) {
       const map = {
-        "explorer-urban-plus": "velo-electrique",
-        "cargo-flex-2-roues": "cargo",
-        "glide-pro-s9": "trottinette",
-        "ninebot-pro-fleet": "gyropode",
+        "locpro-city": "velo-electrique",
+        "locpro-urban": "velo-electrique",
+        "locpro-urban-plus": "velo-electrique",
+        "locpro-fold": "velo-electrique",
+        "locpro-cargo-box": "cargo",
+        "locpro-cargo-long": "cargo",
+        "locpro-cargo-pro": "cargo",
+        "locpro-cargo-flex": "cargo",
+        "locpro-scoot-s9": "trottinette",
+        "locpro-scoot-pro": "trottinette",
+        "locpro-gyro-event": "gyropode",
+        "locpro-gyro-fleet": "gyropode",
       };
       const v = map[preselect];
       if (v) sel.value = v;

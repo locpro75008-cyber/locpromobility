@@ -10,7 +10,9 @@ const vehicules = defineCollection({
       tagline: z.string().optional(),
       tarifs: z.array(z.object({ label: z.string(), prix: z.string() })),
       caution: z.string().optional(),
-      images: z.array(image()),
+      imageUrl: z.string(),
+      modeleReference: z.string(),
+      marque: z.string().optional(),
       disponible: z.boolean(),
       specs: z
         .array(z.object({ label: z.string(), value: z.string() }))

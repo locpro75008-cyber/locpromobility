@@ -6,7 +6,7 @@ import { locationsByType } from "../data/locations";
 
 <BaseLayout
   title="Location vélo électrique à Paris — LocPro Mobilité"
-  description="Louez un vélo électrique à Paris : livraison 48h dans les 20 arrondissements, formules courte et longue durée, cargo et trottinettes. Dès 29 €/jour."
+  description="Louez un vélo électrique à Paris : livraison 48h, 12 modèles (Neomouv, Elops, Motto, Urban Arrow, Tern, Ninebot). Dès 22 €/jour."
 >
   <div class="mx-auto max-w-5xl px-4 py-12 md:px-6 md:py-16">
     <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Location vélo électrique Paris" }]} />
@@ -23,7 +23,7 @@ import { locationsByType } from "../data/locations";
       {[
         { n: "20", l: "Arrondissements parisiens" },
         { n: "48h", l: "Livraison max." },
-        { n: "29 €", l: "À partir de / jour" },
+        { n: "22 €", l: "Vélo City / jour" },
       ].map((s) => (
         <div class="rounded-xl border border-brand-100 bg-brand-50 p-4 text-center">
           <p class="font-display text-2xl font-bold text-brand-700">{s.n}</p>

@@ -6,7 +6,8 @@ import { getCollection } from "astro:content";
 
 const vehicules = (await getCollection("vehicules"))
   .filter((v) => v.data.disponible)
-  .slice(0, 3);
+  .sort((a, b) => a.data.nom.localeCompare(b.data.nom, "fr"))
+  .slice(0, 6);
 
 // === Section saisonnière ===
 const now = new Date();
@@ -77,7 +78,7 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
 
 <BaseLayout
   title="Location vélo électrique Paris — LocPro Mobilité"
-  description="Location vélo électrique à Paris dès 29 €/jour. Cargo, trottinette, gyropode. Livraison à domicile. Formules courte, moyenne et longue durée. B2C et B2B."
+  description="Location vélo électrique à Paris dès 15 €/jour. 12 modèles : Neomouv, Elops, Motto, Urban Arrow, Tern GSD, Ninebot. Livraison 48h. B2C et B2B."
 >
   <section
     class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white"
@@ -121,10 +122,10 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
           <p class="text-sm font-semibold text-ink-900">Grille indicative</p>
           <ul class="mt-4 space-y-3 text-sm text-slate-600">
             <li class="flex justify-between gap-4">
-              <span>Court terme</span><span class="font-medium text-ink-800">à partir de 19 € / jour</span>
+              <span>Court terme</span><span class="font-medium text-ink-800">à partir de 15 € / jour</span>
             </li>
             <li class="flex justify-between gap-4">
-              <span>Moyen terme</span><span class="font-medium text-ink-800">dès 79 € / mois</span>
+              <span>Moyen terme</span><span class="font-medium text-ink-800">dès 79 € / mois (LLD)</span>
             </li>
             <li class="flex justify-between gap-4">
               <span>Long terme B2B</span><span class="font-medium text-brand-700">sur devis</span>
@@ -153,7 +154,7 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
         class="text-sm font-semibold text-brand-700 hover:underline">Catalogue complet →</a
       >
     </div>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
       {vehicules.map((v) => <ProductCard vehicle={v} />)}
     </div>
   </section>
@@ -188,12 +189,12 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
       <p class="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">Véhicules équipés des meilleures marques</p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-8 md:gap-12">
         {[
-          { name: "Bosch", desc: "Motorisation" },
-          { name: "Shimano", desc: "Transmission" },
-          { name: "Yamaha", desc: "Assistance" },
-          { name: "Schwalbe", desc: "Pneumatiques" },
-          { name: "Magura", desc: "Freinage" },
-          { name: "Brose", desc: "Moteur mid-drive" },
+          { name: "Neomouv", desc: "VAE urbain" },
+          { name: "Decathlon", desc: "Elops & E-Fold" },
+          { name: "Motto", desc: "Premium Paris" },
+          { name: "Urban Arrow", desc: "Cargo famille" },
+          { name: "Tern", desc: "Longtail GSD" },
+          { name: "Ninebot", desc: "Trottinette & gyro" },
         ].map((brand) => (
           <div class="flex flex-col items-center gap-1 opacity-60 hover:opacity-100 transition">
             <div class="flex h-12 w-28 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 shadow-sm">
@@ -235,7 +236,7 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
         <p class="text-sm font-semibold uppercase tracking-wide text-brand-200">Nouveau client ?</p>
         <h3 class="mt-2 font-display text-2xl font-bold">Essayez sans risque</h3>
         <ul class="mt-4 space-y-2 text-sm text-brand-100">
-          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Location à la journée dès 29 €</li>
+          <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Location à la journée dès 15 €</li>
           <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Résiliation mensuelle flexible</li>
           <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Aucun frais de mise en service</li>
           <li class="flex items-center gap-2"><span class="text-brand-300">✓</span> Assistance 7j/7 incluse</li>

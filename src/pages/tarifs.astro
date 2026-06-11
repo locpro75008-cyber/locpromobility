@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Tarifs location vélo électrique Paris — LocPro Mobilité"
-  description="Tarifs location vélo électrique Paris : à partir de 29 €/jour, 149 €/mois. Grille complète vélo, cargo, trottinette. Formules B2C et B2B avec remise volume."
+  description="Tarifs location vélo électrique Paris : dès 15 €/jour trottinette, 22 €/jour vélo, 55 €/jour cargo. Grille alignée marché IDF 2026. B2C et B2B."
 >
   <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
     <nav aria-label="Fil d'Ariane" class="mb-6 text-sm text-slate-500">
@@ -16,8 +16,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </nav>
     <h1 class="font-display text-3xl font-bold text-ink-900 md:text-4xl">Tarifs</h1>
     <p class="mt-3 max-w-2xl text-slate-600">
-      Montants indicatifs TTC. Réductions volume et contrats B2B sur devis — page
-      <a href="/devis" class="font-medium text-brand-700 underline">Devis</a>.
+      Grille alignée sur le marché parisien (Motto, Dance, Véligo, Cococharge). Livraison incluse en longue durée.
+      Réductions volume B2B sur <a href="/devis" class="font-medium text-brand-700 underline">devis</a>.
     </p>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-3">
@@ -26,16 +26,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="mt-1 text-sm text-slate-500">&lt; 1 semaine</p>
         <ul class="mt-6 space-y-3 text-sm">
           <li class="flex justify-between gap-2">
-            <span>Trottinette / jour</span><span class="font-semibold">19 €</span>
+            <span>Trottinette / jour</span><span class="font-semibold">15 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Vélo électrique / jour</span><span class="font-semibold">29 €</span>
+            <span>Vélo City / jour</span><span class="font-semibold">22 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Cargo / jour</span><span class="font-semibold">59 €</span>
+            <span>Vélo Urban / jour</span><span class="font-semibold">25 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Gyropode / jour</span><span class="font-semibold">79 €</span>
+            <span>Vélo Urban+ / jour</span><span class="font-semibold">29 €</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Cargo / jour</span><span class="font-semibold">55–59 €</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Gyropode / jour</span><span class="font-semibold">69 €</span>
           </li>
         </ul>
       </section>
@@ -44,34 +50,98 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="mt-1 text-sm text-slate-500">1 semaine à 3 mois</p>
         <ul class="mt-6 space-y-3 text-sm">
           <li class="flex justify-between gap-2">
-            <span>Trottinette / mois</span><span class="font-semibold">99 €</span>
+            <span>Trottinette / mois</span><span class="font-semibold">79 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Vélo / mois</span><span class="font-semibold">189 €</span>
+            <span>Vélo City / mois</span><span class="font-semibold">89 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Cargo / mois</span><span class="font-semibold">349 €</span>
+            <span>Vélo Urban / mois</span><span class="font-semibold">119 €</span>
           </li>
           <li class="flex justify-between gap-2">
-            <span>Gyropode / mois</span><span class="font-semibold">399 €</span>
+            <span>Vélo Urban+ / mois</span><span class="font-semibold">139 €</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Cargo / mois</span><span class="font-semibold">279–299 €</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Gyropode / mois</span><span class="font-semibold">349 €</span>
           </li>
         </ul>
       </section>
       <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 class="font-display text-lg font-semibold text-ink-900">Long terme</h2>
-        <p class="mt-1 text-sm text-slate-500">&gt; 3 mois</p>
-        <p class="mt-6 text-sm text-slate-600">
-          Tarifs dégressifs et maintenance incluse possible. Flotte, facturation centralisée,
-          options assurance — contact commercial.
-        </p>
+        <p class="mt-1 text-sm text-slate-500">&gt; 3 mois — LLD</p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex justify-between gap-2">
+            <span>Trottinette</span><span class="font-semibold">59 €/mois</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Vélo City</span><span class="font-semibold">79 €/mois</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Vélo Urban</span><span class="font-semibold">99 €/mois</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Vélo Urban+</span><span class="font-semibold">119 €/mois</span>
+          </li>
+          <li class="flex justify-between gap-2">
+            <span>Cargo</span><span class="font-semibold">179–219 €/mois</span>
+          </li>
+        </ul>
         <a
           href="/devis"
           class="mt-6 inline-flex rounded-xl bg-brand-700 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800"
         >
-          Demander un devis
+          Devis flotte B2B
         </a>
       </section>
     </div>
+
+    <!-- Grille détaillée par modèle -->
+    <section class="mt-16">
+      <h2 class="font-display text-2xl font-bold text-ink-900">Tarifs par modèle</h2>
+      <p class="mt-2 text-sm text-slate-500">12 véhicules basés sur les références du marché IDF. <a href="/catalogue" class="text-brand-700 underline">Voir le catalogue →</a></p>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+        <table class="min-w-full bg-white text-sm">
+          <thead>
+            <tr class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <th class="px-4 py-3">Modèle</th>
+              <th class="px-4 py-3">Référence</th>
+              <th class="px-4 py-3">Jour</th>
+              <th class="px-4 py-3">Semaine</th>
+              <th class="px-4 py-3">Mois</th>
+              <th class="px-4 py-3">LLD</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            {[
+              { nom: "LocPro City", ref: "Neomouv Carlina", j: "22 €", s: "99 €", m: "89 €", l: "79 €" },
+              { nom: "LocPro Urban", ref: "Elops 920E", j: "25 €", s: "109 €", m: "119 €", l: "99 €" },
+              { nom: "LocPro Urban+", ref: "Motto Two", j: "29 €", s: "129 €", m: "139 €", l: "119 €" },
+              { nom: "LocPro Fold", ref: "E-Fold 500", j: "25 €", s: "109 €", m: "119 €", l: "109 €" },
+              { nom: "LocPro Cargo Box", ref: "Urban Arrow Family", j: "55 €", s: "229 €", m: "279 €", l: "179 €" },
+              { nom: "LocPro Cargo Long", ref: "Tern GSD S10", j: "55 €", s: "229 €", m: "279 €", l: "179 €" },
+              { nom: "LocPro Cargo Pro", ref: "Gazelle Makki Load", j: "59 €", s: "249 €", m: "299 €", l: "219 €" },
+              { nom: "LocPro Cargo Flex", ref: "Biporteur pro", j: "59 €", s: "249 €", m: "279 €", l: "219 €" },
+              { nom: "LocPro Scoot S9", ref: "Ninebot Max G30", j: "15 €", s: "69 €", m: "79 €", l: "59 €" },
+              { nom: "LocPro Scoot Pro", ref: "Ninebot F2 Pro", j: "19 €", s: "89 €", m: "99 €", l: "79 €" },
+              { nom: "LocPro Gyro Event", ref: "Ninebot S2", j: "69 €", s: "350 €", m: "349 €", l: "Devis" },
+            ].map((row) => (
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-medium text-ink-900">{row.nom}</td>
+                <td class="px-4 py-3 text-slate-500">{row.ref}</td>
+                <td class="px-4 py-3">{row.j}</td>
+                <td class="px-4 py-3">{row.s}</td>
+                <td class="px-4 py-3">{row.m}</td>
+                <td class="px-4 py-3 font-semibold text-brand-700">{row.l}{row.l !== "Devis" ? "/mois" : ""}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- Calculateur de prix interactif -->
     <section class="mt-16" id="calculateur">
       <h2 class="font-display text-2xl font-bold text-ink-900">Calculateur de prix</h2>
@@ -79,37 +149,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div class="mt-6 rounded-2xl border border-brand-100 bg-brand-50/50 p-6 md:p-8">
         <div class="grid gap-6 md:grid-cols-3">
-          <!-- Véhicule -->
           <div>
             <label for="calc-vehicule" class="block text-sm font-semibold text-ink-800 mb-2">Type de véhicule</label>
             <select id="calc-vehicule" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200">
               <option value="trottinette">Trottinette électrique</option>
-              <option value="velo" selected>Vélo électrique</option>
+              <option value="velo-city">Vélo City (entrée)</option>
+              <option value="velo" selected>Vélo Urban (standard)</option>
+              <option value="velo-plus">Vélo Urban+ (premium)</option>
               <option value="cargo">Cargo électrique</option>
               <option value="gyropode">Gyropode</option>
             </select>
           </div>
-          <!-- Durée -->
           <div>
             <label for="calc-duree" class="block text-sm font-semibold text-ink-800 mb-2">
               Durée : <span id="calc-duree-label" class="text-brand-700">30 jours</span>
             </label>
-            <input
-              type="range"
-              id="calc-duree"
-              min="1"
-              max="365"
-              value="30"
-              class="w-full accent-brand-600"
-            />
+            <input type="range" id="calc-duree" min="1" max="365" value="30" class="w-full accent-brand-600" />
             <div class="mt-1 flex justify-between text-xs text-slate-400">
               <span>1 jour</span><span>1 an</span>
             </div>
           </div>
-          <!-- Résultat -->
           <div class="flex flex-col items-center justify-center rounded-xl bg-white border border-brand-200 p-5 text-center shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-600">Estimation</p>
-            <p id="calc-result" class="mt-1 font-display text-4xl font-bold text-brand-700">149 €</p>
+            <p id="calc-result" class="mt-1 font-display text-4xl font-bold text-brand-700">99 €</p>
             <p id="calc-unit" class="text-xs text-slate-500">par mois · maintenance incluse</p>
             <a href="/reserver" class="mt-4 w-full rounded-xl bg-brand-600 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 transition text-center">
               Réserver ce véhicule
@@ -117,7 +179,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
         </div>
 
-        <!-- Économie FMD -->
         <div id="calc-fmd" class="mt-4 hidden rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800">
           💡 Salarié ? Avec le <strong>Forfait Mobilités Durables</strong>, votre employeur peut prendre en charge jusqu'à <strong>800 €/an</strong> — soit <strong id="calc-fmd-net"></strong>/mois nets. <a href="/blog/forfait-mobilites-durables-2026" class="underline font-semibold">En savoir plus →</a>
         </div>
@@ -128,10 +189,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <script is:inline>
   (function () {
     const tarifs = {
-      trottinette: { jour: 19, semaine: 89, mois: 99, an: 49 },
-      velo:        { jour: 29, semaine: 139, mois: 149, an: 129 },
-      cargo:       { jour: 59, semaine: 290, mois: 249, an: 219 },
-      gyropode:    { jour: 79, semaine: 350, mois: 399, an: 349 },
+      trottinette: { jour: 15, semaine: 69, mois: 79, an: 59 },
+      "velo-city": { jour: 22, semaine: 99, mois: 89, an: 79 },
+      velo:        { jour: 25, semaine: 109, mois: 119, an: 99 },
+      "velo-plus": { jour: 29, semaine: 129, mois: 139, an: 119 },
+      cargo:       { jour: 55, semaine: 229, mois: 279, an: 179 },
+      gyropode:    { jour: 69, semaine: 350, mois: 349, an: 299 },
     };
 
     const sel = document.getElementById("calc-vehicule");
@@ -170,7 +233,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       } else {
         const months = Math.round(days / 30);
         prix = t.an * months;
-        unitText = `pour ${months} mois (tarif annuel) · tout inclus`;
+        unitText = `pour ${months} mois (tarif LLD) · tout inclus`;
         label.textContent = `${months} mois`;
         showFmd = true;
       }

@@ -46,7 +46,7 @@ const compareLd = {
             data-auto={autonomieKm(v.data.specs)}
             data-dispo={v.data.disponible ? "Disponible" : "Indisponible"}
             data-href={`/catalogue/${v.slug}`}
-            data-img={v.data.images[0]?.src ?? ""}
+            data-img={v.data.imageUrl}
           />
           <div class="min-w-0">
             <p class="font-semibold text-sm text-ink-900">{v.data.nom}</p>
