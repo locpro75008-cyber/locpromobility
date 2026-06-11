@@ -5,7 +5,7 @@ marque: "Segway-Ninebot"
 modeleReference: "KickScooter F2 Pro"
 tagline: "Suspension double — confort premium"
 description: "Trottinette premium Segway Ninebot F2 Pro. Suspensions avant/arrière, plus de puissance et de confort sur les pavés parisiens."
-imageUrl: "/images/vehicules/locpro-scoot-pro.jpg"
+imageUrl: "/images/vehicules/locpro-scoot-pro.png"
 tarifs:
   - label: "À la journée"
     prix: "19 €"

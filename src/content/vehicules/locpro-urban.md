@@ -21,7 +21,7 @@ specs:
   - label: "Autonomie"
     value: "jusqu'à 70 km"
   - label: "Moteur"
-    value: "Brose Drive T 250 W — 70 Nm"
+    value: "Brose Drive T 250 W — 90 Nm"
   - label: "Batterie"
     value: "36 V / 11,6 Ah (418 Wh)"
   - label: "Transmission"
