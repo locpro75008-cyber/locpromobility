@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TrustBadges from "../../components/TrustBadges.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
@@ -265,26 +266,7 @@ const faqLd = {
         </div>
 
         <!-- Garanties -->
-        <div class="rounded-xl bg-slate-50 p-4 space-y-2">
-          <div class="flex items-center gap-2 text-xs text-slate-600">
-            <svg class="h-4 w-4 text-brand-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            Livraison à domicile disponible (Paris + petite couronne)
-          </div>
-          <div class="flex items-center gap-2 text-xs text-slate-600">
-            <svg class="h-4 w-4 text-brand-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            Maintenance et assistance incluses
-          </div>
-          <div class="flex items-center gap-2 text-xs text-slate-600">
-            <svg class="h-4 w-4 text-brand-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            Remplacement sous 24h en cas de panne
-          </div>
-        </div>
+        <TrustBadges />
 
         <!-- Contact téléphone -->
         <div class="text-center">

@@ -46,19 +46,21 @@ jobs:
             echo "Aucun rapport généré."
           fi
 
-      - name: Alerte si performance < 70
+      - name: Alerte si performance < 70 (échec CI = email GitHub)
         run: |
           ALERT=false
           if ls .lighthouseci/*.json 1> /dev/null 2>&1; then
             for f in .lighthouseci/*.json; do
               PERF=$(cat "$f" | python3 -c "import sys,json; d=json.load(sys.stdin); print(round(d['categories']['performance']['score']*100))" 2>/dev/null || echo "100")
+              URL=$(cat "$f" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('finalUrl','?'))" 2>/dev/null || echo "?")
               if [ "$PERF" -lt 70 ]; then
-                echo "⚠️ ATTENTION : score de performance $PERF% (< 70%) détecté !"
+                echo "::error::Performance $PERF% sur $URL (< 70%)"
                 ALERT=true
               fi
             done
           fi
-          if [ "$ALERT" = false ]; then
-            echo "✅ Tous les scores de performance sont satisfaisants."
+          if [ "$ALERT" = true ]; then
+            echo "❌ Au moins une page est sous le seuil de 70% — vérifiez les optimisations."
+            exit 1
           fi
-        continue-on-error: true
+          echo "✅ Tous les scores de performance sont satisfaisants."

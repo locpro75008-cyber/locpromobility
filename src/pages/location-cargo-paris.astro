@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { getCollection } from "astro:content";
+
+const cargos = (await getCollection("vehicules")).filter(
+  (v) => v.data.categorie === "cargo"
+);
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Location cargo électrique Paris",
+  provider: { "@type": "LocalBusiness", name: "LocPro Mobilité" },
+  areaServed: "Paris, Île-de-France",
+  description: "Location de vélos cargo électriques à Paris pour livraisons, artisans et entreprises.",
+};
+---
+
+<BaseLayout
+  title="Location cargo électrique Paris — Livraisons & professionnels | LocPro Mobilité"
+  description="Louez un cargo électrique à Paris : jusqu'à 80 kg de charge, livraison 48h, formules jour/semaine/mois. Idéal artisans, livreurs et entreprises."
+  structuredData={serviceLd}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <Breadcrumb
+      items={[
+        { label: "Accueil", href: "/" },
+        { label: "Catalogue", href: "/catalogue" },
+        { label: "Cargo électrique Paris" },
+      ]}
+    />
+
+    <h1 class="font-display text-3xl font-bold text-ink-900 md:text-4xl">
+      Location cargo électrique à Paris
+    </h1>
+    <p class="mt-4 max-w-3xl text-lg text-slate-600">
+      Remplacez votre utilitaire léger par un <strong>cargo électrique</strong> : livraisons urbaines,
+      tournées commerciales, transport de matériel. Charge utile jusqu'à 80 kg, livraison à domicile sous 48h.
+    </p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      {[
+        { n: "80 kg", l: "Charge utile max." },
+        { n: "60 km", l: "Autonomie cargo" },
+        { n: "59 €", l: "À la journée" },
+      ].map((s) => (
+        <div class="rounded-xl border border-brand-100 bg-brand-50 p-4 text-center">
+          <p class="font-display text-2xl font-bold text-brand-700">{s.n}</p>
+          <p class="text-xs text-slate-500">{s.l}</p>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-12">
+      <h2 class="font-display text-xl font-bold text-ink-900">Nos cargos disponibles</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cargos.map((v) => (
+          <ProductCard vehicle={v} />
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-12 rounded-2xl bg-slate-50 p-8">
+      <h2 class="font-display text-xl font-bold text-ink-900">Pour qui ?</h2>
+      <ul class="mt-4 grid gap-2 sm:grid-cols-2 text-sm text-slate-600">
+        {[
+          "Artisans et techniciens",
+          "Livreurs de dernier kilomètre",
+          "Commerçants et restaurateurs",
+          "Services à la personne",
+          "Collectivités et associations",
+          "Flottes B2B (devis sur mesure)",
+        ].map((u) => (
+          <li class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
+            {u}
+          </li>
+        ))}
+      </ul>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/devis" class="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-brand-700">
+          Devis flotte entreprise
+        </a>
+        <a href="/comparateur" class="rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white">
+          Comparer les modèles
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

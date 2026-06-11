@@ -424,9 +424,19 @@ const cls =
       });
     };
 
+    let funnelStarted = false;
+    form.addEventListener("focusin", () => {
+      if (funnelStarted) return;
+      funnelStarted = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "form_start", form_type: "reservation" });
+    });
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       clearErrs();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "form_submit_attempt", form_type: "reservation" });
 
       const hp = form.querySelector('input[name="bot-field-resa"]');
       if (hp && hp.value.trim() !== "") return;
@@ -487,13 +497,9 @@ const cls =
         });
         const json = await res.json();
         if (res.ok && json.success) {
-          form.reset();
-          fpDebut.clear();
-          fpFin.clear();
-          if (successEl) successEl.classList.remove("hidden");
-          if (errorEl) errorEl.classList.add("hidden");
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "reservation_submitted", form_type: "b2c" });
+          window.location.href = "/merci?type=reservation";
         } else {
           throw new Error(json.error || "Erreur inconnue");
         }

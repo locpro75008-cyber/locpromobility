@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import DevisForm from "../components/DevisForm.astro";
 ---
 
@@ -7,6 +8,9 @@ import DevisForm from "../components/DevisForm.astro";
   title="Location vélo électrique entreprise Paris — Flotte B2B LocPro Mobilité"
   description="Location flotte vélos électriques et cargos pour entreprises à Paris. Contrats LLD, livraison bureau, maintenance incluse. Déductible charges. Devis gratuit."
 >
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6">
+    <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Entreprises" }]} />
+  </div>
   <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
     <div class="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
       <p class="text-sm font-semibold uppercase tracking-wide text-brand-300">B2B</p>

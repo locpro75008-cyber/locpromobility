@@ -425,9 +425,19 @@ const cls =
       });
     };
 
+    let funnelStarted = false;
+    form.addEventListener("focusin", () => {
+      if (funnelStarted) return;
+      funnelStarted = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "form_start", form_type: "devis" });
+    });
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       clearErrs();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "form_submit_attempt", form_type: "devis" });
 
       const hp = form.querySelector('input[name="bot-field-devis"]');
       if (hp instanceof HTMLInputElement && hp.value.trim() !== "") return;
@@ -470,10 +480,9 @@ const cls =
         });
         const json = await res.json();
         if (res.ok && json.success) {
-          form.reset();
-          if (successEl) successEl.classList.remove("hidden");
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "devis_submitted", form_type: "b2b" });
+          window.location.href = "/merci?type=devis";
         } else {
           throw new Error(json.error || "Erreur inconnue");
         }

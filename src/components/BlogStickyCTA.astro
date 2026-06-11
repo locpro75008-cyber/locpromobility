@@ -1,0 +1,38 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = "/reserver", label = "Réserver un vélo" } = Astro.props;
+---
+
+<div
+  id="blog-sticky-cta"
+  class="fixed bottom-0 left-0 right-0 z-50 translate-y-full border-t border-brand-200 bg-white/95 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur-md transition-transform duration-300 md:hidden"
+>
+  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3">
+    <p class="text-sm font-semibold text-ink-900">Prêt à essayer ?</p>
+    <a
+      href={href}
+      class="shrink-0 rounded-full bg-brand-600 px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-brand-700"
+    >
+      {label}
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  const bar = document.getElementById("blog-sticky-cta");
+  if (!bar) return;
+  let shown = false;
+  function onScroll() {
+    if (window.scrollY > 400 && !shown) {
+      bar.classList.remove("translate-y-full");
+      shown = true;
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+})();
+</script>

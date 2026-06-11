@@ -1,31 +1,72 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import { locationsByType } from "../data/locations";
 ---
 
 <BaseLayout
   title="Location vélo électrique à Paris — LocPro Mobilité"
-  description="Louer un vélo électrique à Paris : agence, livraison possible, court et long terme. B2C et B2B."
+  description="Louez un vélo électrique à Paris : livraison 48h dans les 20 arrondissements, formules courte et longue durée, cargo et trottinettes. Dès 29 €/jour."
 >
-  <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
-    <h1 class="font-display text-3xl font-bold text-ink-900">
+  <div class="mx-auto max-w-5xl px-4 py-12 md:px-6 md:py-16">
+    <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Location vélo électrique Paris" }]} />
+
+    <h1 class="font-display text-3xl font-bold text-ink-900 md:text-4xl">
       Location vélo électrique à Paris
     </h1>
     <p class="mt-4 text-lg text-slate-600">
-      LocPro Mobilité propose des <strong>vélos électriques</strong> pour vos trajets urbains,
-      missions professionnelles ou essais avant achat. Retrait en agence centre-ville ou
-      livraison selon zone et planning.
+      LocPro Mobilité livre vos <strong>vélos électriques, cargos et trottinettes</strong> dans tout Paris
+      intra-muros et en petite couronne. Retrait possible à notre agence du 8e arrondissement.
     </p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      {[
+        { n: "20", l: "Arrondissements parisiens" },
+        { n: "48h", l: "Livraison max." },
+        { n: "29 €", l: "À partir de / jour" },
+      ].map((s) => (
+        <div class="rounded-xl border border-brand-100 bg-brand-50 p-4 text-center">
+          <p class="font-display text-2xl font-bold text-brand-700">{s.n}</p>
+          <p class="text-xs text-slate-500">{s.l}</p>
+        </div>
+      ))}
+    </div>
+
     <ul class="mt-8 list-inside list-disc space-y-2 text-slate-700">
       <li>Court terme (journalier) pour touristes et événements</li>
       <li>Moyen terme pour étudiants, expatriés ou projets temporaires</li>
-      <li>Contrats longue durée entreprises avec maintenance</li>
+      <li>Contrats longue durée entreprises avec maintenance incluse</li>
+      <li>Cargo électrique pour livraisons professionnelles</li>
     </ul>
-    <p class="mt-8">
-      <a
-        href="/catalogue"
-        class="inline-flex rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700"
-        >Voir le catalogue</a
-      >
-    </p>
+
+    <section class="mt-12">
+      <h2 class="font-display text-xl font-bold text-ink-900">Tous les arrondissements desservis</h2>
+      <p class="mt-2 text-sm text-slate-500">Cliquez sur votre quartier pour voir les infos de livraison locales.</p>
+      <div class="mt-5 grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {locationsByType.arrondissements.map((loc) => (
+          <a
+            href={`/location/${loc.slug}`}
+            class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:border-brand-300 hover:text-brand-700"
+          >
+            {loc.nom.replace(" arrondissement", "")}
+          </a>
+        ))}
+      </div>
+      <p class="mt-4">
+        <a href="/zones" class="text-sm font-semibold text-brand-700 hover:underline">Voir aussi la banlieue →</a>
+      </p>
+    </section>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="/catalogue" class="rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+        Voir le catalogue
+      </a>
+      <a href="/reserver" class="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-ink-800 hover:bg-brand-50">
+        Réserver
+      </a>
+      <a href="/comparateur" class="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-ink-800 hover:bg-brand-50">
+        Comparateur
+      </a>
+    </div>
   </div>
 </BaseLayout>

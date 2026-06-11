@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+---
+
+<BaseLayout
+  title="Parrainage — -10 % pour vous et votre filleul | LocPro Mobilité"
+  description="Parrainez un ami pour la location de vélo électrique à Paris : -10 % pour le filleul sur sa première location, -10 % pour vous sur la suivante."
+>
+  <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Parrainage" }]} />
+
+    <div class="text-center">
+      <span class="rounded-full bg-brand-100 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-800">
+        Offre parrainage
+      </span>
+      <h1 class="mt-4 font-display text-3xl font-bold text-ink-900 md:text-4xl">
+        Parrainez, roulez moins cher
+      </h1>
+      <p class="mt-4 text-lg text-slate-600">
+        Vous recommandez LocPro à un proche ? Vous gagnez tous les deux <strong>-10 %</strong> sur une location.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {[
+        { who: "Votre filleul", gain: "-10 %", detail: "Sur sa première location (min. 1 semaine)" },
+        { who: "Vous (parrain)", gain: "-10 %", detail: "Sur votre prochaine location ou prolongation" },
+      ].map((c) => (
+        <div class="rounded-2xl border border-brand-200 bg-brand-50 p-6 text-center">
+          <p class="text-sm font-semibold text-brand-800">{c.who}</p>
+          <p class="mt-2 font-display text-4xl font-bold text-brand-700">{c.gain}</p>
+          <p class="mt-2 text-sm text-slate-600">{c.detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-12">
+      <h2 class="font-display text-xl font-bold text-ink-900">Comment ça marche ?</h2>
+      <ol class="mt-6 space-y-4">
+        {[
+          "Contactez-nous par email ou téléphone en indiquant le nom et l'email de votre filleul.",
+          "Votre filleul réserve sa première location en mentionnant votre nom comme parrain.",
+          "La remise de -10 % est appliquée automatiquement sur sa facture.",
+          "Dès validation de sa location, vous recevez votre code -10 % par email.",
+        ].map((step, i) => (
+          <li class="flex gap-4">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+              {i + 1}
+            </span>
+            <p class="pt-1 text-slate-600">{step}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <div class="mt-12 rounded-2xl bg-brand-600 p-8 text-center text-white">
+      <p class="font-semibold text-lg">Lancer un parrainage</p>
+      <p class="mt-2 text-sm text-brand-100">Offre valable sur les locations d'au moins 7 jours. Non cumulable avec d'autres promotions.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="mailto:contact@locpromobility.fr?subject=Parrainage%20LocPro" class="rounded-xl bg-white px-6 py-3 text-sm font-bold text-brand-800 hover:bg-brand-50">
+          Envoyer un email
+        </a>
+        <a href="tel:+33170955661" class="rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold hover:bg-white/10">
+          01 70 95 56 61
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

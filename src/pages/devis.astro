@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import DevisForm from "../components/DevisForm.astro";
 ---
 
@@ -8,6 +9,7 @@ import DevisForm from "../components/DevisForm.astro";
   description="Demande de devis flotte : société, SIRET, nombre de véhicules, durée et usage."
 >
   <div class="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+    <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Entreprises", href: "/entreprises" }, { label: "Devis" }]} />
     <h1 class="font-display text-3xl font-bold text-ink-900">Devis entreprise</h1>
     <p class="mt-3 text-slate-600">
       Décrivez votre besoin : notre équipe vous répond sous 48 h avec une proposition

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
 import { locationsByType } from "../data/locations";
 ---
 
@@ -8,6 +9,7 @@ import { locationsByType } from "../data/locations";
   description="LocPro Mobilité livre vos vélos électriques dans tout Paris (arrondissements) et les villes de banlieue : Boulogne, Neuilly, Vincennes, Saint-Denis et plus."
 >
   <div class="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-14">
+    <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Zones desservies" }]} />
 
     <!-- Header -->
     <div class="text-center">

@@ -1,0 +1,20 @@
+---
+const badges = [
+  { icon: "🚚", label: "Livraison 48h", sub: "Paris & petite couronne" },
+  { icon: "📞", label: "Assistance 7j/7", sub: "Intervention sous 4h" },
+  { icon: "🔧", label: "Maintenance incluse", sub: "LLD & contrats pro" },
+  { icon: "🔄", label: "Remplacement 24h", sub: "Si immobilisation" },
+];
+---
+
+<div class="grid gap-3 sm:grid-cols-2">
+  {badges.map((b) => (
+    <div class="flex items-center gap-3 rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-3">
+      <span class="text-xl" aria-hidden="true">{b.icon}</span>
+      <div>
+        <p class="text-sm font-semibold text-ink-900">{b.label}</p>
+        <p class="text-xs text-slate-500">{b.sub}</p>
+      </div>
+    </div>
+  ))}
+</div>

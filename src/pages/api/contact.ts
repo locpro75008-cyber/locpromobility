@@ -123,20 +123,51 @@ export const POST: APIRoute = async ({ request }) => {
     </table>
   `;
 
+  const isDevis = !!(societe || nombre_vehicules);
+  const isReservation = !!(date_debut || adresse_livraison);
+  const formType = isDevis ? "devis" : isReservation ? "reservation" : "contact";
+
   const recapLines = [
     type_vehicule ? `Véhicule : ${typeLabel[type_vehicule] ?? type_vehicule}` : "",
     duree ? `Durée : ${dureeLabel[duree] ?? duree}` : "",
+    societe ? `Société : ${societe}` : "",
+    nombre_vehicules ? `Nb. véhicules : ${nombre_vehicules}` : "",
     date_debut ? `Départ : ${date_debut}` : "",
     date_fin ? `Retour : ${date_fin}` : "",
     adresse_livraison ? `Livraison : ${adresse_livraison}` : "",
     adresse_recuperation ? `Récupération : ${adresse_recuperation}` : "",
   ].filter(Boolean).join("<br>");
 
+  const confirmContent: Record<string, { subject: string; title: string; body: string; delay: string }> = {
+    reservation: {
+      subject: "Confirmation de votre demande de réservation — LocPro Mobilité",
+      title: "Votre réservation est en cours de traitement",
+      body: "Nous vérifions la disponibilité de votre véhicule et vous confirmons sous <strong>2 heures</strong> en semaine.",
+      delay: "2 h",
+    },
+    devis: {
+      subject: "Confirmation de votre demande de devis B2B — LocPro Mobilité",
+      title: "Votre demande de devis a bien été reçue",
+      body: "Notre équipe commerciale prépare une proposition personnalisée. Réponse sous <strong>48 h ouvrées</strong>.",
+      delay: "48 h",
+    },
+    contact: {
+      subject: "Votre message a bien été reçu — LocPro Mobilité",
+      title: "Merci pour votre message",
+      body: "Notre équipe vous répondra sous <strong>24 h ouvrées</strong>.",
+      delay: "24 h",
+    },
+  };
+
+  const c = confirmContent[formType];
+
   const htmlConfirmation = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h2 style="color:#065f46">Merci ${nom_contact ?? nom} !</h2>
-      <p>Votre demande a bien été reçue. Notre équipe vous répondra sous <strong>24 h ouvrées</strong>.</p>
-      <p style="color:#64748b;font-size:13px">Récapitulatif :<br>${recapLines}</p>
+      <h2 style="color:#065f46">${c.title}</h2>
+      <p>Bonjour ${nom_contact ?? nom},</p>
+      <p>${c.body}</p>
+      ${recapLines ? `<p style="color:#64748b;font-size:13px;margin-top:16px"><strong>Récapitulatif :</strong><br>${recapLines}</p>` : ""}
+      <p style="margin-top:20px"><a href="https://locpromobility.fr/catalogue" style="color:#059669;font-weight:600">Voir le catalogue →</a></p>
       <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">
       <p style="font-size:12px;color:#94a3b8">
         LocPro Mobilité — 60 rue François 1er, 75008 Paris<br>
@@ -159,7 +190,7 @@ export const POST: APIRoute = async ({ request }) => {
     await resend.emails.send({
       from: "LocPro Mobilité <contact@locpromobility.fr>",
       to: email,
-      subject: "Votre demande a bien été reçue — LocPro Mobilité",
+      subject: c.subject,
       html: htmlConfirmation,
     });
   } catch (err) {
