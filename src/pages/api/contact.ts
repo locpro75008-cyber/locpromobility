@@ -1,6 +1,7 @@
-import type { APIRoute } from "astro";
+﻿import type { APIRoute } from "astro";
 import { z } from "zod";
 import { Resend } from "resend";
+import { SITE_CONTACT } from "../../lib/site";
 
 export const prerender = false;
 
@@ -17,6 +18,9 @@ const schema = z
   date_fin: z.string().optional(),
   adresse_livraison: z.string().optional(),
   adresse_recuperation: z.string().optional(),
+  vehicule_slug: z.string().optional(),
+  vehicule_nom: z.string().optional(),
+  code_promo: z.string().optional(),
   // Champs devis B2B
   societe: z.string().optional(),
   siret: z.string().optional(),
@@ -93,6 +97,7 @@ export const POST: APIRoute = async ({ request }) => {
   const {
     email, telephone, type_vehicule, duree, message,
     date_debut, date_fin, adresse_livraison, adresse_recuperation,
+    vehicule_slug, vehicule_nom, code_promo,
     societe, siret, nom_contact, nombre_vehicules, usage,
   } = parsed.data;
   const nom = (parsed.data.nom_contact ?? parsed.data.nom ?? "").trim();
@@ -111,7 +116,10 @@ export const POST: APIRoute = async ({ request }) => {
       ${row("Société", societe, "", "#f8fafc")}
       ${row("SIRET", siret)}
       ${row("Contact B2B", nom_contact, "", "#f8fafc")}
-      ${type_vehicule ? `<tr style="background:#f8fafc"><td style="padding:8px;color:#64748b">Véhicule</td><td style="padding:8px">${typeLabel[type_vehicule] ?? type_vehicule}</td></tr>` : ""}
+      ${type_vehicule ? `<tr style="background:#f8fafc"><td style="padding:8px;color:#64748b">Catégorie</td><td style="padding:8px">${typeLabel[type_vehicule] ?? type_vehicule}</td></tr>` : ""}
+      ${row("Modèle", vehicule_nom || undefined)}
+      ${row("Réf. catalogue", vehicule_slug, "", "#f8fafc")}
+      ${row("Code promo", code_promo || undefined)}
       ${row("Nb. véhicules", nombre_vehicules)}
       ${row("Durée", duree ? (dureeLabel[duree] ?? duree) : undefined, "", "#f8fafc")}
       ${row("Date de départ", date_debut)}
@@ -128,7 +136,9 @@ export const POST: APIRoute = async ({ request }) => {
   const formType = isDevis ? "devis" : isReservation ? "reservation" : "contact";
 
   const recapLines = [
-    type_vehicule ? `Véhicule : ${typeLabel[type_vehicule] ?? type_vehicule}` : "",
+    vehicule_nom ? `Modèle : ${vehicule_nom}` : type_vehicule ? `Catégorie : ${typeLabel[type_vehicule] ?? type_vehicule}` : "",
+    vehicule_slug ? `Réf. : ${vehicule_slug}` : "",
+    code_promo ? `Code promo : ${code_promo}` : "",
     duree ? `Durée : ${dureeLabel[duree] ?? duree}` : "",
     societe ? `Société : ${societe}` : "",
     nombre_vehicules ? `Nb. véhicules : ${nombre_vehicules}` : "",
@@ -170,8 +180,8 @@ export const POST: APIRoute = async ({ request }) => {
       <p style="margin-top:20px"><a href="https://locpromobility.fr/catalogue" style="color:#059669;font-weight:600">Voir le catalogue →</a></p>
       <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">
       <p style="font-size:12px;color:#94a3b8">
-        LocPro Mobilité — 60 rue François 1er, 75008 Paris<br>
-        <a href="tel:+33170955661">01 70 95 56 61</a> · <a href="mailto:contact@locpromobility.fr">contact@locpromobility.fr</a>
+        LocPro Mobilité — ${SITE_CONTACT.fullAddress}<br>
+        <a href="${SITE_CONTACT.phoneTel}">${SITE_CONTACT.phoneDisplay}</a> · <a href="mailto:${SITE_CONTACT.email}">${SITE_CONTACT.email}</a>
       </p>
     </div>
   `;
@@ -182,7 +192,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: "LocPro Mobilité <contact@locpromobility.fr>",
       to: "contact@locpromobility.fr",
       replyTo: email,
-      subject: `[Demande] ${nom} — ${type_vehicule ? (typeLabel[type_vehicule] ?? type_vehicule) : societe ?? "Devis B2B"}`,
+      subject: `[Demande] ${nom} — ${vehicule_nom || (type_vehicule ? (typeLabel[type_vehicule] ?? type_vehicule) : societe ?? "Devis B2B")}`,
       html: htmlInterne,
     });
 

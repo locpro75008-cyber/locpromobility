@@ -1,8 +1,13 @@
----
+﻿---
+import { SITE_CONTACT, SITE_DELAYS } from "../lib/site";
+
 interface Props {
   id?: string;
+  preselectSlug?: string;
+  preselectNom?: string;
+  preselectCode?: string;
 }
-const { id = "resa" } = Astro.props;
+const { id = "resa", preselectSlug = "", preselectNom = "", preselectCode = "" } = Astro.props;
 const cls =
   "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200";
 ---
@@ -62,6 +67,8 @@ const cls =
   <p class="absolute -left-[9999px]" aria-hidden="true">
     <input type="text" name="bot-field-resa" tabindex="-1" autocomplete="off" />
   </p>
+  <input type="hidden" name="vehicule_slug" id={`${id}-slug`} value={preselectSlug} />
+  <input type="hidden" name="vehicule_nom" id={`${id}-nom-vehicule`} value={preselectNom} />
 
   <!-- Nom + Email -->
   <div class="grid gap-4 sm:grid-cols-2">
@@ -232,6 +239,37 @@ const cls =
   </div>
 
   <!-- Message -->
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-modele`} class="mb-1 block text-sm font-medium text-slate-700">
+        Modèle souhaité
+      </label>
+      <input
+        id={`${id}-modele`}
+        name="vehicule_nom_display"
+        type="text"
+        readonly={!!preselectNom}
+        placeholder="Ex. : LocPro Urban, LocPro Cargo Box…"
+        value={preselectNom}
+        class={`${cls} ${preselectNom ? "bg-slate-50" : ""}`}
+      />
+      <p class="mt-1 text-xs text-slate-500">Précisez le modèle si vous hésitez entre plusieurs références.</p>
+    </div>
+    <div>
+      <label for={`${id}-code`} class="mb-1 block text-sm font-medium text-slate-700">
+        Code promo / parrain (optionnel)
+      </label>
+      <input
+        id={`${id}-code`}
+        name="code_promo"
+        type="text"
+        placeholder="Ex. : PARRAIN10, ETE2026…"
+        value={preselectCode}
+        class={cls}
+      />
+    </div>
+  </div>
+
   <div>
     <label for={`${id}-msg`} class="mb-1 block text-sm font-medium text-slate-700">
       Message complémentaire
@@ -257,7 +295,7 @@ const cls =
     class="hidden rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900"
     role="status"
   >
-    ✓ Demande envoyée ! Nous vous répondons sous 24 h ouvrées.
+    ✓ Demande envoyée ! Nous vous répondons sous {SITE_DELAYS.contactResponse}.
   </p>
   <p
     id={`${id}-error`}
@@ -266,7 +304,7 @@ const cls =
   ></p>
 </form>
 
-<script define:vars={{ formId: id }}>
+<script define:vars={{ formId: id, phoneDisplay: SITE_CONTACT.phoneDisplay, preselectSlug, preselectNom }}>
   async function initReservationForm() {
     // Load flatpickr CSS
     if (!document.querySelector("link[data-flatpickr]")) {
@@ -409,6 +447,39 @@ const cls =
     setupAddressAutocomplete(`${formId}-livraison`, `${formId}-livraison-list`);
     setupAddressAutocomplete(`${formId}-recup`, `${formId}-recup-list`);
 
+    // Sync modèle affiché → champ hidden pour l'email
+    const modeleInput = document.getElementById(`${formId}-modele`);
+    const nomHidden = document.getElementById(`${formId}-nom-vehicule`);
+    const slugHidden = document.getElementById(`${formId}-slug`);
+    if (modeleInput && nomHidden) {
+      modeleInput.addEventListener("input", () => {
+        nomHidden.value = modeleInput.value.trim();
+      });
+    }
+
+    // Présélection catégorie depuis le slug catalogue
+    if (preselectSlug) {
+      const typeMap = {
+        "locpro-city": "velo-electrique",
+        "locpro-urban": "velo-electrique",
+        "locpro-urban-plus": "velo-electrique",
+        "locpro-fold": "velo-electrique",
+        "locpro-cargo-box": "cargo",
+        "locpro-cargo-long": "cargo",
+        "locpro-cargo-pro": "cargo",
+        "locpro-cargo-flex": "cargo",
+        "locpro-scoot-s9": "trottinette",
+        "locpro-scoot-pro": "trottinette",
+        "locpro-gyro-event": "gyropode",
+        "locpro-gyro-fleet": "gyropode",
+      };
+      const sel = document.getElementById(`${formId}-type`);
+      const cat = typeMap[preselectSlug];
+      if (sel instanceof HTMLSelectElement && cat) sel.value = cat;
+      if (slugHidden && !slugHidden.value) slugHidden.value = preselectSlug;
+      if (nomHidden && preselectNom && !nomHidden.value) nomHidden.value = preselectNom;
+    }
+
     // Form submission
     const form = document.getElementById(formId);
     if (!form) return;
@@ -507,7 +578,7 @@ const cls =
         if (errorEl) {
           errorEl.textContent =
             (err instanceof Error ? err.message : "Une erreur est survenue.") +
-            " Vous pouvez aussi nous appeler au 01 70 95 56 61.";
+            " Vous pouvez aussi nous appeler au " + phoneDisplay + ".";
           errorEl.classList.remove("hidden");
         }
       } finally {

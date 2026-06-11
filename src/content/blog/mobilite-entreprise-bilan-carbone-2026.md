@@ -1,4 +1,4 @@
----
+﻿---
 title: "Mobilité durable en entreprise : bilan carbone et avantages fiscaux en 2026"
 description: "Plan de Déplacements Entreprise, bilan carbone, FMD, crédit d'impôt : comment la mobilité vélo réduit l'empreinte carbone ET les charges fiscales de votre entreprise."
 pubDate: "2026-12-08"
@@ -100,4 +100,4 @@ Les salariés qui viennent à vélo sont en moyenne **15% moins absents** que la
 
 Pour un audit de mobilité gratuit et un devis flotte personnalisé, contactez notre équipe B2B :
 
-[Demander un devis flotte →](/devis) | Téléphone : 07 58 48 10 21
+[Demander un devis flotte →](/devis) | Téléphone : 07 70 95 56 61

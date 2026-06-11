@@ -1,23 +1,23 @@
----
+﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_CONTACT, SITE_DELAYS } from "../lib/site";
 
-// On récupère le type de formulaire depuis l'URL (?type=reservation|devis|contact)
 const type = Astro.url.searchParams.get("type") || "contact";
 
 const messages = {
   reservation: {
     titre: "Réservation bien reçue !",
-    texte: "Notre équipe traite votre demande et vous contactera sous 2h (jours ouvrés) pour confirmer les détails de votre location.",
+    texte: `Notre équipe traite votre demande et vous contacte sous ${SITE_DELAYS.reservationResponse} pour confirmer les détails de votre location.`,
     icon: "🚲",
   },
   devis: {
     titre: "Votre devis est en cours !",
-    texte: "Nous avons bien reçu votre demande de devis entreprise. Un conseiller vous adressera une proposition personnalisée sous 24h.",
+    texte: `Nous avons bien reçu votre demande de devis entreprise. Un conseiller vous adressera une proposition personnalisée sous ${SITE_DELAYS.devisResponse}.`,
     icon: "📋",
   },
   contact: {
     titre: "Message bien envoyé !",
-    texte: "Merci pour votre message. Notre équipe vous répondra dans les meilleurs délais, généralement sous 24h.",
+    texte: `Merci pour votre message. Notre équipe vous répondra sous ${SITE_DELAYS.contactResponse}.`,
     icon: "✉️",
   },
 };
@@ -40,38 +40,32 @@ const msg = messages[type as keyof typeof messages] ?? messages.contact;
     <h1 class="mt-6 font-display text-2xl font-bold text-ink-900 md:text-3xl">
       {msg.titre}
     </h1>
-    <p class="mt-4 text-slate-600 leading-relaxed">{msg.texte}</p>
+    <p class="mt-4 leading-relaxed text-slate-600">{msg.texte}</p>
 
-    <div class="mt-4 rounded-xl bg-brand-50 border border-brand-100 p-4 text-sm text-brand-800">
+    <div class="mt-4 rounded-xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-800">
       <strong>Une question urgente ?</strong><br />
-      Appelez-nous directement au
-      <a href="tel:+33758481021" class="font-bold text-brand-700 hover:underline">07 58 48 10 21</a>
-      ou sur WhatsApp.
+      Appelez-nous au
+      <a href={SITE_CONTACT.phoneTel} class="font-bold text-brand-700 hover:underline">{SITE_CONTACT.phoneDisplay}</a>
+      {" "}ou écrivez-nous sur{" "}
+      <a href={SITE_CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" class="font-bold text-brand-700 hover:underline">WhatsApp</a>.
     </div>
 
     <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a
-        href="/catalogue"
-        class="rounded-full bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
-      >
+      <a href="/catalogue" class="rounded-full bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700">
         Voir le catalogue
       </a>
-      <a
-        href="/"
-        class="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-      >
+      <a href="/" class="rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
         Retour à l'accueil
       </a>
     </div>
 
-    <!-- Étapes suivantes -->
-    <div class="mt-12 text-left rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mt-12 rounded-2xl border border-slate-200 bg-white p-6 text-left shadow-sm">
       <p class="text-sm font-semibold text-slate-700">Prochaines étapes :</p>
       <ol class="mt-4 space-y-3">
         {[
-          "Vous recevrez un email de confirmation dans quelques minutes.",
+          "Vous recevrez un e-mail de confirmation dans quelques minutes.",
           "Un conseiller LocPro vous contacte pour finaliser votre location.",
-          "Livraison de votre véhicule à l'adresse de votre choix sous 24–48h.",
+          `Livraison de votre véhicule à l'adresse choisie sous ${SITE_DELAYS.delivery}.`,
         ].map((step, i) => (
           <li class="flex items-start gap-3">
             <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
@@ -86,7 +80,6 @@ const msg = messages[type as keyof typeof messages] ?? messages.contact;
 </BaseLayout>
 
 <script is:inline>
-// GTM event : confirmation de conversion
 window.dataLayer = window.dataLayer || [];
 const type = new URLSearchParams(window.location.search).get("type") || "contact";
 window.dataLayer.push({ event: "form_confirmation", form_type: type });

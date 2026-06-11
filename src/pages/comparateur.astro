@@ -147,10 +147,16 @@ const compareLd = {
       .map((i) => {
         const c = selected[i];
         if (!c) return '<td class="px-4 py-3 hidden"></td>';
-        return '<td class="px-4 py-3"><a href="' + c.dataset.href + '" class="text-brand-700 font-semibold hover:underline">Voir la fiche →</a></td>';
+        return '<td class="px-4 py-3"><a href="/reserver?vehicule=' + encodeURIComponent(c.value) + '" class="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-700">Réserver →</a></td>';
       })
       .join("");
-    body.innerHTML += '<tr class="bg-brand-50"><td class="px-4 py-3 font-medium text-slate-500">Action</td>' + ctas + "</tr>";
+    body.innerHTML += '<tr class="bg-brand-50"><td class="px-4 py-3 font-medium text-slate-500">Réserver</td>' + ctas + '</tr>';
+    body.innerHTML += '<tr><td class="px-4 py-3 font-medium text-slate-500">Fiche produit</td>' + [0, 1, 2]
+      .map((i) => {
+        const c = selected[i];
+        if (!c) return '<td class="px-4 py-3 hidden"></td>';
+        return '<td class="px-4 py-3"><a href="' + c.dataset.href + '" class="text-brand-700 font-semibold hover:underline">Voir →</a></td>';
+      }).join("") + '</tr>';
   }
 
   checks.forEach((c) => c.addEventListener("change", update));

@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TrustBadges from "../../components/TrustBadges.astro";
 import { getCollection } from "astro:content";
+import { SITE_CONTACT, SITE_DELAYS } from "../../lib/site";
+import { parsePrixEuro, getTarifByLabel } from "../../lib/tariff-utils";
 
 export async function getStaticPaths() {
   const items = await getCollection("vehicules");
@@ -33,6 +35,13 @@ const autresCategories = allVehicules
 const suggestions = similaires.length > 0 ? similaires : autresCategories;
 
 const prixDepart = tarifs[0]?.prix ?? "Sur devis";
+const prixBas = Math.min(
+  ...tarifs.map((t) => parsePrixEuro(t.prix)).filter((n) => n > 0),
+);
+const prixHaut = Math.max(
+  ...tarifs.map((t) => parsePrixEuro(t.prix)).filter((n) => n > 0),
+);
+const prixJour = getTarifByLabel(tarifs, "journée");
 
 const SITE = Astro.site?.toString().replace(/\/$/, "") || "https://locpromobility.fr";
 const canonicalCat = `${SITE}/catalogue/${item.slug}`;
@@ -47,10 +56,13 @@ const productLd = {
   offers: {
     "@type": "AggregateOffer",
     priceCurrency: "EUR",
+    lowPrice: prixBas || undefined,
+    highPrice: prixHaut || undefined,
+    offerCount: tarifs.length,
+    url: `${SITE}/reserver?vehicule=${item.slug}`,
     availability: disponible
       ? "https://schema.org/InStock"
-      : "https://schema.org/OutOfStock",
-    offerCount: tarifs.length,
+      : "https://schema.org/PreOrder",
   },
 };
 
@@ -93,7 +105,7 @@ const faqLd = {
 ---
 
 <BaseLayout
-  title={`${nom} — Location vélo électrique Paris | LocPro Mobilité`}
+  title={`${nom} — Location ${catLabels[categorie] ?? "mobilité électrique"} Paris | LocPro Mobilité`}
   description={description}
   structuredData={[productLd, breadcrumbLd, faqLd]}
 >
@@ -269,8 +281,8 @@ const faqLd = {
         <!-- Contact téléphone -->
         <div class="text-center">
           <p class="text-xs text-slate-400">Des questions ?</p>
-          <a href="tel:+33170955661" class="text-sm font-semibold text-brand-700 hover:underline">
-            01 70 95 56 61
+          <a href={SITE_CONTACT.phoneTel} class="text-sm font-semibold text-brand-700 hover:underline">
+            {SITE_CONTACT.phoneDisplay}
           </a>
           <span class="text-xs text-slate-400"> — Lun–Sam 9h–19h</span>
         </div>
@@ -323,7 +335,7 @@ const faqLd = {
           },
           {
             q: "Que se passe-t-il en cas de panne ?",
-            a: "Appelez notre assistance au 01 70 95 56 61 (7j/7, 8h-20h). Pour les pannes techniques, nous intervenons sous 4h dans Paris et petite couronne. Si la réparation est impossible en urgence, un véhicule de remplacement est livré sous 24h.",
+            a: `Appelez notre assistance au ${SITE_CONTACT.phoneDisplay} (7j/7, 8h–20h). Pour les pannes techniques, nous intervenons sous 4 h dans Paris et petite couronne. Si la réparation est impossible en urgence, un véhicule de remplacement est livré sous ${SITE_DELAYS.replacementUrgent}.`,
           },
           {
             q: "Puis-je modifier ou annuler ma réservation ?",

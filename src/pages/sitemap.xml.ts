@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { locations } from "../data/locations";
+import { CATEGORIES } from "../data/blogCategories";
 
 export const prerender = true;
 
@@ -71,10 +72,15 @@ export const GET: APIRoute = async () => {
     url(`/location/${l.slug}`, "0.7", "monthly", today)
   );
 
+  const blogCategoryPages = Object.keys(CATEGORIES).map((cat) =>
+    url(`/blog/categorie/${cat}`, "0.6", "weekly", today),
+  );
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPages.join("")}
 ${vehiculePages.join("")}
+${blogCategoryPages.join("")}
 ${blogPages.join("")}
 ${locationPages.join("")}
 </urlset>`;

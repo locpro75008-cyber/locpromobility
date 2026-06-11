@@ -1,4 +1,6 @@
----
+﻿---
+import { SITE_CONTACT, SITE_DELAYS } from "../lib/site";
+
 interface Props {
   id?: string;
   action?: string;
@@ -308,11 +310,11 @@ const cls =
     class="hidden rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-900"
     role="status"
   >
-    Demande enregistrée. Notre équipe commerciale vous contacte sous 48 h.
+    Demande enregistrée. Notre équipe commerciale vous contacte sous {SITE_DELAYS.devisResponse}.
   </p>
 </form>
 
-<script define:vars={{ formId: id, formAction: action }}>
+<script define:vars={{ formId: id, formAction: action, phoneDisplay: SITE_CONTACT.phoneDisplay }}>
   async function initDevisExtras() {
     if (!document.querySelector("link[data-flatpickr]")) {
       const link = document.createElement("link");
@@ -487,7 +489,7 @@ const cls =
           throw new Error(json.error || "Erreur inconnue");
         }
       } catch (err) {
-        alert((err instanceof Error ? err.message : "Une erreur est survenue.") + " Vous pouvez aussi nous appeler au 01 70 95 56 61.");
+        alert((err instanceof Error ? err.message : "Une erreur est survenue.") + " Vous pouvez aussi nous appeler au " + phoneDisplay + ".");
       } finally {
         if (btn instanceof HTMLButtonElement) { btn.disabled = false; btn.textContent = "Demander un devis"; }
       }

@@ -19,9 +19,11 @@ export const POST: APIRoute = async ({ request }) => {
 
   const apiKey = import.meta.env.BREVO_API_KEY;
   if (!apiKey) {
-    // Si pas de clé configurée, on accepte silencieusement (dev / avant config)
-    console.warn("[newsletter] BREVO_API_KEY manquante — inscription ignorée.");
-    return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
+    console.error("[newsletter] BREVO_API_KEY manquante — inscription impossible.");
+    return new Response(
+      JSON.stringify({ error: "Service newsletter temporairement indisponible. Réessayez plus tard." }),
+      { status: 503, headers },
+    );
   }
 
   const listId = parseInt(import.meta.env.BREVO_LIST_ID || "2", 10);

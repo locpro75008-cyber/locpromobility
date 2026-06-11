@@ -1,4 +1,6 @@
----
+﻿---
+import { SITE_CONTACT } from "../lib/site";
+
 const year = new Date().getFullYear();
 const links = [
   { href: "/mentions-legales", label: "Mentions légales" },
@@ -26,14 +28,14 @@ const links = [
         <p>60 rue François 1er</p>
         <p>75008 Paris, France</p>
         <p class="mt-2">
-          <a href="tel:+33170955661" class="text-brand-700 hover:underline"
-            >01 70 95 56 61</a
+          <a href={SITE_CONTACT.phoneTel} class="text-brand-700 hover:underline"
+            >{SITE_CONTACT.phoneDisplay}</a
           >
         </p>
         <p>
           <a
-            href="mailto:contact@locpromobility.fr"
-            class="text-brand-700 hover:underline">contact@locpromobility.fr</a
+            href={`mailto:${SITE_CONTACT.email}`}
+            class="text-brand-700 hover:underline">{SITE_CONTACT.email}</a
           >
         </p>
       </address>

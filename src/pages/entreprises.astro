@@ -105,21 +105,29 @@ import DevisForm from "../components/DevisForm.astro";
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
-    <h2 class="font-display text-2xl font-bold text-ink-900">Logos clients</h2>
-    <div
-      class="mt-8 grid grid-cols-2 gap-4 text-center text-xs font-semibold uppercase tracking-wide text-slate-400 sm:grid-cols-4"
-    >
-      <div class="rounded-xl border border-dashed border-slate-200 py-8">Urban Deliv</div>
-      <div class="rounded-xl border border-dashed border-slate-200 py-8">EcoFleet</div>
-      <div class="rounded-xl border border-dashed border-slate-200 py-8">Metro Events</div>
-      <div class="rounded-xl border border-dashed border-slate-200 py-8">Green HR</div>
-    </div>
+    <h2 class="font-display text-2xl font-bold text-ink-900">Ils nous font confiance</h2>
+    <p class="mt-2 max-w-2xl text-sm text-slate-600">
+      PME, artisans, offices de tourisme et équipes RH en Île-de-France nous confient leurs flottes et leurs événements mobilité.
+    </p>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {[
+        { secteur: "Livraison urbaine", detail: "Flottes cargo pour le dernier kilomètre" },
+        { secteur: "PME & startups", detail: "VAE salariés avec Forfait Mobilités Durables" },
+        { secteur: "Événementiel", detail: "Gyropodes pour team-building et visites guidées" },
+        { secteur: "Commerces locaux", detail: "Biporteurs pour livraisons de proximité" },
+      ].map((c) => (
+        <li class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-sm font-semibold text-ink-900">{c.secteur}</p>
+          <p class="mt-1 text-xs text-slate-500">{c.detail}</p>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <section class="mx-auto max-w-3xl px-4 pb-20 md:px-6">
     <h2 class="font-display text-2xl font-bold text-ink-900">Devis express</h2>
     <p class="mt-2 text-sm text-slate-600">
-      Même pipeline e-mail que le contact une fois les variables d’environnement configurées.
+      Décrivez votre besoin : réponse sous 48 h ouvrées avec une proposition personnalisée.
     </p>
     <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <DevisForm id="devis-inline" formName="devis-entreprises" />

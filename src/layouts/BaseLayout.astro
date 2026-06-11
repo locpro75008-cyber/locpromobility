@@ -1,4 +1,4 @@
----
+﻿---
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -8,6 +8,7 @@ import ExitIntentPopup from "../components/ExitIntentPopup.astro";
 import MobileCTA from "../components/MobileCTA.astro";
 import BackToTop from "../components/BackToTop.astro";
 import NewsletterForm from "../components/NewsletterForm.astro";
+import { SITE_CONTACT } from "../lib/site";
 
 interface Props {
   title: string;
@@ -43,26 +44,19 @@ const jsonLd = {
   legalName: "LOCPRO",
   description,
   url: siteUrl,
-  telephone: "+33170955661",
-  email: "contact@locpromobility.fr",
+  telephone: SITE_CONTACT.phoneE164,
+  email: SITE_CONTACT.email,
   vatID: "FR16982806200",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "60 rue François 1er",
-    addressLocality: "Paris",
-    postalCode: "75008",
+    streetAddress: SITE_CONTACT.streetAddress,
+    addressLocality: SITE_CONTACT.locality,
+    postalCode: SITE_CONTACT.postalCode,
     addressCountry: "FR",
   },
   areaServed: "FR",
   priceRange: "€€",
   foundingDate: "2023-12-21",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "127",
-    bestRating: "5",
-    worstRating: "1",
-  },
 };
 
 const websiteLd = {
@@ -94,7 +88,7 @@ const orgLd = {
   sameAs: [],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+33170955661",
+    telephone: SITE_CONTACT.phoneE164,
     contactType: "customer service",
     availableLanguage: "French",
     hoursAvailable: "Mo-Sa 09:00-19:00",

@@ -1,15 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ReservationForm from "../components/ReservationForm.astro";
+import { getCollection } from "astro:content";
+import { SITE_DELAYS } from "../lib/site";
 
-const vehicule = Astro.url.searchParams.get("vehicule") || "";
+const vehiculeSlug = Astro.url.searchParams.get("vehicule") || "";
+const codePromo = Astro.url.searchParams.get("code") || "";
+const duree = Astro.url.searchParams.get("duree") || "";
+
+const vehicules = await getCollection("vehicules");
+const selected = vehicules.find((v) => v.slug === vehiculeSlug);
 ---
 
 <BaseLayout
-  title="Réserver un vélo électrique à Paris — LocPro Mobilité"
-  description="Réservez votre vélo électrique en ligne à Paris. Choisissez vos dates, adresse de livraison et modèle. Réponse sous 2h, livraison 24-48h."
+  title="Réserver — Vélo, cargo, trottinette ou gyropode à Paris | LocPro Mobilité"
+  description={`Demandez votre location de mobilité électrique à Paris : dates, adresse de livraison et modèle. Confirmation sous ${SITE_DELAYS.reservationResponse}, livraison ${SITE_DELAYS.delivery}.`}
 >
-  <!-- Breadcrumb -->
   <div class="mx-auto max-w-3xl px-4 pt-6 md:px-6">
     <nav aria-label="Fil d'Ariane" class="text-sm text-slate-500">
       <ol class="flex flex-wrap items-center gap-1">
@@ -21,17 +27,17 @@ const vehicule = Astro.url.searchParams.get("vehicule") || "";
   </div>
 
   <div class="mx-auto max-w-3xl px-4 py-8 md:px-6 md:py-10">
-    <h1 class="font-display text-3xl font-bold text-ink-900">Réserver un vélo électrique</h1>
+    <h1 class="font-display text-3xl font-bold text-ink-900">Demander une réservation</h1>
     <p class="mt-3 text-slate-600">
-      Remplissez le formulaire ci-dessous. Notre équipe vous confirme la disponibilité et les détails de livraison <strong>sous 2h</strong> (jours ouvrés).
+      Remplissez le formulaire ci-dessous. Notre équipe confirme la disponibilité et les détails de livraison
+      <strong>sous {SITE_DELAYS.reservationResponse}</strong> (jours ouvrés).
     </p>
 
-    <!-- Signaux de confiance -->
     <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
       {[
-        { icon: "⚡", label: "Réponse sous 2h" },
-        { icon: "🚚", label: "Livraison 24–48h" },
-        { icon: "🔒", label: "Paiement sécurisé" },
+        { icon: "⚡", label: `Réponse ${SITE_DELAYS.reservationResponse}` },
+        { icon: "🚚", label: `Livraison ${SITE_DELAYS.delivery}` },
+        { icon: "🔒", label: "Caution à la confirmation" },
         { icon: "↩️", label: "Résiliation flexible" },
       ].map((s) => (
         <div class="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-white p-3 text-center shadow-sm">
@@ -40,40 +46,35 @@ const vehicule = Astro.url.searchParams.get("vehicule") || "";
         </div>
       ))}
     </div>
+
     {
-      vehicule && (
+      selected && (
         <p class="mt-4 rounded-lg bg-brand-50 px-4 py-3 text-sm text-brand-900">
-          Véhicule présélectionné : <strong>{vehicule}</strong> — précisez-le aussi dans le
-          message si besoin.
+          Modèle présélectionné : <strong>{selected.data.nom}</strong>
+          {selected.data.modeleReference && (
+            <span class="text-brand-700"> ({selected.data.modeleReference})</span>
+          )}
+          {duree && (
+            <>
+              {" "}
+              · Durée estimée : <strong>{duree}</strong>
+            </>
+          )}
         </p>
       )
     }
+
     <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <ReservationForm id="resa-form" />
+      <ReservationForm
+        id="resa-form"
+        preselectSlug={vehiculeSlug}
+        preselectNom={selected?.data.nom ?? ""}
+        preselectCode={codePromo}
+      />
     </div>
+
+    <p class="mt-6 text-center text-xs text-slate-500">
+      Le paiement en ligne n'est pas encore disponible : nous finalisons votre réservation par téléphone ou e-mail après vérification de la disponibilité.
+    </p>
   </div>
 </BaseLayout>
-
-<script define:vars={{ preselect: vehicule }}>
-  if (preselect) {
-    const sel = document.querySelector("#resa-form-type");
-    if (sel instanceof HTMLSelectElement) {
-      const map = {
-        "locpro-city": "velo-electrique",
-        "locpro-urban": "velo-electrique",
-        "locpro-urban-plus": "velo-electrique",
-        "locpro-fold": "velo-electrique",
-        "locpro-cargo-box": "cargo",
-        "locpro-cargo-long": "cargo",
-        "locpro-cargo-pro": "cargo",
-        "locpro-cargo-flex": "cargo",
-        "locpro-scoot-s9": "trottinette",
-        "locpro-scoot-pro": "trottinette",
-        "locpro-gyro-event": "gyropode",
-        "locpro-gyro-fleet": "gyropode",
-      };
-      const v = map[preselect];
-      if (v) sel.value = v;
-    }
-  }
-</script>
