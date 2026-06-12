@@ -100,4 +100,4 @@ Les salariés qui viennent à vélo sont en moyenne **15% moins absents** que la
 
 Pour un audit de mobilité gratuit et un devis flotte personnalisé, contactez notre équipe B2B :
 
-[Demander un devis flotte →](/devis) | Téléphone : 07 70 95 56 61
+[Demander un devis flotte →](/devis) | Téléphone : 01 70 95 56 61

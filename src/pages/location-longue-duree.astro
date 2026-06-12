@@ -1,6 +1,7 @@
 ﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { SITE_CONTACT } from "../lib/site";
 
 const vehicules = await getCollection("vehicules");
 const disponibles = vehicules.filter((v) => v.data.disponible);
@@ -38,7 +39,7 @@ const structuredData = {
     "@type": "LocalBusiness",
     name: "LocPro Mobilité",
     url: SITE,
-    telephone: "+33770955661",
+    telephone: SITE_CONTACT.phoneE164,
   },
   description: "Location de vélos électriques, cargos et trottinettes à la semaine, au mois ou à l'année. Maintenance incluse, livraison à domicile à Paris et Île-de-France.",
   areaServed: "Île-de-France",

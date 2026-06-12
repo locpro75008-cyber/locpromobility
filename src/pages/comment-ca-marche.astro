@@ -1,6 +1,7 @@
 ﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
+import { SITE_CONTACT } from "../lib/site";
 
 const etapes = [
   {
@@ -48,7 +49,7 @@ const etapes = [
 ];
 
 const faqs = [
-  { q: "Combien de temps à l'avance faut-il réserver ?", a: "Idéalement 48h à l'avance, mais nous pouvons parfois livrer le jour même pour les urgences. Appelez-nous au 07 70 95 56 61." },
+  { q: "Combien de temps à l'avance faut-il réserver ?", a: `Idéalement 48h à l'avance, mais nous pouvons parfois livrer le jour même pour les urgences. Appelez-nous au ${SITE_CONTACT.phoneDisplay}.` },
   { q: "Puis-je prolonger ma location ?", a: "Oui, contactez-nous avant la date de retour initiale. Prolongation possible sous réserve de disponibilité, au même tarif." },
   { q: "Que se passe-t-il en cas de vol ?", a: "Déposez plainte et contactez-nous immédiatement. Selon la formule choisie, votre assurance vol couvre tout ou partie du préjudice." },
   { q: "Y a-t-il un kilométrage limité ?", a: "Non, aucune limite de kilométrage. Roulez autant que vous le souhaitez pendant la durée de votre location." },

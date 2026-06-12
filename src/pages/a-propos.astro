@@ -1,6 +1,7 @@
 ﻿---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumb from "../components/Breadcrumb.astro";
+import { SITE_CONTACT } from "../lib/site";
 
 const valeurs = [
   {
@@ -149,7 +150,7 @@ const orgaSchema = {
         </div>
         <div>
           <p class="font-semibold text-ink-900">Contact</p>
-          <p class="mt-1"><a href="tel:+33770955661" class="text-brand-700 hover:underline">07 70 95 56 61</a></p>
+          <p class="mt-1"><a href={SITE_CONTACT.phoneTel} class="text-brand-700 hover:underline">{SITE_CONTACT.phoneDisplay}</a></p>
           <p><a href="mailto:contact@locpromobility.fr" class="text-brand-700 hover:underline">contact@locpromobility.fr</a></p>
         </div>
         <div>

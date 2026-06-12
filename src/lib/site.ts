@@ -1,9 +1,12 @@
 /** Coordonnées et constantes éditoriales — source unique pour tout le site. */
 export const SITE_CONTACT = {
-  phoneE164: "+33770955661",
-  phoneDisplay: "07 70 95 56 61",
-  phoneTel: "tel:+33770955661",
+  /** Numéro fixe — appels téléphoniques (tel:, footer, assistance) */
+  phoneE164: "+33170955661",
+  phoneDisplay: "01 70 95 56 61",
+  phoneTel: "tel:+33170955661",
+  /** Mobile — WhatsApp uniquement */
   whatsapp: "33770955661",
+  whatsappDisplay: "07 70 95 56 61",
   whatsappUrl: "https://wa.me/33770955661",
   email: "contact@locpromobility.fr",
   streetAddress: "60 rue François 1er",

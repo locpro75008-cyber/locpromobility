@@ -47,7 +47,7 @@ const msg = messages[type as keyof typeof messages] ?? messages.contact;
       Appelez-nous au
       <a href={SITE_CONTACT.phoneTel} class="font-bold text-brand-700 hover:underline">{SITE_CONTACT.phoneDisplay}</a>
       {" "}ou écrivez-nous sur{" "}
-      <a href={SITE_CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" class="font-bold text-brand-700 hover:underline">WhatsApp</a>.
+      <a href={SITE_CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" class="font-bold text-brand-700 hover:underline">WhatsApp ({SITE_CONTACT.whatsappDisplay})</a>.
     </div>
 
     <div class="mt-8 flex flex-wrap justify-center gap-3">
