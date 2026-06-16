@@ -1,104 +1,68 @@
 ---
-// Retours d'expérience recueillis auprès de locataires B2C et B2B
-const avis = [
+const engagements = [
   {
-    nom: "Sophie M.",
-    ville: "Paris 11e",
-    note: 5,
-    usage: "Location longue durée",
-    texte: "J'utilise le vélo électrique LocPro depuis 4 mois pour aller au travail. Livraison impeccable, le technicien m'a tout expliqué. Plus jamais le métro bondé. Et avec le FMD de mon employeur, ça me coûte moins de 80 €/mois !",
-    date: "Mars 2026",
+    icon: "🚚",
+    titre: "Livraison sous 48h",
+    texte: "Véhicule chargé et prêt à rouler, livré à votre adresse à Paris et en petite couronne.",
   },
   {
-    nom: "Thomas B.",
-    ville: "Montreuil (93)",
-    note: 5,
-    usage: "Cargo électrique",
-    texte: "Artisan électricien, j'ai remplacé ma Berlingo par le cargo LocPro pour mes chantiers parisiens. Je livre 3 fois plus vite, plus jamais d'amende stationnement, et je facture plus. Rentabilisé en 2 semaines.",
-    date: "Février 2026",
+    icon: "📞",
+    titre: "Assistance 7j/7",
+    texte: "Ligne dédiée pendant vos heures de location. Intervention sous 4h en Île-de-France.",
   },
   {
-    nom: "Camille R.",
-    ville: "Paris 8e",
-    note: 5,
-    usage: "Location courte durée",
-    texte: "Weekend à Paris avec une amie. On a loué deux vélos pour 3 jours, livrés à l'hôtel le vendredi soir. On a tout visité sans jamais prendre le métro. Service client réactif, retour sans souci. On refera !",
-    date: "Avril 2026",
+    icon: "🔧",
+    titre: "Maintenance incluse",
+    texte: "Révisions et pièces d'usure prises en charge en longue durée et contrats entreprise.",
   },
   {
-    nom: "Laurent D.",
-    ville: "Boulogne-Billancourt (92)",
-    note: 5,
-    usage: "Abonnement mensuel",
-    texte: "J'hésitais entre acheter et louer. La location gagne haut la main : maintenance incluse, aucun souci de vol, et si le vélo tombe en panne ils en apportent un autre le lendemain. Service 5 étoiles.",
-    date: "Janvier 2026",
+    icon: "📋",
+    titre: "Tarifs transparents",
+    texte: "Prix TTC affichés, caution restituée sous 5 jours, aucun frais caché.",
   },
   {
-    nom: "Nadia K.",
-    ville: "Paris 15e",
-    note: 5,
-    usage: "Flotte entreprise",
-    texte: "Responsable RH dans une PME de 80 personnes, j'ai mis en place une flotte de 6 vélos LocPro pour nos collaborateurs. Le contrat cadre est simple, les attestations FMD sont générées automatiquement. Nos salariés adorent.",
-    date: "Décembre 2025",
+    icon: "🔄",
+    titre: "Vélo de remplacement",
+    texte: "Si immobilisation prolongée, remplacement livré sous 24 à 48 h.",
   },
   {
-    nom: "Julien F.",
-    ville: "Vincennes (94)",
-    note: 5,
-    usage: "Location longue durée",
-    texte: "15 km aller-retour chaque jour. En 3 mois, j'ai économisé mon Navigo + économisé du temps. L'assistance le long du trajet est vraiment rassurante les premiers jours. Très bonne expérience globale.",
-    date: "Novembre 2025",
+    icon: "⚡",
+    titre: "Réponse sous 2h",
+    texte: "Toute demande de réservation ou devis reçoit une réponse en moins de 2 h ouvrées.",
   },
 ];
 ---
 
 <section class="bg-white py-16">
   <div class="mx-auto max-w-6xl px-4 md:px-6">
-    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-      <div>
-        <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Avis clients</p>
-        <h2 class="mt-1 font-display text-2xl font-bold text-ink-900 md:text-3xl">
-          Ce que disent nos locataires
-        </h2>
-      </div>
-      <div class="flex items-center gap-3 rounded-2xl border border-brand-100 bg-brand-50 px-5 py-3">
-        <div>
-          <div class="flex gap-0.5 text-lg text-amber-400">
-            {"★★★★★".split("").map((s) => <span>{s}</span>)}
-          </div>
-          <p class="mt-0.5 text-xs text-slate-500">Témoignages clients recueillis en 2025–2026</p>
-        </div>
-      </div>
+    <div class="max-w-2xl">
+      <p class="text-sm font-bold uppercase tracking-widest text-brand-600">Nos engagements</p>
+      <h2 class="mt-1 font-display text-2xl font-bold text-ink-900 md:text-3xl">
+        Une location simple et transparente
+      </h2>
+      <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+        LocPro Mobilité accompagne particuliers et entreprises à Paris et en Île-de-France.
+        Pas de promesses creuses — des services concrets, contractuels et vérifiables.
+      </p>
     </div>
 
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {avis.map((a) => (
+      {engagements.map((e) => (
         <article class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <!-- Étoiles -->
-          <div class="flex gap-0.5 text-amber-400">
-            {Array.from({ length: a.note }).map(() => <span>★</span>)}
-          </div>
-          <!-- Texte -->
-          <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-            "{a.texte}"
-          </p>
-          <!-- Auteur -->
-          <div class="mt-4 flex items-center justify-between gap-2 border-t border-slate-100 pt-4">
-            <div>
-              <p class="text-sm font-semibold text-ink-900">{a.nom}</p>
-              <p class="text-xs text-slate-500">{a.ville} · {a.date}</p>
-            </div>
-            <span class="rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700">
-              {a.usage}
-            </span>
-          </div>
+          <span class="text-2xl" aria-hidden="true">{e.icon}</span>
+          <h3 class="mt-3 font-semibold text-ink-900">{e.titre}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{e.texte}</p>
         </article>
       ))}
     </div>
 
     <p class="mt-8 text-center text-sm text-slate-500">
+      <a href="/nos-engagements" class="font-semibold text-brand-700 hover:underline">
+        Voir tous nos engagements →
+      </a>
+      {" · "}
       <a href="/reserver" class="font-semibold text-brand-700 hover:underline">
-        Rejoindre nos clients satisfaits →
+        Réserver un véhicule →
       </a>
     </p>
   </div>

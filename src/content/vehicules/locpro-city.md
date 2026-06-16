@@ -12,7 +12,7 @@ tarifs:
   - label: "Semaine (7j)"
     prix: "99 €"
   - label: "Mois"
-    prix: "89 €"
+    prix: "109 €"
   - label: "Long terme (> 3 mois)"
     prix: "79 €/mois"
 caution: "250 €"

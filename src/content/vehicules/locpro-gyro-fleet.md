@@ -12,7 +12,7 @@ tarifs:
   - label: "Semaine (7j)"
     prix: "350 €"
   - label: "Mois"
-    prix: "349 €"
+    prix: "390 €"
   - label: "Long terme / flotte"
     prix: "Sur devis"
 caution: "800 €"

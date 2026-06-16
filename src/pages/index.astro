@@ -165,19 +165,19 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
     <div class="mx-auto max-w-6xl px-4 md:px-6">
       <div class="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
         <div data-counter="12" data-suffix="" class="counter-block">
-          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">12</p>
           <p class="mt-1 text-sm font-medium text-slate-500">Modèles disponibles</p>
         </div>
         <div data-counter="33" data-suffix="+" class="counter-block">
-          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">33+</p>
           <p class="mt-1 text-sm font-medium text-slate-500">Villes en Île-de-France</p>
         </div>
         <div data-counter="48" data-suffix="h" class="counter-block">
-          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">48h</p>
           <p class="mt-1 text-sm font-medium text-slate-500">Délai de livraison max</p>
         </div>
         <div data-counter="330" data-suffix=" km" class="counter-block">
-          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">0</p>
+          <p class="counter-value font-display text-4xl font-bold text-brand-700 md:text-5xl">330 km</p>
           <p class="mt-1 text-sm font-medium text-slate-500">Pistes cyclables Paris</p>
         </div>
       </div>
@@ -344,6 +344,7 @@ const tenDaysAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);
         let current = 0;
         const display = el.querySelector(".counter-value");
         if (!display) return;
+        display.textContent = "0" + suffix;
         const timer = setInterval(() => {
           current += increment;
           if (current >= target) {
