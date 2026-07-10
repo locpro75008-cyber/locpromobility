@@ -5,14 +5,14 @@ export const SITE_CONTACT = {
   phoneDisplay: "01 70 95 56 61",
   phoneTel: "tel:+33170955661",
   /** Mobile — WhatsApp uniquement */
-  whatsapp: "33770955661",
-  whatsappDisplay: "07 70 95 56 61",
-  whatsappUrl: "https://wa.me/33770955661",
+  whatsapp: "33758481021",
+  whatsappDisplay: "07 58 48 10 21",
+  whatsappUrl: "https://wa.me/33758481021",
   email: "contact@locpromobility.fr",
-  streetAddress: "60 rue François 1er",
-  postalCode: "75008",
+  streetAddress: "86 rue de Charonne",
+  postalCode: "75011",
   locality: "Paris",
-  fullAddress: "60 rue François 1er, 75008 Paris",
+  fullAddress: "86 rue de Charonne, 75011 Paris",
 } as const;
 
 export const SITE_DELAYS = {

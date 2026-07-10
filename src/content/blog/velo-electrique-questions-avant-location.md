@@ -96,7 +96,7 @@ Nos vélos disposent de selles et guidons réglables. La plage de réglage couvr
 
 À la fin de la location, deux options :
 1. **Récupération à domicile** : notre équipe vient chercher le véhicule à votre adresse (inclus en LLD, 29 € en courte durée)
-2. **Dépôt en agence** : 60 rue François 1er, Paris 8e, sur rendez-vous
+2. **Dépôt en agence** : 86 rue de Charonne, Paris 11e, sur rendez-vous
 
 Le véhicule doit être rendu propre et avec la batterie rechargée. Un état des lieux est réalisé sur place.
 

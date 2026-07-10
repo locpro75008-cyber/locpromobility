@@ -28,7 +28,7 @@ export const locations: Location[] = [
     landmarks: ["Musée du Louvre", "Centre Pompidou", "Les Halles", "Pont Neuf", "Palais Royal"],
     metros: ["Châtelet (L1/4/7/11/14)", "Les Halles (L4)", "Louvre-Rivoli (L1)", "Pont Neuf (L7)"],
     usages: ["Visites touristiques", "Déplacements professionnels", "Livraisons dernier kilomètre"],
-    distanceAgence: "10 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "10 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-2e",
@@ -43,7 +43,7 @@ export const locations: Location[] = [
     landmarks: ["Bourse de Commerce", "Passage des Panoramas", "Galerie Vivienne", "Sentier (mode)"],
     metros: ["Bonne Nouvelle (L8/9)", "Sentier (L3)", "Grands Boulevards (L8/9)", "Bourse (L3)"],
     usages: ["Start-ups et entreprises tech", "Industrie de la mode", "Courriers et livraisons B2B"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-3e",
@@ -58,7 +58,7 @@ export const locations: Location[] = [
     landmarks: ["Musée Picasso", "Place des Vosges", "Carreau du Temple", "Archives Nationales"],
     metros: ["Arts et Métiers (L3/11)", "Filles du Calvaire (L8)", "Temple (L3)", "République (L3/5/8/9/11)"],
     usages: ["Tourisme culturel", "Galeries et événements", "Commerces et livraisons"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-4e",
@@ -73,7 +73,7 @@ export const locations: Location[] = [
     landmarks: ["Cathédrale Notre-Dame", "Île Saint-Louis", "Place de la Bastille", "Centre Pompidou"],
     metros: ["Hôtel de Ville (L1/11)", "Saint-Paul (L1)", "Bastille (L1/5/8)", "Cité (L4)"],
     usages: ["Tourisme et visites", "Promenades quais de Seine", "Déplacements courts"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-7e",
@@ -88,22 +88,22 @@ export const locations: Location[] = [
     landmarks: ["Tour Eiffel", "Musée d'Orsay", "Les Invalides", "Assemblée Nationale", "Champ-de-Mars"],
     metros: ["Invalides (L8/13)", "École Militaire (L8)", "La Tour-Maubourg (L8)", "Solférino (L12)"],
     usages: ["Tourisme Tour Eiffel", "Déplacements institutionnels", "Visites musées"],
-    distanceAgence: "12 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "12 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-8e",
     nom: "Paris 8e arrondissement",
     type: "arrondissement",
     codePostal: "75008",
-    description: "Location vélo électrique Paris 8e — Champs-Élysées, Madeleine, agence LocPro",
+    description: "Location vélo électrique Paris 8e — Champs-Élysées, Madeleine",
     metaDescription:
-      "Location vélo électrique Paris 8e arrondissement. Champs-Élysées, Madeleine, siège LocPro au 60 rue François 1er. Livraison le jour même — LocPro Mobilité.",
+      "Location vélo électrique Paris 8e arrondissement. Champs-Élysées, Madeleine. Livraison sous 24-48h — LocPro Mobilité.",
     intro:
-      "Le 8e arrondissement, entre les Champs-Élysées et la Madeleine, est le cœur du Paris des affaires et du luxe. LocPro Mobilité y a son siège au 60 rue François 1er : livraison express et retrait sur place possibles.",
+      "Le 8e arrondissement, entre les Champs-Élysées et la Madeleine, est le cœur du Paris des affaires et du luxe. Livraison express à votre adresse depuis notre agence du 11e arrondissement.",
     landmarks: ["Champs-Élysées", "Arc de Triomphe", "Place de la Madeleine", "Parc Monceau", "Grand Palais"],
     metros: ["Charles de Gaulle-Étoile (L1/2/6/RER A)", "Madeleine (L8/12/14)", "Franklin D. Roosevelt (L1/9)", "George V (L1)"],
-    usages: ["Cadres et professions libérales", "Tourisme Champs-Élysées", "Livraison express depuis notre agence"],
-    distanceAgence: "Notre agence est dans le 8e — livraison le jour même possible",
+    usages: ["Cadres et professions libérales", "Tourisme Champs-Élysées", "Livraison express"],
+    distanceAgence: "12 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-9e",
@@ -118,22 +118,22 @@ export const locations: Location[] = [
     landmarks: ["Opéra Garnier", "Galeries Lafayette", "Printemps", "Moulin Rouge (à proximité)"],
     metros: ["Opéra (L3/7/8)", "Havre-Caumartin (L3/9)", "Pigalle (L2/12)", "Saint-Lazare (L3/12/13/14)"],
     usages: ["Shopping et déplacements commerciaux", "Événements culturels", "Tourisme"],
-    distanceAgence: "8 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "8 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-11e",
     nom: "Paris 11e arrondissement",
     type: "arrondissement",
     codePostal: "75011",
-    description: "Location vélo électrique Paris 11e — Bastille, Oberkampf, Nation",
+    description: "Location vélo électrique Paris 11e — Bastille, Oberkampf, Charonne, agence LocPro",
     metaDescription:
-      "Location vélo électrique Paris 11e : Bastille, Oberkampf, Nation. Livraison à domicile dès le lendemain — LocPro Mobilité.",
+      "Location vélo électrique Paris 11e : Bastille, Oberkampf, Nation. Siège LocPro au 86 rue de Charonne. Retrait sur place — LocPro Mobilité.",
     intro:
-      "Quartier vivant et branché, le 11e arrondissement est le territoire des jeunes actifs, des start-ups et de la vie nocturne. Ses larges avenues et ses pistes cyclables en font une zone parfaite pour les déplacements quotidiens à vélo électrique.",
-    landmarks: ["Place de la Bastille", "Oberkampf", "Rue de la Roquette", "Cirque d'Hiver"],
-    metros: ["Bastille (L1/5/8)", "Oberkampf (L5/9)", "Voltaire (L9)", "Nation (L1/2/6/9)"],
-    usages: ["Navetteurs et actifs", "Livraisons restaurants", "Sorties et loisirs"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+      "Quartier vivant et branché, le 11e arrondissement abrite notre agence au 86 rue de Charonne. Idéal pour les jeunes actifs, start-ups et la vie nocturne — retrait sur place et livraison le jour même possibles.",
+    landmarks: ["Place de la Bastille", "Oberkampf", "Rue de Charonne", "Cirque d'Hiver"],
+    metros: ["Bastille (L1/5/8)", "Charonne (L9)", "Oberkampf (L5/9)", "Voltaire (L9)", "Nation (L1/2/6/9)"],
+    usages: ["Navetteurs et actifs", "Livraisons restaurants", "Retrait en agence"],
+    distanceAgence: "Notre agence est dans le 11e — retrait sur place possible",
   },
   {
     slug: "paris-15e",
@@ -148,7 +148,7 @@ export const locations: Location[] = [
     landmarks: ["Tour Montparnasse", "Parc André-Citroën", "Palais des Sports", "Marché Georges-Brassens"],
     metros: ["Montparnasse (L4/6/12/13)", "Convention (L12)", "Vaugirard (L12)", "Balard (L8)"],
     usages: ["Déplacements domicile-travail", "Courses et loisirs familiaux", "Sport et bien-être"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-16e",
@@ -163,7 +163,7 @@ export const locations: Location[] = [
     landmarks: ["Trocadéro", "Musée Marmottan Monet", "Bois de Boulogne", "Palais de Chaillot", "Roland-Garros"],
     metros: ["Trocadéro (L6/9)", "Passy (L6)", "La Muette (L9)", "Ranelagh (L9)"],
     usages: ["Balades Bois de Boulogne", "Résidents CSP+", "Tourisme Trocadéro"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-17e",
@@ -178,7 +178,7 @@ export const locations: Location[] = [
     landmarks: ["Parc Clichy-Batignolles", "Palais des Congrès", "Porte Maillot", "Place des Ternes"],
     metros: ["Ternes (L2)", "Wagram (L3)", "Porte Maillot (L1)", "Rome (L2)"],
     usages: ["Navetteurs La Défense", "Familles actives", "Professionnels du quartier d'affaires"],
-    distanceAgence: "10 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "10 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-18e",
@@ -193,7 +193,7 @@ export const locations: Location[] = [
     landmarks: ["Basilique du Sacré-Cœur", "Place du Tertre", "Moulin de la Galette", "Marché aux Puces de Clignancourt"],
     metros: ["Abbesses (L12)", "Pigalle (L2/12)", "Anvers (L2)", "Lamarck-Caulaincourt (L12)"],
     usages: ["Tourisme Montmartre", "Résidents et artistes", "Visites guidées"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
 
   // ─── Villes de banlieue ──────────────────────────────────────────────
@@ -211,7 +211,7 @@ export const locations: Location[] = [
     landmarks: ["Île Seguin", "Stade Bollaert-Delelis", "Parc de Billancourt", "MediaPark"],
     metros: ["Marcel Sembat (L9)", "Billancourt (L9)", "Pont de Sèvres (T2)"],
     usages: ["Navetteurs vers Paris", "Déplacements entre entreprises", "Balades quais de Seine"],
-    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "neuilly-sur-seine",
@@ -227,7 +227,7 @@ export const locations: Location[] = [
     landmarks: ["Avenue Charles-de-Gaulle", "Bois de Boulogne", "Île de la Jatte", "La Défense (proche)"],
     metros: ["Les Sablons (L1)", "Pont de Neuilly (L1)", "Tram T2 (Neuilly-Porte Maillot)"],
     usages: ["Résidents premium", "Navetteurs La Défense", "Balades Bois de Boulogne"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "levallois-perret",
@@ -243,7 +243,7 @@ export const locations: Location[] = [
     landmarks: ["Tribunal de Levallois", "Centre commercial Levallois", "Île de la Jatte"],
     metros: ["Anatole France (L3)", "Louise Michel (L3)", "Pont de Levallois (L3)"],
     usages: ["Navetteurs et salariés", "PME et grandes entreprises", "Résidents actifs"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "issy-les-moulineaux",
@@ -259,7 +259,7 @@ export const locations: Location[] = [
     landmarks: ["Canal+ (siège)", "Eurosport", "Fort d'Issy", "Quais de Seine"],
     metros: ["Mairie d'Issy (L12)", "Issy-Val de Seine (RER C)", "Corentin Celton (L12)"],
     usages: ["Salariés entreprises médias/tech", "Navetteurs RER C", "Déplacements inter-sites"],
-    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "vincennes",
@@ -275,7 +275,7 @@ export const locations: Location[] = [
     landmarks: ["Château de Vincennes", "Bois de Vincennes", "Zoo de Vincennes", "Hippodrome de Vincennes"],
     metros: ["Vincennes (L1)", "Château de Vincennes (L1)", "RER A (Vincennes)"],
     usages: ["Balades Bois de Vincennes", "Tourisme château", "Familles et sportifs"],
-    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "saint-denis",
@@ -291,7 +291,7 @@ export const locations: Location[] = [
     landmarks: ["Stade de France", "Basilique de Saint-Denis", "Plaine Commune", "Canal Saint-Denis"],
     metros: ["Saint-Denis Université (L13)", "Stade de France Saint-Denis (RER D/B)", "La Plaine Stade de France (RER B)"],
     usages: ["Événements Stade de France", "Salariés Plaine Commune", "Tourisme culturel"],
-    distanceAgence: "35 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "35 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "montreuil",
@@ -307,7 +307,7 @@ export const locations: Location[] = [
     landmarks: ["Murs à Pêches", "Marché de Montreuil", "Les Portes de Montreuil", "Fort de Montreuil"],
     metros: ["Croix de Chavaux (L9)", "Mairie de Montreuil (L9)", "Vincennes (L1 proche)"],
     usages: ["Start-ups et créatifs", "Navetteurs Paris Est", "Résidents actifs"],
-    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "versailles",
@@ -323,7 +323,7 @@ export const locations: Location[] = [
     landmarks: ["Château de Versailles", "Jardins à la française", "Trianon", "Marché Notre-Dame"],
     metros: ["Versailles Château Rive Gauche (RER C)", "Versailles Chantiers (RER C/N)"],
     usages: ["Tourisme Château de Versailles", "Balades grandes allées", "Familles et groupes"],
-    distanceAgence: "Livraison sur rendez-vous (45 min depuis Paris 8e)",
+    distanceAgence: "Livraison sur rendez-vous (45 min depuis Paris 11e)",
   },
   // ─── Arrondissements manquants ────────────────────────────────────────
   {
@@ -339,7 +339,7 @@ export const locations: Location[] = [
     landmarks: ["Panthéon", "Sorbonne", "Jardin des Plantes", "Musée National d'Histoire Naturelle", "Arènes de Lutèce"],
     metros: ["Cardinal Lemoine (L10)", "Jussieu (L7/10)", "Luxembourg (RER B)", "Maubert-Mutualité (L10)"],
     usages: ["Étudiants et enseignants", "Tourisme culturel", "Navetteurs Rive Gauche"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-6e",
@@ -354,7 +354,7 @@ export const locations: Location[] = [
     landmarks: ["Jardin du Luxembourg", "Saint-Germain-des-Prés", "École des Beaux-Arts", "Odéon", "Musée d'Orsay (proche)"],
     metros: ["Saint-Germain-des-Prés (L4)", "Odéon (L4/10)", "Mabillon (L10)", "Luxembourg (RER B)"],
     usages: ["Promenades culturelles", "Mode et design", "Cadres et professions libérales"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-10e",
@@ -369,7 +369,7 @@ export const locations: Location[] = [
     landmarks: ["Canal Saint-Martin", "Gare du Nord", "Gare de l'Est", "Hôpital Saint-Louis", "Place de la République (proche)"],
     metros: ["Gare du Nord (L2/4/5/RER B/D/E)", "Gare de l'Est (L4/5/7/RER E)", "Jacques Bonsergent (L5)"],
     usages: ["Navetteurs grandes lignes", "Résidents actifs", "Touristes en transit"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-12e",
@@ -384,7 +384,7 @@ export const locations: Location[] = [
     landmarks: ["Bercy Village", "Coulée Verte", "Opéra Bastille", "Bois de Vincennes (proche)", "Accor Arena"],
     metros: ["Gare de Lyon (L1/14/RER A/D)", "Bastille (L1/5/8)", "Bercy (L6/14)", "Nation (L1/2/6/9/RER A)"],
     usages: ["Loisirs et balades Vincennes", "Salariés Bercy", "Navetteurs Gare de Lyon"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-13e",
@@ -399,7 +399,7 @@ export const locations: Location[] = [
     landmarks: ["Bibliothèque François-Mitterrand (BNF)", "Butte-aux-Cailles", "Quartier asiatique", "Les Frigos"],
     metros: ["Bibliothèque François-Mitterrand (L14/RER C)", "Place d'Italie (L5/6/7)", "Tolbiac (L7)"],
     usages: ["Étudiants et chercheurs", "Résidents actifs", "Balade berges de Seine"],
-    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-14e",
@@ -414,7 +414,7 @@ export const locations: Location[] = [
     landmarks: ["Tour Montparnasse", "Catacombes de Paris", "Parc Montsouris", "Fondation Cartier", "Marché Edgar-Quinet"],
     metros: ["Montparnasse-Bienvenüe (L4/6/12/13)", "Denfert-Rochereau (L4/6/RER B)", "Alésia (L4)"],
     usages: ["Résidents et familles", "Tourisme culturel", "Navetteurs Montparnasse"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-19e",
@@ -429,7 +429,7 @@ export const locations: Location[] = [
     landmarks: ["Parc des Buttes-Chaumont", "Cité des Sciences", "La Villette", "Canal de l'Ourcq", "Parc de la Villette"],
     metros: ["Jaurès (L2/5/7bis)", "Laumière (L5)", "Porte de Pantin (L5)"],
     usages: ["Familles et loisirs", "Navetteurs La Villette", "Résidents Est parisien"],
-    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "paris-20e",
@@ -444,7 +444,7 @@ export const locations: Location[] = [
     landmarks: ["Cimetière du Père-Lachaise", "Belleville", "Ménilmontant", "Parc de Belleville"],
     metros: ["Gambetta (L3/3bis)", "Père Lachaise (L2/3)", "Ménilmontant (L2)", "Belleville (L2/11)"],
     usages: ["Résidents et artistes", "Tourisme culturel alternatif", "Navetteurs Est parisien"],
-    distanceAgence: "25 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "25 min à vélo depuis notre agence (Paris 11e)",
   },
   // ─── Nouvelles villes banlieue proche ────────────────────────────────
   {
@@ -461,7 +461,7 @@ export const locations: Location[] = [
     landmarks: ["La Défense (CNIT, Grande Arche)", "Berges de Seine", "Parc de Bécon", "Île de la Jatte"],
     metros: ["La Défense (L1/RER A)", "Courbevoie (Transilien L)", "Charlebourg (T2)"],
     usages: ["Cadres La Défense", "Navetteurs Paris Ouest", "Salariés secteur tertiaire"],
-    distanceAgence: "20 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "20 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "clichy",
@@ -477,7 +477,7 @@ export const locations: Location[] = [
     landmarks: ["Maison du Peuple", "Berges de Seine", "Clichy Batignolles (proche)", "Parc Roger Salengro"],
     metros: ["Mairie de Clichy (L13)", "Porte de Clichy (L13/RER C)"],
     usages: ["Navetteurs Paris 17e/8e", "Résidents actifs", "PME et artisans"],
-    distanceAgence: "15 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "15 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "ivry-sur-seine",
@@ -493,7 +493,7 @@ export const locations: Location[] = [
     landmarks: ["Berges de Seine d'Ivry", "Manufacture des Œillets", "Parc Maurice Thorez", "ZAC du Plateau"],
     metros: ["Pierre et Marie Curie (T3a)", "Ivry-sur-Seine (RER C)"],
     usages: ["Navetteurs Paris 13e", "Résidents en reconversion urbaine", "Salariés secteur créatif"],
-    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 11e)",
   },
   {
     slug: "pantin",
@@ -509,7 +509,7 @@ export const locations: Location[] = [
     landmarks: ["Canal de l'Ourcq", "Siège Chanel et Hermès", "Parc de la Bergère", "Docks en Seine (proche)"],
     metros: ["Hoche (L5)", "Église de Pantin (L5)", "Aubervilliers-Pantin (L7)"],
     usages: ["Professionnels de la mode", "Navetteurs Paris 19e", "Résidents actifs"],
-    distanceAgence: "30 min à vélo depuis notre agence (Paris 8e)",
+    distanceAgence: "30 min à vélo depuis notre agence (Paris 11e)",
   },
 ];
 

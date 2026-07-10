@@ -45,9 +45,9 @@ const orgaSchema = {
     foundingDate: "2023-12-21",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "60 rue François 1er",
-      addressLocality: "Paris",
-      postalCode: "75008",
+      streetAddress: SITE_CONTACT.streetAddress,
+      addressLocality: SITE_CONTACT.locality,
+      postalCode: SITE_CONTACT.postalCode,
       addressCountry: "FR",
     },
   },
@@ -81,7 +81,7 @@ const orgaSchema = {
       <div>
         <h2 class="font-display text-2xl font-bold text-ink-900 md:text-3xl">Pourquoi LocPro Mobilité ?</h2>
         <p class="mt-4 text-slate-600">
-          Fondée en décembre 2023 et immatriculée au RCS de Paris (SIREN 982 806 200), LocPro Mobilité opère depuis le 8e arrondissement de Paris.
+          Fondée en décembre 2023 et immatriculée au RCS de Paris (SIREN 982 806 200), LocPro Mobilité opère depuis le 11e arrondissement de Paris.
         </p>
         <p class="mt-4 text-slate-600">
           Notre modèle est simple : nous gérons l'intégralité du cycle de vie du véhicule — achat, entretien, maintenance, assurance, livraison — pour que vous n'ayez qu'à pédaler.
@@ -145,8 +145,8 @@ const orgaSchema = {
       <div class="mt-6 grid gap-6 md:grid-cols-3 text-sm text-slate-600">
         <div>
           <p class="font-semibold text-ink-900">Adresse</p>
-          <p class="mt-1">60 rue François 1er</p>
-          <p>75008 Paris, France</p>
+          <p class="mt-1">{SITE_CONTACT.streetAddress}</p>
+          <p>{SITE_CONTACT.postalCode} {SITE_CONTACT.locality}, France</p>
         </div>
         <div>
           <p class="font-semibold text-ink-900">Contact</p>

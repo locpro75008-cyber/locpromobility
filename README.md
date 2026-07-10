@@ -36,9 +36,9 @@ npm run build
 ## Contact site
 
 - Téléphone : **01 70 95 56 61**
-- WhatsApp : **07 70 95 56 61**
+- WhatsApp : **07 58 48 10 21**
 - E-mail : contact@locpromobility.fr
-- Adresse : 60 rue François 1er, 75008 Paris
+- Adresse : 86 rue de Charonne, 75011 Paris
 
 ## Structure
 
